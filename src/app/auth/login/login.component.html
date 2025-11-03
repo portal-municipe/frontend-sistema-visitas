@@ -1,12 +1,15 @@
+<!-- src/app/auth/login/login.component.html -->
 <div class="auth-wrap">
-  <mat-card>
-    <mat-card-title>Iniciar sessão</mat-card-title>
+  <mat-card class="auth-card">
+    <mat-card-title class="auth-title">Iniciar sessão</mat-card-title>
+
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Email ou username</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
           <input
             matInput
-            placeholder="Username"
             formControlName="username"
             autocomplete="username"
           />
@@ -15,30 +18,63 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Palavra-passe</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
           <input
             matInput
-            placeholder="Palavra-passe"
-            type="password"
+            [type]="showPassword ? 'text' : 'password'"
             formControlName="password"
             autocomplete="current-password"
           />
+          <button
+            mat-icon-button
+            type="button"
+            matSuffix
+            (click)="toggleShowPassword()"
+            [attr.aria-label]="showPassword ? 'Ocultar' : 'Mostrar'"
+          >
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
           <mat-error *ngIf="f.password.touched && f.password.invalid">
             Informe a palavra-passe
           </mat-error>
         </mat-form-field>
 
+        <div class="row-between">
+          <mat-checkbox>Manter sessão iniciada</mat-checkbox>
+          <a routerLink="/auth/registar" class="link">Criar conta</a>
+        </div>
+
         <button
           mat-raised-button
           color="primary"
-          class="w-100"
-          [disabled]="loading"
+          class="submit-btn"
+          [disabled]="loading || form.invalid"
         >
-          {{ loading ? 'A entrar...' : 'Entrar' }}
+          <ng-container *ngIf="!loading; else loadingTpl">Entrar</ng-container>
+          <ng-template #loadingTpl>
+            <mat-spinner diameter="18"></mat-spinner>
+          </ng-template>
         </button>
 
-        <div class="mt-2">
-          <a mat-button routerLink="/criar-conta">Criar conta</a>
+        <div class="legal">
+          Ao continuar, concorda com os <a class="link" href="#">Termos de uso</a> e
+          <a class="link" href="#">Política de Privacidade</a>.
+        </div>
+
+        <mat-divider class="my-24"></mat-divider>
+
+        <div class="alt-block">
+          <span class="legend">Novo por aqui?</span>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="alt-btn"
+            routerLink="/auth/registar"
+          >
+            Criar uma conta
+          </button>
         </div>
       </form>
     </mat-card-content>

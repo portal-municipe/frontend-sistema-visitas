@@ -1,10 +1,62 @@
+/* src/app/auth/login/login.component.scss */
 .auth-wrap {
-  max-width: 380px;
-  margin: 4rem auto;
+  min-height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
-.w-100 {
+.auth-card {
   width: 100%;
+  max-width: 540px;
+  border-radius: 16px;
+  padding: 8px 8px 24px;
 }
-.mt-2 {
-  margin-top: 1rem;
+.auth-title {
+  text-align: center;
+  margin: 8px 0 12px;
+  font-weight: 600;
 }
+.w-100 { width: 100%; }
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0 18px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.legal {
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: .8;
+  text-align: center;
+}
+
+.my-24 { margin: 24px 0; }
+
+.alt-block {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+.legend {
+  font-size: 12px;
+  opacity: .8;
+}
+.alt-btn {
+  width: 100%;
+  max-width: 360px;
+  height: 44px;
+  border-radius: 28px;
+}
+.link { text-decoration: none; }

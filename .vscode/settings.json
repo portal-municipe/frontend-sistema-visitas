@@ -5,8 +5,8 @@
   "typescript.tsserver.pluginPaths": ["typescript-tslint-plugin"],
 
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.tslint": true
+    "source.fixAll": "explicit",
+    "source.fixAll.tslint": "explicit"
   },
 
   "files.exclude": {
