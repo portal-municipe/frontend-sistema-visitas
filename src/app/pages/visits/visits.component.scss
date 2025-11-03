@@ -1,0 +1,64 @@
+.visits-card {
+  padding: 12px 12px 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.title-wrap { display: flex; align-items: center; gap: 10px; }
+.title { margin: 0; font-weight: 600; }
+.subtitle { font-size: 13px; opacity: .85; }
+.actions button + button { margin-left: 8px; }
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 220px 200px 200px auto;
+  gap: 12px;
+  align-items: center;
+  margin: 10px 0 12px;
+}
+.search .mat-form-field-infix input { padding-left: 0; }
+.mr-8 { margin-right: 8px; }
+
+.table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.v-stack { display: grid; }
+.strong { font-weight: 600; }
+.muted { color: rgba(0,0,0,.54); font-size: 12px; }
+
+.chip {
+  display: inline-block;
+  background: #eef1f6;
+  color: #2b3a55;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.pill {
+  display: inline-block;
+  background: #e8f0ff;
+  color: #1f5bd6;
+  border-radius: 16px;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.empty {
+  text-align: center;
+  color: rgba(0,0,0,.54);
+  td { padding: 24px 0; }
+}
+
+/* compact header cells */
+.mat-header-cell { font-weight: 600; }

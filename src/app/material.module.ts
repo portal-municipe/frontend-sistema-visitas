@@ -14,11 +14,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 const modules = [
   MatToolbarModule, MatSidenavModule, MatListModule, MatIconModule,
   MatButtonModule, MatCardModule, MatMenuModule, MatTableModule,
   MatInputModule, MatFormFieldModule, MatSnackBarModule,
-  MatSelectModule, MatBadgeModule, MatChipsModule
+  MatSelectModule, MatBadgeModule, MatChipsModule, MatPaginatorModule
 ];
 
 @NgModule({

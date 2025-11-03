@@ -1,13 +1,113 @@
-<table mat-table [dataSource]="data" class="mat-elevation-z1">
-  <ng-container matColumnDef="data"><th mat-header-cell *matHeaderCellDef>Data</th><td mat-cell *matCellDef="let v">{{ v.data | date:'dd/MM/yyyy' }}</td></ng-container>
-  <ng-container matColumnDef="visitante"><th>Visitante</th><td mat-cell *matCellDef="let v">{{ v.visitanteNome }}</td></ng-container>
-  <ng-container matColumnDef="anfitriao"><th>Anfitrião</th><td mat-cell *matCellDef="let v">{{ v.anfitriao }}</td></ng-container>
-  <ng-container matColumnDef="departamento"><th>Departamento</th><td mat-cell *matCellDef="let v">{{ v.departamento }}</td></ng-container>
-  <ng-container matColumnDef="motivo"><th>Motivo</th><td mat-cell *matCellDef="let v">{{ v.motivo }}</td></ng-container>
-  <ng-container matColumnDef="entrada"><th>Entrada</th><td mat-cell *matCellDef="let v">{{ v.entrada }}</td></ng-container>
-  <ng-container matColumnDef="saida"><th>Saída</th><td mat-cell *matCellDef="let v">{{ v.saida || '—' }}</td></ng-container>
-  <ng-container matColumnDef="duracao"><th>Duração</th><td mat-cell *matCellDef="let v">{{ formatDuracao(v.duracaoMin) }}</td></ng-container>
+<mat-card class="visits-card">
+  <div class="header">
+    <div class="title-wrap">
+      <mat-icon class="mr-8">history</mat-icon>
+      <div>
+        <h2 class="title">Registos de Visitas</h2>
+        <div class="subtitle">Total de {{ total }} visitas encontradas</div>
+      </div>
+    </div>
 
-  <tr mat-header-row *matHeaderRowDef="cols"></tr>
-  <tr mat-row *matRowDef="let row; columns: cols;"></tr>
-</table>
+    <div class="actions">
+      <button mat-stroked-button (click)="exportPDF()">
+        <mat-icon>picture_as_pdf</mat-icon>&nbsp; PDF
+      </button>
+      <button mat-stroked-button (click)="exportCSV()">
+        <mat-icon>cloud_download</mat-icon>&nbsp; CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Toolbar de filtros -->
+  <div class="filters">
+    <mat-form-field class="search">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Pesquisar..." [formControl]="form.controls.q">
+    </mat-form-field>
+
+    <mat-form-field class="dept">
+      <mat-select [formControl]="form.controls.departamento">
+        <mat-select-trigger>
+          {{ (departments.find(d => d.value === form.value.departamento) || departments[0]).label }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let d of departments" [value]="d.value">
+          {{ d.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="date">
+      <mat-icon matPrefix>event</mat-icon>
+      <input matInput type="date" placeholder="Data Inicial" [formControl]="form.controls.dataInicial">
+    </mat-form-field>
+
+    <mat-form-field class="date">
+      <mat-icon matPrefix>event</mat-icon>
+      <input matInput type="date" placeholder="Data Final" [formControl]="form.controls.dataFinal">
+    </mat-form-field>
+
+    <button mat-button type="button" (click)="clearFilters()">Limpar</button>
+  </div>
+
+  <!-- Tabela -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 table">
+
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let v">{{ v.data | date:'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="visitante">
+      <th mat-header-cell *matHeaderCellDef>Visitante</th>
+      <td mat-cell *matCellDef="let v">
+        <div class="v-stack">
+          <div class="strong">{{ v.visitanteNome }}</div>
+          <div class="muted" *ngIf="v.empresa">{{ v.empresa }}</div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anfitriao">
+      <th mat-header-cell *matHeaderCellDef>Anfitrião</th>
+      <td mat-cell *matCellDef="let v">{{ v.anfitriao }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef>Departamento</th>
+      <td mat-cell *matCellDef="let v">
+        <span class="chip">{{ v.departamento }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="motivo">
+      <th mat-header-cell *matHeaderCellDef>Motivo</th>
+      <td mat-cell *matCellDef="let v">{{ v.motivo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="entrada">
+      <th mat-header-cell *matHeaderCellDef>Entrada</th>
+      <td mat-cell *matCellDef="let v">{{ v.entrada }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="saida">
+      <th mat-header-cell *matHeaderCellDef>Saída</th>
+      <td mat-cell *matCellDef="let v">{{ v.saida || '—' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duracao">
+      <th mat-header-cell *matHeaderCellDef>Duração</th>
+      <td mat-cell *matCellDef="let v">
+        <span class="pill">{{ formatDuracao(v.duracaoMin) }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayed"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayed;"></tr>
+    <tr class="empty" *ngIf="!dataSource.data.length">
+      <td [attr.colspan]="displayed.length">Sem registos.</td>
+    </tr>
+  </table>
+
+  <mat-paginator [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]">
+  </mat-paginator>
+</mat-card>
