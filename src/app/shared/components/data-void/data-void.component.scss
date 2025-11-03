@@ -1,0 +1,42 @@
+.data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+  width: 100%;
+  background: transparent;
+
+  .ilustrate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .found {
+      width: 155px;
+      height: 155px;
+      opacity: .85;
+    }
+  }
+
+  .text-info {
+    text-align: center;
+    width: 100%;
+    margin-top: 12px;
+
+    h3 {
+      color: #333335;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    p {
+      color: #6b6b79;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+}

@@ -17,6 +17,7 @@ import { MaterialModule } from '@app/material.module';
 import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.component';
 import { AppTopbarComponent } from './components/app-topbar/app-topbar.component';
 import { RouterModule } from '@angular/router';
+import { DataVoidComponent } from './components/data-void/data-void.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouterModule } from '@angular/router';
     AppButtonComponent,
     AppSidebarComponent,
     AppTopbarComponent,
+    DataVoidComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { RouterModule } from '@angular/router';
     AppPaginationComponent,
     AppExportComponent,
     AppButtonComponent,
+    DataVoidComponent,
     RouterModule
   ]
 })
