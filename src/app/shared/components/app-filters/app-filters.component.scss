@@ -7,4 +7,12 @@
   align-items: center;
   margin: 10px 0 12px;
 }
-.search .mat-form-field-infix input { padding-left: 0; }
+.search .mat-form-fi/* src/app/shared/components/filters/filters.component.scss */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: center;
+  margin: 10px 0 12px;
+}
+eld-infix input { padding-left: 0; }

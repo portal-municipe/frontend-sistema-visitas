@@ -12,3 +12,11 @@
   border-radius: 16px; padding: 6px 10px; font-weight: 600; font-size: 12px;
 }
 .mat-header-cell { font-weight: 600; }
+
+/* src/app/shared/components/table/table.component.scss */
+.table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.mat-header-cell { font-weight: 600; }

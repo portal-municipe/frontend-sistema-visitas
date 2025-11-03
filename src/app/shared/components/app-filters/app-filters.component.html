@@ -1,25 +1,30 @@
 <!-- src/app/shared/components/filters/filters.component.html -->
-<div class="filters">
-  <mat-form-field class="search">
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput placeholder="Pesquisar..." [formControl]="form.controls.q">
-  </mat-form-field>
+<div class="filters" *ngIf="form && config?.length">
+  <ng-container *ngFor="let field of config; trackBy: trackByName">
 
-  <mat-form-field class="dept">
-    <mat-select [formControl]="form.controls.departamento" placeholder="Departamento">
-      <mat-option *ngFor="let d of departments" [value]="d.value">{{ d.label }}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <!-- TEXT -->
+    <mat-form-field *ngIf="field.type === 'text'" [ngClass]="field.class">
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput [placeholder]="field.placeholder" [formControl]="form.controls[field.name]">
+    </mat-form-field>
 
-  <mat-form-field class="date">
-    <mat-icon matPrefix>event</mat-icon>
-    <input matInput type="date" placeholder="Data Inicial" [formControl]="form.controls.dataInicial">
-  </mat-form-field>
+    <!-- DATE -->
+    <mat-form-field *ngIf="field.type === 'date'" [ngClass]="field.class">
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput type="date" [placeholder]="field.placeholder" [formControl]="form.controls[field.name]">
+    </mat-form-field>
 
-  <mat-form-field class="date">
-    <mat-icon matPrefix>event</mat-icon>
-    <input matInput type="date" placeholder="Data Final" [formControl]="form.controls.dataFinal">
-  </mat-form-field>
+    <!-- SELECT -->
+    <mat-form-field *ngIf="field.type === 'select'" [ngClass]="field.class">
+      <mat-label>{{ field.label }}</mat-label>
+      <mat-select [formControl]="form.controls[field.name]">
+        <mat-option *ngFor="let opt of field.options" [value]="opt.value">
+          {{ opt.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button mat-button type="button" (click)="onClear()">Limpar</button>
+  </ng-container>
+
+  <button *ngIf="showClear" mat-button type="button" (click)="onClear()">Limpar</button>
 </div>

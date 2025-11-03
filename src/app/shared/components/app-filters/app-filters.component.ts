@@ -1,6 +1,7 @@
 // src/app/shared/components/filters/filters.component.ts
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { FilterConfig } from '@core/models/ui-config';
 
 @Component({
   selector: 'app-filters',
@@ -10,8 +11,16 @@ import { FormGroup } from '@angular/forms';
 })
 export class AppFiltersComponent {
   @Input() form: FormGroup;
-  @Input() departments: { label: string; value: string | null }[] = [];
+  @Input() config: FilterConfig[] = [];
+  @Input() showClear = true;
+
   @Output() clear = new EventEmitter<void>();
 
-  onClear() { this.clear.emit(); }
+  onClear() {
+    this.clear.emit();
+  }
+
+  trackByName(_: number, item: FilterConfig) {
+    return item.name;
+  }
 }

@@ -1,6 +1,6 @@
 // src/app/shared/components/table/table.component.ts
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { TableColumn } from '@core/models/ui-config';
 
 @Component({
   selector: 'app-table',
@@ -9,15 +9,10 @@ import { MatTableDataSource } from '@angular/material/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppTableComponent {
-  @Input() dataSource: MatTableDataSource<any>;
-  @Input() displayed: string[] = [];
-  // util para pipes na célula
-  formatDuracao(min: number): string {
-    if (min == null) { return '—'; }
-    const h = Math.floor(min / 60);
-    const m = min % 60;
-    if (h && m) { return h + 'h ' + m + 'm'; }
-    if (h) { return h + 'h'; }
-    return m + 'm';
+  @Input() data: any[] = [];
+  @Input() columns: TableColumn[] = [];
+
+  trackByKey(_: number, col: TableColumn) {
+    return col.key;
   }
 }

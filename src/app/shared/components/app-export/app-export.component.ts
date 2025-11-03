@@ -1,5 +1,11 @@
 // src/app/shared/components/export/export.component.ts
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
+export interface ExportAction {
+  key: string;    // ex: 'pdf', 'csv'
+  label: string;  // ex: 'PDF'
+  icon?: string;  // ex: 'picture_as_pdf'
+}
 
 @Component({
   selector: 'app-export',
@@ -7,7 +13,12 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppExportComponent {
+  @Input() actions: ExportAction[] = [];
   @Input() disabled = false;
-  @Output() pdf = new EventEmitter<void>();
-  @Output() csv = new EventEmitter<void>();
+
+  @Output() action = new EventEmitter<string>();
+
+  onClick(key: string) {
+    this.action.emit(key);
+  }
 }

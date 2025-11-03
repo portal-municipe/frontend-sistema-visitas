@@ -10,26 +10,23 @@
     </div>
 
     <app-export
-      [disabled]="!dataSource?.data?.length"
-      (pdf)="exportPDF()"
-      (csv)="exportCSV()">
+      [actions]="exportActions"
+      [disabled]="!rowsView.length"
+      (action)="onExport($event)">
     </app-export>
   </div>
 
-  <!-- Filtros -->
   <app-filters
     [form]="form"
-    [departments]="departments"
+    [config]="filterConfig"
     (clear)="clearFilters()">
   </app-filters>
 
-  <!-- Tabela -->
   <app-table
-    [dataSource]="dataSource"
-    [displayed]="displayed">
+    [data]="rowsView"
+    [columns]="tableColumns">
   </app-table>
 
-  <!-- Paginação (opcional: caso uses server-side, escuta (page)) -->
   <app-pagination
     [length]="total"
     [pageSize]="10"
