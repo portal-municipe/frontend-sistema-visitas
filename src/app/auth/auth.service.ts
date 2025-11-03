@@ -4,6 +4,7 @@ export interface User {
   username: string;
   password: string;
   nome?: string;
+  email?: string;
 }
 
 @Injectable({ providedIn: 'root' })

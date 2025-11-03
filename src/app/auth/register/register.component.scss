@@ -1,0 +1,59 @@
+/* src/app/auth/register/register.component.scss */
+@import '../login/login.component.scss';
+
+.alt-link {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.auth-wrap {
+  min-height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 560px;
+  border-radius: 16px;
+  padding: 24px 28px 32px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.06);
+}
+
+.title {
+  text-align: center;
+  margin: 8px 0 4px;
+  font-weight: 600;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 0 0 20px;
+  opacity: .85;
+  font-size: 14px;
+}
+
+.w-100 { width: 100%; }
+
+.hint {
+  font-size: 11px;
+  opacity: .9;
+}
+
+.legal {
+  margin: 8px 0 14px;
+  font-size: 12px;
+  opacity: .85;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 46px;
+  border-radius: 28px; /* pill */
+  font-weight: 600;
+}

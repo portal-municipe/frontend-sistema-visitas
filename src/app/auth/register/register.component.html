@@ -1,47 +1,64 @@
 <div class="auth-wrap">
-  <mat-card>
-    <mat-card-title>Criar Conta</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field class="w-100">
-          <input matInput placeholder="Nome" formControlName="nome" />
-          <mat-error *ngIf="f.nome.touched && f.nome.invalid">
-            Informe o nome
-          </mat-error>
-        </mat-form-field>
+  <mat-card class="auth-card">
+    <h2 class="title">Criar conta</h2>
+    <p class="subtitle">
+      Já tens uma conta?
+      <a class="link" routerLink="/auth/login">Inicia sessão</a>
+    </p>
 
-        <mat-form-field class="w-100">
-          <input matInput placeholder="Username" formControlName="username" />
-          <mat-error *ngIf="f.username.touched && f.username.invalid">
-            Informe o username
-          </mat-error>
-        </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Como devemos chamar-te?</mat-label>
+        <input matInput formControlName="nome" placeholder="Insere o teu nome de perfil" />
+        <mat-error *ngIf="f.nome.touched && f.nome.invalid">Informe o nome</mat-error>
+      </mat-form-field>
 
-        <mat-form-field class="w-100">
-          <input
-            matInput
-            type="password"
-            placeholder="Palavra-passe"
-            formControlName="password"
-          />
-          <mat-error *ngIf="f.password.touched && f.password.invalid">
-            Palavra-passe mínima de 4 caracteres
-          </mat-error>
-        </mat-form-field>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Qual é o teu e-mail?</mat-label>
+        <input matInput formControlName="email" placeholder="Insere o teu endereço de e-mail" autocomplete="email" />
+        <mat-error *ngIf="f.email.touched && f.email.hasError('required')">Informe o e-mail</mat-error>
+        <mat-error *ngIf="f.email.touched && f.email.hasError('email')">E-mail inválido</mat-error>
+      </mat-form-field>
 
-        <button
-          mat-raised-button
-          color="primary"
-          class="w-100"
-          [disabled]="loading"
-        >
-          {{ loading ? 'A criar...' : 'Registar' }}
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Cria uma palavra-passe</mat-label>
+        <input
+          matInput
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Insere a tua palavra-passe"
+          autocomplete="new-password"
+        />
+        <button mat-icon-button type="button" matSuffix (click)="toggleShowPassword()" aria-label="Mostrar/ocultar palavra-passe">
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
+        <mat-hint align="start" class="hint">
+          Usa 8 ou mais caracteres com uma combinação de letras, números e símbolos.
+        </mat-hint>
+        <mat-error *ngIf="f.password.touched && f.password.hasError('required')">
+          Informe a palavra-passe
+        </mat-error>
+        <mat-error *ngIf="f.password.touched && f.password.hasError('minlength')">
+          Mínimo de 8 caracteres
+        </mat-error>
+        <mat-error *ngIf="f.password.touched && f.password.hasError('pattern')">
+          Utilize letras, números e símbolos
+        </mat-error>
+      </mat-form-field>
 
-        <div class="mt-2">
-          <a mat-button routerLink="/login">Já tenho conta</a>
-        </div>
-      </form>
-    </mat-card-content>
+      <p class="legal">
+        Ao criar uma conta, concordas com os <a class="link" href="#">Termos de utilização</a> e com a
+        <a class="link" href="#">Política de Privacidade</a>.
+      </p>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        [disabled]="loading || form.invalid"
+      >
+        {{ loading ? 'A criar…' : 'Criar conta' }}
+      </button>
+    </form>
   </mat-card>
 </div>

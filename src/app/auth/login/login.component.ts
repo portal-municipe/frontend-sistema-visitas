@@ -17,7 +17,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router,
+    private router: Router
   ) {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -36,13 +36,16 @@ export class LoginComponent {
     }
     this.loading = true;
 
-    const { username, password } = this.form.value;
+    const username = this.form.value.username;
+    const password = this.form.value.password;
 
     try {
       this.auth.login(username, password);
       this.router.navigate(['/']);
     } catch (e) {
-      alert((e as any)?.message || 'Falha ao autenticar');
+      // TS 3.2: sem optional chaining
+      const msg = e && (e as any).message ? (e as any).message : 'Falha ao autenticar';
+      alert(msg);
     } finally {
       this.loading = false;
     }
