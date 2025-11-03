@@ -1,3 +1,10 @@
-.filters { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
-.field { min-width: 200px; }
-.grow { flex: 1 1 auto; }
+
+/* src/app/shared/components/filters/filters.component.scss */
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 220px 200px 200px auto;
+  gap: 12px;
+  align-items: center;
+  margin: 10px 0 12px;
+}
+.search .mat-form-field-infix input { padding-left: 0; }

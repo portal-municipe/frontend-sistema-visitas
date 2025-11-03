@@ -1,36 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TableColumn, Sort } from '@app/shared/types/table.types';
+// src/app/shared/components/table/table.component.ts
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-table',
   templateUrl: './app-table.component.html',
-  styleUrls: ['./app-table.component.scss']
+  styleUrls: ['./app-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppTableComponent<T = any> {
-  @Input() columns: TableColumn<T>[] = [];
-  @Input() data: T[] = [];
-  @Input() clickable = false;
-  @Output() rowClick = new EventEmitter<T>();
-  @Output() sort = new EventEmitter<Sort>();
-
-  active = '';
-  direction: 'asc'|'desc'|'' = '';
-
-setSort(col: TableColumn): void {
-  if (!col.key) {
-    return;
+export class AppTableComponent {
+  @Input() dataSource: MatTableDataSource<any>;
+  @Input() displayed: string[] = [];
+  // util para pipes na célula
+  formatDuracao(min: number): string {
+    if (min == null) { return '—'; }
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    if (h && m) { return h + 'h ' + m + 'm'; }
+    if (h) { return h + 'h'; }
+    return m + 'm';
   }
-
-  if (this.active !== col.key) {
-    this.active = col.key;
-    this.direction = 'asc';
-  } else if (this.direction === 'asc') {
-    this.direction = 'desc';
-  } else {
-    this.direction = '';
-  }
-
-  this.sort.emit({ active: this.active, direction: this.direction });
-}
-
 }

@@ -1,39 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageEvent } from '@app/shared/types/table.types';
+// src/app/shared/components/pagination/pagination.component.ts
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './app-pagination.component.html',
-  styleUrls: ['./app-pagination.component.scss']
+  styleUrls: ['./app-pagination.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppPaginationComponent {
-  @Input() pageIndex = 0;
+  @Input() length = 0;
   @Input() pageSize = 10;
-  @Input() total = 0;
-  @Input() pageSizeOptions = [5, 10, 25, 50];
+  @Input() pageSizeOptions: number[] = [5, 10, 20];
+  @Output() page = new EventEmitter<PageEvent>();
 
-  @Output() change = new EventEmitter<PageEvent>();
-
-  get pages(): number {
-    return this.total ? Math.ceil(this.total / this.pageSize) : 1;
-  }
-
- go(i: number): void {
-  if (i < 0 || i >= this.pages) {
-    return;
-  }
-  this.pageIndex = i;
-  this.emit();
-}
-
-
-  setSize(s: number) {
-    this.pageSize = +s;
-    this.pageIndex = 0;
-    this.emit();
-  }
-
-  private emit() {
-    this.change.emit({ pageIndex: this.pageIndex, pageSize: this.pageSize });
-  }
+  onPage(e: PageEvent) { this.page.emit(e); }
 }

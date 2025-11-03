@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataProvider, PagedResult, Sort, TableColumn } from '@app/shared/types/table.types';
-import { FilterField } from '../app-filters/app-filters.component';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +9,7 @@ import { FilterField } from '../app-filters/app-filters.component';
 export class AppListComponent<T = any, F = any> implements OnInit {
   @Input() title = 'Listagem';
   @Input() columns: TableColumn<T>[] = [];
-  @Input() filters: FilterField[] = [];
+  @Input() filters: any[] = [];
   @Input() provider: DataProvider<T, F>; // (page, size, filters, sort) => Observable<PagedResult<T>>
   @Input() pageSize = 10;
 

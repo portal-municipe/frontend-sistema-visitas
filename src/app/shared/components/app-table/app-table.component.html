@@ -1,28 +1,64 @@
-<table class="mat-elevation-z1 w-100 table">
-  <thead>
-    <tr>
-      <th *ngFor="let c of columns" [style.width]="c.width" (click)="setSort(c)" class="th">
-        {{ c.header }}
-        <span class="sort" *ngIf="active === c.key">
-          {{ direction === 'asc' ? '▲' : (direction==='desc' ? '▼' : '') }}
-        </span>
-      </th>
-    </tr>
-  </thead>
+<!-- src/app/shared/components/table/table.component.html -->
+<ng-template #emptyState>
+  <app-data-void
+    [titulo]="'Sem registos de visitas'"
+    [descricao]="'Ajuste os filtros acima ou limpe a pesquisa.'">
+  </app-data-void>
+</ng-template>
 
-  <tbody>
-    <tr *ngFor="let row of data" [class.clickable]="clickable" (click)="clickable && rowClick.emit(row)">
-      <td *ngFor="let c of columns">
-        <ng-container [ngSwitch]="c.type">
-          <span *ngSwitchCase="'date'">{{ (c.cell ? c.cell(row) : row[c.key]) | date:c.format || 'dd/MM/yyyy' }}</span>
-          <span *ngSwitchDefault>
-            {{ c.cell ? c.cell(row) : row[c.key] }}
-          </span>
-        </ng-container>
+<ng-container *ngIf="dataSource?.data?.length; else emptyState">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z1 table">
+
+    <ng-container matColumnDef="data">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let v">{{ v.data | date:'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="visitante">
+      <th mat-header-cell *matHeaderCellDef>Visitante</th>
+      <td mat-cell *matCellDef="let v">
+        <div class="v-stack">
+          <div class="strong">{{ v.visitanteNome }}</div>
+          <div class="muted" *ngIf="v.empresa">{{ v.empresa }}</div>
+        </div>
       </td>
-    </tr>
-    <tr *ngIf="!data || !data.length">
-      <td [attr.colspan]="columns.length" class="empty">Sem registos.</td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <ng-container matColumnDef="anfitriao">
+      <th mat-header-cell *matHeaderCellDef>Anfitrião</th>
+      <td mat-cell *matCellDef="let v">{{ v.anfitriao }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef>Departamento</th>
+      <td mat-cell *matCellDef="let v">
+        <span class="chip">{{ v.departamento }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="motivo">
+      <th mat-header-cell *matHeaderCellDef>Motivo</th>
+      <td mat-cell *matCellDef="let v">{{ v.motivo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="entrada">
+      <th mat-header-cell *matHeaderCellDef>Entrada</th>
+      <td mat-cell *matCellDef="let v">{{ v.entrada }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="saida">
+      <th mat-header-cell *matHeaderCellDef>Saída</th>
+      <td mat-cell *matCellDef="let v">{{ v.saida || '—' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duracao">
+      <th mat-header-cell *matHeaderCellDef>Duração</th>
+      <td mat-cell *matCellDef="let v">
+        <span class="pill">{{ formatDuracao(v.duracaoMin) }}</span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayed"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayed;"></tr>
+  </table>
+</ng-container>

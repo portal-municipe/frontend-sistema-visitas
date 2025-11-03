@@ -1,18 +1,7 @@
-<div class="pager">
-  <button mat-button (click)="go(0)" [disabled]="pageIndex===0">«</button>
-  <button mat-button (click)="go(pageIndex-1)" [disabled]="pageIndex===0">‹</button>
-
-  <span class="info">Página {{pageIndex+1}} de {{pages}}</span>
-
-  <button mat-button (click)="go(pageIndex+1)" [disabled]="pageIndex>=pages-1">›</button>
-  <button mat-button (click)="go(pages-1)" [disabled]="pageIndex>=pages-1">»</button>
-
-  <span class="grow"></span>
-
-  <mat-form-field>
-    <mat-label>Por página</mat-label>
-    <mat-select [value]="pageSize" (selectionChange)="setSize($event.value)">
-      <mat-option *ngFor="let s of pageSizeOptions" [value]="s">{{s}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+<!-- src/app/shared/components/pagination/pagination.component.html -->
+<mat-paginator
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPage($event)">
+</mat-paginator>

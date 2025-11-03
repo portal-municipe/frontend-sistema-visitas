@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { exportToCsv } from '@app/shared/utils/csv-export.util';
+// src/app/shared/components/export/export.component.ts
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-export',
-  templateUrl: './app-export.component.html'
+  templateUrl: './app-export.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppExportComponent {
-  @Input() data: any[] = [];
-  @Input() filename = 'export.csv';
-  @Output() pdf = new EventEmitter<void>(); // para integrares jsPDF depois
-
-  exportCsv() { exportToCsv(this.filename, this.data); }
+  @Input() disabled = false;
+  @Output() pdf = new EventEmitter<void>();
+  @Output() csv = new EventEmitter<void>();
 }

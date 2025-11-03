@@ -1,22 +1,25 @@
-<form [formGroup]="form" class="filters">
-  <ng-container *ngFor="let f of fields">
-    <mat-form-field>
-      <mat-label>{{ f.label }}</mat-label>
+<!-- src/app/shared/components/filters/filters.component.html -->
+<div class="filters">
+  <mat-form-field class="search">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Pesquisar..." [formControl]="form.controls.q">
+  </mat-form-field>
 
-      <input *ngIf="f.type === 'text'" matInput [formControlName]="f.key" [placeholder]="f.placeholder || ''">
+  <mat-form-field class="dept">
+    <mat-select [formControl]="form.controls.departamento" placeholder="Departamento">
+      <mat-option *ngFor="let d of departments" [value]="d.value">{{ d.label }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <input *ngIf="f.type === 'date'" matInput [formControlName]="f.key" type="date">
+  <mat-form-field class="date">
+    <mat-icon matPrefix>event</mat-icon>
+    <input matInput type="date" placeholder="Data Inicial" [formControl]="form.controls.dataInicial">
+  </mat-form-field>
 
-      <mat-select *ngIf="f.type === 'select'" [formControlName]="f.key">
-        <mat-option *ngFor="let o of f.options" [value]="o.value">
-          {{ o.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
+  <mat-form-field class="date">
+    <mat-icon matPrefix>event</mat-icon>
+    <input matInput type="date" placeholder="Data Final" [formControl]="form.controls.dataFinal">
+  </mat-form-field>
 
-  <div class="actions">
-    <button mat-button type="button" (click)="reset()">Limpar</button>
-    <button mat-flat-button color="primary" type="button" (click)="apply()">Aplicar</button>
-  </div>
-</form>
+  <button mat-button type="button" (click)="onClear()">Limpar</button>
+</div>

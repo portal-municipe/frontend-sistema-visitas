@@ -1,2 +1,9 @@
-<app-button icon="save_alt" label="CSV" (click)="exportCsv()" flat="true"></app-button>
-<app-button icon="picture_as_pdf" label="PDF" color="warn" (click)="pdf.emit()" flat="true"></app-button>
+<!-- src/app/shared/components/export/export.component.html -->
+<div class="actions">
+  <button mat-stroked-button (click)="pdf.emit()" [disabled]="disabled">
+    <mat-icon>picture_as_pdf</mat-icon>&nbsp; PDF
+  </button>
+  <button mat-stroked-button (click)="csv.emit()" [disabled]="disabled">
+    <mat-icon>cloud_download</mat-icon>&nbsp; CSV
+  </button>
+</div>
