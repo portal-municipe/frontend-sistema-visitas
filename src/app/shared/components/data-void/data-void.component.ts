@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./data-void.component.scss'],
 })
 export class DataVoidComponent {
-  @Input() titulo: string = 'Nenhum registo encontrado';
-  @Input() descricao: string = 'Tente ajustar os filtros ou limpar a pesquisa.';
+  @Input() titulo = 'Nenhum registo encontrado';
+  @Input() descricao = 'Tente ajustar os filtros ou limpar a pesquisa.';
 }

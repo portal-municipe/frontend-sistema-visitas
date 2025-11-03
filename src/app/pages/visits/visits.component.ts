@@ -133,7 +133,7 @@ export class VisitsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const di = this.filters.dataInicial ? new Date(this.filters.dataInicial as any) : null;
     const df = this.filters.dataFinal ? new Date(this.filters.dataFinal as any) : null;
-    if (df) df.setHours(23, 59, 59, 999);
+    if (df) { df.setHours(23, 59, 59, 999); }
 
     const filtered = this.allRows.filter((v: Visit) => {
       // texto
@@ -160,7 +160,7 @@ export class VisitsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.data = filtered;
 
     // garantir paginação válida e update da tabela no Angular Material 7
-    if (this.paginator) this.paginator.firstPage();
+    if (this.paginator) { this.paginator.firstPage(); }
     if ((this.dataSource as any)._updateChangeSubscription) {
       (this.dataSource as any)._updateChangeSubscription();
     }
@@ -176,11 +176,11 @@ export class VisitsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   formatDuracao(min: number): string {
-    if (min == null) return '—';
+    if (min == null) { return '—'; }
     const h = Math.floor(min / 60);
     const m = min % 60;
-    if (h && m) return h + 'h ' + m + 'm';
-    if (h) return h + 'h';
+    if (h && m) { return h + 'h ' + m + 'm'; }
+    if (h) { return h + 'h'; }
     return m + 'm';
   }
 
@@ -201,7 +201,7 @@ export class VisitsComponent implements OnInit, AfterViewInit, OnDestroy {
         v.saida || '',
         this.formatDuracao(v.duracaoMin),
       ]
-        .map(function (x: any) { return '"' + (x ? x.toString().replace(/"/g, '""') : '') + '"'; })
+        .map((x: any) => `"${(x ? x.toString().replace(/"/g, '""') : '')}"`)
         .join(',')
     );
 
@@ -214,6 +214,7 @@ export class VisitsComponent implements OnInit, AfterViewInit, OnDestroy {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
 
   exportPDF(): void {
     alert('Hook para PDF: plugar jsPDF/autotable aqui quando preferires.');
