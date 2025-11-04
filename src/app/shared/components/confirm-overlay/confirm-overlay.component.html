@@ -1,0 +1,11 @@
+<div class="overlay" *ngIf="show"></div>
+
+<div class="confirm-modal" *ngIf="show">
+  <h3>{{ title }}</h3>
+  <p>{{ message }}</p>
+
+  <div class="actions">
+    <button class="btn-cancel" mat-button (click)="onCancel()">Cancelar</button>
+    <button class="btn-confirm" mat-button (click)="onConfirm()">Confirmar Saída</button>
+  </div>
+</div>

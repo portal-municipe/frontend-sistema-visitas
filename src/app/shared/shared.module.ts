@@ -19,6 +19,7 @@ import { AppTopbarComponent } from './components/app-topbar/app-topbar.component
 import { RouterModule } from '@angular/router';
 import { DataVoidComponent } from './components/data-void/data-void.component';
 import { AppTableCellDirective } from './directives/app-table-cell.directive';
+import { ConfirmOverlayComponent } from './components/confirm-overlay/confirm-overlay.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AppTableCellDirective } from './directives/app-table-cell.directive';
     AppSidebarComponent,
     AppTopbarComponent,
     DataVoidComponent,
-    AppTableCellDirective
+    AppTableCellDirective,
+    ConfirmOverlayComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { AppTableCellDirective } from './directives/app-table-cell.directive';
     AppButtonComponent,
     DataVoidComponent,
     RouterModule,
-    AppTableCellDirective
+    AppTableCellDirective,
+    ConfirmOverlayComponent
   ]
 })
 export class SharedModule { }

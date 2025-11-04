@@ -10,18 +10,16 @@ import { ActiveVisit, TableColumn } from '@app/core/models/index';
 export class ActiveVisitsComponent {
   search = '';
 
-  // colunas que o app-table vai desenhar
   columns: TableColumn[] = [
     { key: 'visitante', header: 'Visitante' },
-    { key: 'anfitriao', header: 'Anfitrião' },
+    //{ key: 'anfitriao', header: 'Anfitrião' },
     { key: 'localizacao', header: 'Localização' },
     { key: 'motivo', header: 'Motivo' },
-    { key: 'entrada', header: 'Entrada' },
-    { key: 'duracao', header: 'Duração' },
-    { key: 'acoes', header: 'Ações' },
+    { key: 'entrada', header: 'Entrada', align: 'center', width: '90px' },
+    { key: 'duracao', header: 'Duração', align: 'center', width: '90px' },
+    { key: 'acoes', header: 'Ações', align: 'right', width: '140px' },
   ];
 
-  // origem
   private visits: ActiveVisit[] = [
     {
       id: 1,
@@ -31,7 +29,7 @@ export class ActiveVisitsComponent {
       departamento: 'Finanças',
       sala: 'Sala de Reuniões 1',
       motivo: 'Reunião de Trabalho',
-      entrada: '12:36',
+      entrada: '14:36',
       duracaoMin: 135,
     },
     {
@@ -42,7 +40,7 @@ export class ActiveVisitsComponent {
       departamento: 'Recursos Humanos',
       sala: 'Gabinete do Director',
       motivo: 'Entrega de Documentos',
-      entrada: '13:36',
+      entrada: '15:36',
       duracaoMin: 90,
     },
     {
@@ -53,24 +51,10 @@ export class ActiveVisitsComponent {
       departamento: 'Administração',
       sala: 'Escritório Geral',
       motivo: 'Consultoria',
-      entrada: '14:06',
+      entrada: '16:06',
       duracaoMin: 45,
     },
   ];
-
-  // view que o app-table usa
-  get rows(): any[] {
-    return this.filtered.map(v => ({
-      id: v.id,
-      visitante: v,             // passo o obj inteiro pro template
-      anfitriao: v,             // idem
-      localizacao: v,
-      motivo: v.motivo,
-      entrada: v.entrada,
-      duracao: this.formatDuration(v.duracaoMin),
-      acoes: v,
-    }));
-  }
 
   // modal
   showingConfirm = false;
@@ -82,7 +66,7 @@ export class ActiveVisitsComponent {
 
   get filtered(): ActiveVisit[] {
     const t = this.search.trim().toLowerCase();
-    if (!t) { return this.visits; }
+    if (!t) return this.visits;
     return this.visits.filter(v =>
       v.nome.toLowerCase().includes(t) ||
       v.empresa.toLowerCase().includes(t) ||
@@ -92,26 +76,41 @@ export class ActiveVisitsComponent {
     );
   }
 
+  get rows() {
+    return this.filtered.map(v => ({
+      id: v.id,
+      visitante: v,
+      anfitriao: v,
+      localizacao: v,
+      motivo: v.motivo,
+      entrada: v.entrada,
+      duracao: this.formatDuration(v.duracaoMin),
+      acoes: v, // passa o próprio visitante para o template
+    }));
+  }
+
   get totalAtivos(): number {
     return this.filtered.length;
   }
 
   initials(nome: string): string {
-    if (!nome) { return ''; }
-    const parts = nome.split(' ').filter(Boolean);
-    if (parts.length === 1) { return parts[0].substr(0, 2).toUpperCase(); }
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    if (!nome) return '';
+    const p = nome.split(' ').filter(Boolean);
+    if (p.length === 1) return p[0].substr(0, 2).toUpperCase();
+    return (p[0][0] + p[p.length - 1][0]).toUpperCase();
   }
 
   formatDuration(min: number): string {
     const h = Math.floor(min / 60);
     const m = min % 60;
-    if (h && m) { return `${h}h ${m}m`; }
-    if (h) { return `${h}h`; }
+    if (h && m) return `${h}h ${m}m`;
+    if (h) return `${h}h`;
     return `${m}m`;
   }
 
+  // <-- usa o mesmo nome que o HTML
   onOpenConfirm(v: ActiveVisit): void {
+    console.log('onOpenConfirm', v);
     this.visitToExit = v;
     this.showingConfirm = true;
   }
@@ -122,24 +121,17 @@ export class ActiveVisitsComponent {
   }
 
   onConfirmExit(): void {
-    const current = this.visitToExit;
-    if (!current) {
-      return;
-    }
+    if (!this.visitToExit) return;
 
-    // remove da lista
-    this.visits = this.visits.filter(x => x.id !== current.id);
+    this.visits = this.visits.filter(x => x.id !== this.visitToExit!.id);
 
-    // prepara toast
-    const dur = this.formatDuration(current.duracaoMin);
-    this.lastToastMsg = `${current.nome} - Duração: ${dur}`;
+    const dur = this.formatDuration(this.visitToExit.duracaoMin);
+    this.lastToastMsg = `${this.visitToExit.nome} - Duração: ${dur}`;
     this.showToast = true;
-    setTimeout(() => {
-      this.showToast = false;
-    }, 5000);
+    setTimeout(() => (this.showToast = false), 5000);
 
-    // limpa estado
-    this.visitToExit = null;
     this.showingConfirm = false;
+    this.visitToExit = null;
   }
 }
+
