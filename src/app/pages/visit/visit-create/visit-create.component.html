@@ -1,0 +1,263 @@
+<!-- src/app/features/visits/visit-create/visit-create.component.html -->
+<div class="visit-page">
+  <!-- toast de sucesso -->
+  <div class="toast" *ngIf="showSuccess">
+    <div class="toast-icon">
+      <mat-icon>check_circle</mat-icon>
+    </div>
+    <div class="toast-body">
+      <div class="toast-title">Visita registada com sucesso!</div>
+      <div class="toast-sub">Visitante: {{ selectedVisitor?.nome }}</div>
+    </div>
+  </div>
+
+  <h1 class="page-title">Cadastrar Nova Visita</h1>
+  <p class="page-subtitle">Registe a entrada de um visitante no edifício do MINFIN</p>
+
+  <!-- steps -->
+  <div class="steps">
+    <div class="step" [class.active]="step === 1" [class.done]="step > 1">
+      <div class="circle">
+        <span *ngIf="step === 1">1</span>
+        <mat-icon *ngIf="step > 1">check_circle</mat-icon>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Identificar Visitante</div>
+        <div class="step-sub">Selecione ou registe o visitante</div>
+      </div>
+    </div>
+    <div class="divider" [class.done]="step > 1"></div>
+    <div class="step" [class.active]="step === 2" [class.done]="step > 2">
+      <div class="circle">
+        <span *ngIf="step === 2">2</span>
+        <mat-icon *ngIf="step > 2">check_circle</mat-icon>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Dados do Visitante</div>
+        <div class="step-sub">Confirme os dados pessoais</div>
+      </div>
+    </div>
+    <div class="divider" [class.done]="step > 2"></div>
+    <div class="step" [class.active]="step === 3">
+      <div class="circle">
+        <span>3</span>
+      </div>
+      <div class="step-body">
+        <div class="step-title">Detalhes da Visita</div>
+        <div class="step-sub">Informe os dados da visita</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <mat-card *ngIf="step === 1" class="panel">
+    <div class="panel-title">
+      <mat-icon>group</mat-icon>
+      <div>
+        <h2>Selecionar Visitante</h2>
+        <p>Procure um visitante existente no sistema ou registe um novo</p>
+      </div>
+    </div>
+
+    <mat-form-field class="search-field" appearance="fill">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Pesquisar por nome, documento ou empresa..." />
+    </mat-form-field>
+
+    <div class="visitor-grid">
+      <button
+        type="button"
+        class="visitor-card"
+        *ngFor="let v of visitors"
+        [class.selected]="selectedVisitor?.id === v.id"
+        (click)="selectVisitor(v)"
+      >
+        <div class="name">{{ v.nome }}</div>
+        <div class="muted">{{ v.empresa }}</div>
+        <div class="muted small">Doc: {{ v.documento }}</div>
+      </button>
+    </div>
+
+    <div class="separator-text">Visitante não encontrado?</div>
+
+    <div class="center">
+      <button mat-stroked-button color="primary" (click)="goRegisterNewVisitor()">
+        <mat-icon>person_add</mat-icon>
+        Registar Novo Visitante
+      </button>
+    </div>
+
+    <div class="actions-row">
+      <span></span>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="nextFromStep1()"
+        [disabled]="!selectedVisitor"
+      >
+        Próximo
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- STEP 2: confirmar OU registar novo -->
+  <mat-card *ngIf="step === 2 && !isNewVisitor" class="panel">
+    <div class="panel-title">
+      <mat-icon>person</mat-icon>
+      <div>
+        <h2>Confirmar Dados do Visitante</h2>
+        <p>Verifique se os dados estão corretos antes de prosseguir</p>
+      </div>
+    </div>
+
+    <div class="visitor-summary">
+      <div class="tag">Visitante Selecionado</div>
+      <div class="grid-two">
+        <div>
+          <label>Nome Completo</label>
+          <p>{{ selectedVisitor?.nome }}</p>
+        </div>
+        <div>
+          <label>Documento</label>
+          <p>{{ selectedVisitor?.documento }}</p>
+        </div>
+        <div>
+          <label>Telefone</label>
+          <p>{{ selectedVisitor?.telefone || '—' }}</p>
+        </div>
+        <div>
+          <label>Empresa</label>
+          <p>{{ selectedVisitor?.empresa || '—' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-row">
+      <button mat-stroked-button (click)="backToStep1()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+      <button mat-raised-button color="primary" (click)="nextFromStep2()">
+        Próximo
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- STEP 2: formulário de novo visitante -->
+  <mat-card *ngIf="step === 2 && isNewVisitor" class="panel">
+    <div class="panel-title">
+      <mat-icon>person_add</mat-icon>
+      <div>
+        <h2>Dados do Novo Visitante</h2>
+        <p>Preencha os dados do visitante para registá-lo no sistema</p>
+      </div>
+    </div>
+
+    <form [formGroup]="newVisitorForm" class="form-grid">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome Completo *</mat-label>
+        <input matInput formControlName="nome" placeholder="Nome completo do visitante" />
+        <mat-error *ngIf="newVisitorForm.controls.nome.invalid && newVisitorForm.controls.nome.touched">
+          Informe o nome
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Documento de Identificação *</mat-label>
+        <input matInput formControlName="documento" placeholder="Ex: 004567890LA045" />
+        <mat-error *ngIf="newVisitorForm.controls.documento.invalid && newVisitorForm.controls.documento.touched">
+          Informe o documento
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="telefone" placeholder="+244 9XX XXX XXX" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Empresa/Origem</mat-label>
+        <input matInput formControlName="empresa" placeholder="Nome da empresa ou instituição" />
+      </mat-form-field>
+    </form>
+
+    <div class="actions-row">
+      <button mat-stroked-button (click)="backToStep1()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+      <button mat-raised-button color="primary" (click)="nextFromStep2()">
+        Próximo
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- STEP 3 -->
+  <mat-card *ngIf="step === 3" class="panel">
+    <div class="panel-title">
+      <mat-icon>business_center</mat-icon>
+      <div>
+        <h2>Detalhes da Visita</h2>
+        <p>Informe os dados sobre o destino e motivo da visita</p>
+      </div>
+    </div>
+
+    <form [formGroup]="visitDetailsForm" class="form-grid">
+      <mat-form-field appearance="fill">
+        <mat-label>Funcionário Anfitrião *</mat-label>
+        <mat-select formControlName="anfitriao">
+          <mat-option *ngFor="let h of hosts" [value]="h.id">{{ h.nome }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="visitDetailsForm.controls.anfitriao.invalid && visitDetailsForm.controls.anfitriao.touched">
+          Selecione o anfitrião
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Departamento de Destino *</mat-label>
+        <mat-select formControlName="departamento">
+          <mat-option *ngFor="let d of departments" [value]="d.id">{{ d.nome }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="visitDetailsForm.controls.departamento.invalid && visitDetailsForm.controls.departamento.touched">
+          Selecione o departamento
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Área/Sala</mat-label>
+        <mat-select formControlName="area">
+          <mat-option *ngFor="let a of areas" [value]="a">{{ a }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Motivo da Visita *</mat-label>
+        <mat-select formControlName="motivo">
+          <mat-option *ngFor="let m of motives" [value]="m.id">{{ m.nome }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="visitDetailsForm.controls.motivo.invalid && visitDetailsForm.controls.motivo.touched">
+          Selecione o motivo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Observações Adicionais</mat-label>
+        <textarea matInput rows="3" formControlName="observacoes" placeholder="Informações complementares..."></textarea>
+      </mat-form-field>
+    </form>
+
+    <div class="actions-row">
+      <button mat-stroked-button (click)="backToStep2()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+      <button mat-raised-button color="primary" class="success" (click)="submitVisit()">
+        <mat-icon>check</mat-icon>
+        Registar Entrada
+      </button>
+    </div>
+  </mat-card>
+</div>

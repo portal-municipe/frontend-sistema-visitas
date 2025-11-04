@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { VisitsComponent } from './visits/visits.component';
+import { VisitsComponent } from './visit/visits/visits.component';
 import { VisitorsComponent } from './visitors/visitors.component';
 import { UsersComponent } from './users/users.component';
 import { MaterialModule } from '@app/material.module';
 import { AppFiltersComponent, AppListComponent } from '@app/shared/components';
 import { SharedModule } from '@app/shared/shared.module';
+import { VisitCreateComponent } from './visit/visit-create/visit-create.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     VisitsComponent,
     VisitorsComponent,
-    UsersComponent
+    UsersComponent,
+    VisitCreateComponent
   ],
   imports: [
     CommonModule,
