@@ -103,7 +103,7 @@ export class VisitsComponent implements OnInit, OnDestroy {
     const depNorm = (departamento || '').toString().trim();
     const di = dataInicial ? new Date(dataInicial) : null;
     const df = dataFinal ? new Date(dataFinal) : null;
-    if (df) df.setHours(23, 59, 59, 999);
+    if (df) { df.setHours(23, 59, 59, 999); }
 
     const filtered = this.allRows.filter(v => {
       const hitQ =
@@ -140,11 +140,11 @@ export class VisitsComponent implements OnInit, OnDestroy {
   }
 
   formatDuracao(min: number): string {
-    if (min == null) return '—';
+    if (min == null) { return '—'; }
     const h = Math.floor(min / 60);
     const m = min % 60;
-    if (h && m) return `${h}h ${m}m`;
-    if (h) return `${h}h`;
+    if (h && m) { return `${h}h ${m}m`; }
+    if (h) { return `${h}h`; }
     return `${m}m`;
   }
 

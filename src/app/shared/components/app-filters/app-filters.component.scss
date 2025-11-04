@@ -4,15 +4,13 @@
   display: grid;
   grid-template-columns: 1fr 220px 200px 200px auto;
   gap: 12px;
-  align-items: center;
-  margin: 10px 0 12px;
+  align-items: end;
 }
 .search .mat-form-fi/* src/app/shared/components/filters/filters.component.scss */
 .filters {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
-  align-items: center;
-  margin: 10px 0 12px;
+  align-items: end;
 }
 eld-infix input { padding-left: 0; }
