@@ -8,7 +8,7 @@ import { ActiveVisit, TableColumn } from '@app/core/models';
   styleUrls: ['./active-visits.component.scss'],
 })
 export class ActiveVisitsComponent implements OnInit {
-  filterForm!: FormGroup;
+  filterForm: FormGroup;
 
   columns: TableColumn[] = [
     { key: 'visitante', header: 'Visitante' },
@@ -66,34 +66,38 @@ export class ActiveVisitsComponent implements OnInit {
   showToast = false;
   lastToastMsg = '';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
       search: [''],
     });
 
-    // primeira carga
     this.buildRows();
 
-    // sempre que o search muda, reconstrói
-    this.filterForm.get('search')!.valueChanges.subscribe(() => {
-      this.buildRows();
-    });
+    const searchCtrl = this.filterForm.get('search');
+    if (searchCtrl) {
+      searchCtrl.valueChanges.subscribe(() => {
+        this.buildRows();
+      });
+    }
   }
 
   private buildRows(): void {
-    const t = (this.filterForm.get('search')!.value || '').trim().toLowerCase();
+    const searchCtrl = this.filterForm.get('search');
+    const text = searchCtrl && searchCtrl.value
+      ? String(searchCtrl.value).trim().toLowerCase()
+      : '';
 
-    const filtered = !t
+    const filtered = !text
       ? this.visits
       : this.visits.filter(v =>
-          v.nome.toLowerCase().includes(t) ||
-          v.empresa.toLowerCase().includes(t) ||
-          v.anfitriao.toLowerCase().includes(t) ||
-          v.departamento.toLowerCase().includes(t) ||
-          v.motivo.toLowerCase().includes(t)
-        );
+        v.nome.toLowerCase().includes(text) ||
+        v.empresa.toLowerCase().includes(text) ||
+        v.anfitriao.toLowerCase().includes(text) ||
+        v.departamento.toLowerCase().includes(text) ||
+        v.motivo.toLowerCase().includes(text)
+      );
 
     this.rows = filtered.map(v => ({
       id: v.id,
@@ -103,7 +107,7 @@ export class ActiveVisitsComponent implements OnInit {
       motivo: v.motivo,
       entrada: v.entrada,
       duracao: this.formatDuration(v.duracaoMin),
-      acoes: v, // será usado na ação
+      acoes: v,
     }));
   }
 
@@ -135,7 +139,7 @@ export class ActiveVisitsComponent implements OnInit {
   }
 
   // chamado quando a tabela emitir
-  onTableCellAction(evt: { col: string; row: any }) {
+  onTableCellAction(evt: { col: string; row: any }): void {
     if (evt.col === 'acoes') {
       const visit: ActiveVisit = evt.row.acoes;
       this.onOpenConfirm(visit);
