@@ -1,4 +1,3 @@
-<!-- src/app/shared/components/table/app-table.component.html -->
 <ng-template #empty>
   <app-data-void
     [titulo]="'Sem dados'"
@@ -12,8 +11,9 @@
   [dataSource]="data"
   class="mat-elevation-z1 table">
 
+  <!-- colunas dinâmicas -->
   <ng-container
-    *ngFor="let col of columns; trackBy: trackByKey"
+    *ngFor="let col of columns"
     [matColumnDef]="col.key">
     <th
       mat-header-cell
@@ -22,11 +22,22 @@
       [style.width]="col.width || null">
       {{ col.header }}
     </th>
+
     <td
       mat-cell
       *matCellDef="let row"
       [style.text-align]="col.align || 'left'">
-      {{ row[col.key] }}
+
+      <!-- se tiver template para esta coluna usa, senão mostra o valor bruto -->
+      <ng-container *ngIf="hasTemplate(col.key); else defaultCell">
+        <ng-container
+          *ngTemplateOutlet="getTemplate(col.key); context: {$implicit: row}">
+        </ng-container>
+      </ng-container>
+
+      <ng-template #defaultCell>
+        {{ row[col.key] }}
+      </ng-template>
     </td>
   </ng-container>
 

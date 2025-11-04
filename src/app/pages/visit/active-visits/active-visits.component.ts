@@ -1,7 +1,6 @@
 // src/app/features/visits/active-visits/active-visits.component.ts
 import { Component } from '@angular/core';
-import { ActiveVisit } from '@app/core/models/index';
-
+import { ActiveVisit, TableColumn } from '@app/core/models/index';
 
 @Component({
   selector: 'app-active-visits',
@@ -11,7 +10,19 @@ import { ActiveVisit } from '@app/core/models/index';
 export class ActiveVisitsComponent {
   search = '';
 
-  visits: ActiveVisit[] = [
+  // colunas que o app-table vai desenhar
+  columns: TableColumn[] = [
+    { key: 'visitante', header: 'Visitante' },
+    { key: 'anfitriao', header: 'Anfitrião' },
+    { key: 'localizacao', header: 'Localização' },
+    { key: 'motivo', header: 'Motivo' },
+    { key: 'entrada', header: 'Entrada' },
+    { key: 'duracao', header: 'Duração' },
+    { key: 'acoes', header: 'Ações' },
+  ];
+
+  // origem
+  private visits: ActiveVisit[] = [
     {
       id: 1,
       nome: 'António Carlos Silva',
@@ -47,7 +58,21 @@ export class ActiveVisitsComponent {
     },
   ];
 
-  // para o modal
+  // view que o app-table usa
+  get rows(): any[] {
+    return this.filtered.map(v => ({
+      id: v.id,
+      visitante: v,             // passo o obj inteiro pro template
+      anfitriao: v,             // idem
+      localizacao: v,
+      motivo: v.motivo,
+      entrada: v.entrada,
+      duracao: this.formatDuration(v.duracaoMin),
+      acoes: v,
+    }));
+  }
+
+  // modal
   showingConfirm = false;
   visitToExit: ActiveVisit | null = null;
 
@@ -55,7 +80,7 @@ export class ActiveVisitsComponent {
   showToast = false;
   lastToastMsg = '';
 
-  get filteredVisits(): ActiveVisit[] {
+  get filtered(): ActiveVisit[] {
     const t = this.search.trim().toLowerCase();
     if (!t) { return this.visits; }
     return this.visits.filter(v =>
@@ -68,7 +93,7 @@ export class ActiveVisitsComponent {
   }
 
   get totalAtivos(): number {
-    return this.filteredVisits.length;
+    return this.filtered.length;
   }
 
   initials(nome: string): string {
@@ -86,33 +111,35 @@ export class ActiveVisitsComponent {
     return `${m}m`;
   }
 
-  // abrir modal
   onOpenConfirm(v: ActiveVisit): void {
     this.visitToExit = v;
     this.showingConfirm = true;
   }
 
-  // fechar modal sem ação
   onCancelExit(): void {
     this.showingConfirm = false;
     this.visitToExit = null;
   }
 
-  // confirmar saída
   onConfirmExit(): void {
-    if (!this.visitToExit) { return; }
+    const current = this.visitToExit;
+    if (!current) {
+      return;
+    }
 
     // remove da lista
-    this.visits = this.visits.filter(x => x.id !== this.visitToExit.id);
+    this.visits = this.visits.filter(x => x.id !== current.id);
 
-    // mostra toast
-    const dur = this.formatDuration(this.visitToExit.duracaoMin);
-    this.lastToastMsg = `${this.visitToExit.nome} - Duração: ${dur}`;
+    // prepara toast
+    const dur = this.formatDuration(current.duracaoMin);
+    this.lastToastMsg = `${current.nome} - Duração: ${dur}`;
     this.showToast = true;
-    setTimeout(() => this.showToast = false, 5000);
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000);
 
-    // fecha modal
-    this.showingConfirm = false;
+    // limpa estado
     this.visitToExit = null;
+    this.showingConfirm = false;
   }
 }

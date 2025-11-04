@@ -1,22 +1,16 @@
-/* src/app/shared/components/table/table.component.scss */
-.table { width: 100%; border-radius: 8px; overflow: hidden; }
-.v-stack { display: grid; }
-.strong { font-weight: 600; }
-.muted { color: rgba(0,0,0,.54); font-size: 12px; }
-.chip {
-  display: inline-block; background: #eef1f6; color: #2b3a55;
-  border-radius: 16px; padding: 4px 10px; font-size: 12px; line-height: 1;
-}
-.pill {
-  display: inline-block; background: #e8f0ff; color: #1f5bd6;
-  border-radius: 16px; padding: 6px 10px; font-weight: 600; font-size: 12px;
-}
-.mat-header-cell { font-weight: 600; }
-
-/* src/app/shared/components/table/table.component.scss */
 .table {
   width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
+  background: transparent;
 }
-.mat-header-cell { font-weight: 600; }
+.mat-table {
+  background: transparent;
+}
+.mat-row {
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+.mat-cell, .mat-header-cell {
+  border-bottom: none !important;
+}

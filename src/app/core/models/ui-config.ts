@@ -8,10 +8,3 @@ export interface FilterConfig {
     class?: string;            // para grid
 }
 
-export interface TableColumn {
-    key: string;               // propriedade no objeto
-    header: string;            // texto do header
-    width?: string;
-    align?: 'left' | 'right' | 'center';
-}
-

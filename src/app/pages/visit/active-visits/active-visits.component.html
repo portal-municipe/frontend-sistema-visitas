@@ -33,87 +33,82 @@
       </mat-form-field>
     </div>
 
-    <div class="table-shell">
-      <div class="table-header">
-        <div class="th col-visitante">Visitante</div>
-        <div class="th col-anfitriao">Anfitrião</div>
-        <div class="th col-local">Localização</div>
-        <div class="th col-motivo">Motivo</div>
-        <div class="th col-hora">Entrada</div>
-        <div class="th col-dur">Duração</div>
-        <div class="th col-actions">Ações</div>
-      </div>
+    <!-- AQUI reutilizamos o app-table -->
+    <app-table
+      [data]="rows"
+      [columns]="columns"
+      class="active-table">
 
-      <div
-        class="table-row"
-        *ngFor="let v of filteredVisits"
-      >
+      <!-- visitante -->
+      <ng-template appTableCell="visitante" let-row>
         <div class="td col-visitante">
-          <div class="avatar">{{ initials(v.nome) }}</div>
+          <div class="avatar">{{ initials(row.visitante.nome) }}</div>
           <div class="v-stack">
-            <div class="name">{{ v.nome }}</div>
-            <div class="sub">{{ v.empresa }}</div>
+            <div class="name">{{ row.visitante.nome }}</div>
+            <div class="sub">{{ row.visitante.empresa }}</div>
           </div>
         </div>
+      </ng-template>
 
+      <!-- anfitrião -->
+      <ng-template appTableCell="anfitriao" let-row>
         <div class="td col-anfitriao">
           <mat-icon class="inline-icon">person_outline</mat-icon>
-          <span>{{ v.anfitriao }}</span>
+          <span>{{ row.anfitriao.anfitriao }}</span>
         </div>
+      </ng-template>
 
+      <!-- localização -->
+      <ng-template appTableCell="localizacao" let-row>
         <div class="td col-local">
           <div class="loc-line">
             <mat-icon class="inline-icon">location_city</mat-icon>
-            <span>{{ v.departamento }}</span>
+            <span>{{ row.localizacao.departamento }}</span>
           </div>
           <div class="sub small">
             <mat-icon class="inline-icon small">room</mat-icon>
-            {{ v.sala }}
+            {{ row.localizacao.sala }}
           </div>
         </div>
+      </ng-template>
 
-        <div class="td col-motivo">
-          <span class="badge">{{ v.motivo }}</span>
-        </div>
+      <!-- motivo -->
+      <ng-template appTableCell="motivo" let-row>
+        <span class="badge">{{ row.motivo }}</span>
+      </ng-template>
 
-        <div class="td col-hora">
-          {{ v.entrada }}
-        </div>
+      <!-- entrada -->
+      <ng-template appTableCell="entrada" let-row>
+        {{ row.entrada }}
+      </ng-template>
 
+      <!-- duração -->
+      <ng-template appTableCell="duracao" let-row>
         <div class="td col-dur">
           <mat-icon class="inline-icon">access_time</mat-icon>
-          <span>{{ formatDuration(v.duracaoMin) }}</span>
+          <span>{{ row.duracao }}</span>
         </div>
+      </ng-template>
 
-        <div class="td col-actions">
-          <button class="exit-btn" mat-button (click)="onOpenConfirm(v)">
-            <mat-icon>exit_to_app</mat-icon>
-            Registar Saída
-          </button>
-        </div>
-      </div>
-
-      <div class="empty" *ngIf="!filteredVisits.length">
-        Nenhum visitante ativo no momento.
-      </div>
-    </div>
+      <!-- ações -->
+      <ng-template appTableCell="acoes" let-row>
+        <button class="exit-btn" mat-button (click)="onOpenConfirm(row.acoes)">
+          <mat-icon>exit_to_app</mat-icon>
+          Registar Saída
+        </button>
+      </ng-template>
+    </app-table>
   </div>
 </div>
 
 <!-- overlay + modal -->
 <div class="overlay" *ngIf="showingConfirm"></div>
-
 <div class="confirm-modal" *ngIf="showingConfirm">
   <h3>Registar Saída</h3>
   <p>Confirma que deseja registar a saída deste visitante?</p>
-
   <div class="actions">
-    <button class="btn-cancel" mat-button (click)="onCancelExit()">
-      Cancelar
-    </button>
-    <button class="btn-confirm" mat-button (click)="onConfirmExit()">
-      Confirmar Saída
-    </button>
+    <button class="btn-cancel" mat-button (click)="onCancelExit()">Cancelar</button>
+    <button class="btn-confirm" mat-button (click)="onConfirmExit()">Confirmar Saída</button>
   </div>
 </div>
 

@@ -18,6 +18,7 @@ import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.compon
 import { AppTopbarComponent } from './components/app-topbar/app-topbar.component';
 import { RouterModule } from '@angular/router';
 import { DataVoidComponent } from './components/data-void/data-void.component';
+import { AppTableCellDirective } from './directives/app-table-cell.directive';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,14 @@ import { DataVoidComponent } from './components/data-void/data-void.component';
     AppSidebarComponent,
     AppTopbarComponent,
     DataVoidComponent,
+    AppTableCellDirective
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     // exporta para os outros módulos poderem usar
@@ -53,7 +55,8 @@ import { DataVoidComponent } from './components/data-void/data-void.component';
     AppExportComponent,
     AppButtonComponent,
     DataVoidComponent,
-    RouterModule
+    RouterModule,
+    AppTableCellDirective
   ]
 })
 export class SharedModule { }

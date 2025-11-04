@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { VisitService } from '@app/core/services/visit.service';
 import { Visit } from '@app/core/models/visit.model';
-import { FilterConfig, TableColumn } from '@core/models/ui-config';
+import { FilterConfig, TableColumn } from '@core/models/index';
 
 @Component({
   selector: 'app-visits',
