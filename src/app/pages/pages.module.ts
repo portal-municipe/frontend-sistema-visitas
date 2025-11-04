@@ -10,6 +10,10 @@ import { MaterialModule } from '@app/material.module';
 import { AppFiltersComponent, AppListComponent } from '@app/shared/components';
 import { SharedModule } from '@app/shared/shared.module';
 import { VisitCreateComponent } from './visit/visit-create/visit-create.component';
+import { VisitStep1SelectComponent } from './visit/visit-create/components/visit-step1-select/visit-step1-select.component';
+import { VisitStep2ConfirmComponent } from './visit/visit-create/components/visit-step2-confirm/visit-step2-confirm.component';
+import { VisitStep2NewComponent } from './visit/visit-create/components/visit-step2-new/visit-step2-new.component';
+import { VisitStep3DetailsComponent } from './visit/visit-create/components/visit-step3-details/visit-step3-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { VisitCreateComponent } from './visit/visit-create/visit-create.componen
     VisitsComponent,
     VisitorsComponent,
     UsersComponent,
-    VisitCreateComponent
+    VisitCreateComponent,
+    VisitStep1SelectComponent,
+    VisitStep2ConfirmComponent,
+    VisitStep2NewComponent,
+    VisitStep3DetailsComponent
   ],
   imports: [
     CommonModule,

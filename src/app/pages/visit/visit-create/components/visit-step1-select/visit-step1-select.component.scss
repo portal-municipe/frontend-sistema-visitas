@@ -128,6 +128,9 @@
 .full {
   width: 100%;
 }
+.search-field input{
+    width: 100%;
+}
 
 /* visitor cards */
 .visitor-grid {
@@ -227,7 +230,6 @@
 .mat-form-field-appearance-legacy .mat-input-element {
   background: #f5f6f9;
   border-radius: 10px;
-  padding: 10px 12px;
 }
 .mat-form-field-appearance-legacy .mat-form-field-flex {
   background: transparent;
