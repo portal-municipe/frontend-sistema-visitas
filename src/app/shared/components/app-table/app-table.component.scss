@@ -2,15 +2,25 @@
   width: 100%;
   background: transparent;
 }
+
 .mat-table {
   background: transparent;
 }
+
 .mat-row {
   background: #fff;
   border: 1px solid #edf0f5;
   border-radius: 16px;
   margin-bottom: 10px;
 }
-.mat-cell, .mat-header-cell {
+
+.mat-cell,
+.mat-header-cell {
   border-bottom: none !important;
+}
+
+.cell-content {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }

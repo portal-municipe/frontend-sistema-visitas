@@ -1,18 +1,17 @@
-// src/app/features/visits/active-visits/active-visits.component.ts
-import { Component } from '@angular/core';
-import { ActiveVisit, TableColumn } from '@app/core/models/index';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActiveVisit, TableColumn } from '@app/core/models';
 
 @Component({
   selector: 'app-active-visits',
   templateUrl: './active-visits.component.html',
   styleUrls: ['./active-visits.component.scss'],
 })
-export class ActiveVisitsComponent {
-  search = '';
+export class ActiveVisitsComponent implements OnInit {
+  filterForm!: FormGroup;
 
   columns: TableColumn[] = [
     { key: 'visitante', header: 'Visitante' },
-    //{ key: 'anfitriao', header: 'Anfitrião' },
     { key: 'localizacao', header: 'Localização' },
     { key: 'motivo', header: 'Motivo' },
     { key: 'entrada', header: 'Entrada', align: 'center', width: '90px' },
@@ -56,6 +55,9 @@ export class ActiveVisitsComponent {
     },
   ];
 
+  // linhas que vão para a tabela (referência estável)
+  rows: any[] = [];
+
   // modal
   showingConfirm = false;
   visitToExit: ActiveVisit | null = null;
@@ -64,20 +66,36 @@ export class ActiveVisitsComponent {
   showToast = false;
   lastToastMsg = '';
 
-  get filtered(): ActiveVisit[] {
-    const t = this.search.trim().toLowerCase();
-    if (!t) return this.visits;
-    return this.visits.filter(v =>
-      v.nome.toLowerCase().includes(t) ||
-      v.empresa.toLowerCase().includes(t) ||
-      v.anfitriao.toLowerCase().includes(t) ||
-      v.departamento.toLowerCase().includes(t) ||
-      v.motivo.toLowerCase().includes(t)
-    );
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.filterForm = this.fb.group({
+      search: [''],
+    });
+
+    // primeira carga
+    this.buildRows();
+
+    // sempre que o search muda, reconstrói
+    this.filterForm.get('search')!.valueChanges.subscribe(() => {
+      this.buildRows();
+    });
   }
 
-  get rows() {
-    return this.filtered.map(v => ({
+  private buildRows(): void {
+    const t = (this.filterForm.get('search')!.value || '').trim().toLowerCase();
+
+    const filtered = !t
+      ? this.visits
+      : this.visits.filter(v =>
+          v.nome.toLowerCase().includes(t) ||
+          v.empresa.toLowerCase().includes(t) ||
+          v.anfitriao.toLowerCase().includes(t) ||
+          v.departamento.toLowerCase().includes(t) ||
+          v.motivo.toLowerCase().includes(t)
+        );
+
+    this.rows = filtered.map(v => ({
       id: v.id,
       visitante: v,
       anfitriao: v,
@@ -85,30 +103,45 @@ export class ActiveVisitsComponent {
       motivo: v.motivo,
       entrada: v.entrada,
       duracao: this.formatDuration(v.duracaoMin),
-      acoes: v, // passa o próprio visitante para o template
+      acoes: v, // será usado na ação
     }));
   }
 
   get totalAtivos(): number {
-    return this.filtered.length;
+    return this.rows.length;
   }
 
   initials(nome: string): string {
-    if (!nome) return '';
+    if (!nome) {
+      return '';
+    }
     const p = nome.split(' ').filter(Boolean);
-    if (p.length === 1) return p[0].substr(0, 2).toUpperCase();
+    if (p.length === 1) {
+      return p[0].substr(0, 2).toUpperCase();
+    }
     return (p[0][0] + p[p.length - 1][0]).toUpperCase();
   }
 
   formatDuration(min: number): string {
     const h = Math.floor(min / 60);
     const m = min % 60;
-    if (h && m) return `${h}h ${m}m`;
-    if (h) return `${h}h`;
+    if (h && m) {
+      return `${h}h ${m}m`;
+    }
+    if (h) {
+      return `${h}h`;
+    }
     return `${m}m`;
   }
 
-  // <-- usa o mesmo nome que o HTML
+  // chamado quando a tabela emitir
+  onTableCellAction(evt: { col: string; row: any }) {
+    if (evt.col === 'acoes') {
+      const visit: ActiveVisit = evt.row.acoes;
+      this.onOpenConfirm(visit);
+    }
+  }
+
   onOpenConfirm(v: ActiveVisit): void {
     console.log('onOpenConfirm', v);
     this.visitToExit = v;
@@ -121,17 +154,25 @@ export class ActiveVisitsComponent {
   }
 
   onConfirmExit(): void {
-    if (!this.visitToExit) return;
+    const visit = this.visitToExit;
+    if (!visit) {
+      return;
+    }
 
-    this.visits = this.visits.filter(x => x.id !== this.visitToExit!.id);
+    // remove da lista original
+    this.visits = this.visits.filter(x => x.id !== visit.id);
 
-    const dur = this.formatDuration(this.visitToExit.duracaoMin);
-    this.lastToastMsg = `${this.visitToExit.nome} - Duração: ${dur}`;
+    // rebuild das rows
+    this.buildRows();
+
+    // toast
+    const dur = this.formatDuration(visit.duracaoMin);
+    this.lastToastMsg = `${visit.nome} - Duração: ${dur}`;
     this.showToast = true;
     setTimeout(() => (this.showToast = false), 5000);
 
+    // fecha modal
     this.showingConfirm = false;
     this.visitToExit = null;
   }
 }
-

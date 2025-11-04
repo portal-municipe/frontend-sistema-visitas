@@ -1,4 +1,3 @@
-// src/app/shared/components/table/app-table.component.ts
 import {
   Component,
   Input,
@@ -8,17 +7,19 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { AppTableCellDirective } from '@app/shared/directives/app-table-cell.directive';
-import { TableColumn } from '@app/core/models/index';
+import { TableColumn } from '@app/core/models';
+
 @Component({
   selector: 'app-table',
   templateUrl: './app-table.component.html',
   styleUrls: ['./app-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppTableComponent
-  implements OnChanges, AfterContentInit {
+export class AppTableComponent implements OnChanges, AfterContentInit {
   @Input() data: any[] = [];
   @Input() columns: TableColumn[] = [];
 
@@ -26,8 +27,10 @@ export class AppTableComponent
   @ContentChildren(AppTableCellDirective)
   cellTemplates!: QueryList<AppTableCellDirective>;
 
+  // para o pai ouvir ações da célula
+  @Output() cellAction = new EventEmitter<{ col: string; row: any; event?: Event }>();
+
   displayedColumns: string[] = [];
-  // mapa: { [key: string]: TemplateRef }
   templateMap: { [key: string]: any } = {};
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,5 +54,13 @@ export class AppTableComponent
 
   getTemplate(key: string) {
     return this.templateMap[key];
+  }
+
+  // será chamado pelo template projetado
+  onCellAction(col: string, row: any, event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.cellAction.emit({ col, row, event });
   }
 }

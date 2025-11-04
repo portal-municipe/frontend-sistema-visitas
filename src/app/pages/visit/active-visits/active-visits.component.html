@@ -23,20 +23,23 @@
         </div>
       </div>
 
-      <mat-form-field class="search" floatLabel="never" appearance="legacy">
-        <mat-icon matPrefix>search</mat-icon>
-        <input
-          matInput
-          placeholder="Pesquisar visitante..."
-          [(ngModel)]="search"
-        />
-      </mat-form-field>
+      <!-- form reativo -->
+      <form [formGroup]="filterForm" class="search-form">
+        <mat-form-field class="search" floatLabel="never" appearance="legacy">
+          <mat-icon matPrefix>search</mat-icon>
+          <input
+            matInput
+            placeholder="Pesquisar visitante..."
+            formControlName="search" />
+        </mat-form-field>
+      </form>
     </div>
 
     <app-table
       [data]="rows"
       [columns]="columns"
-      class="active-table">
+      class="active-table"
+      (cellAction)="onTableCellAction($event)">
 
       <!-- Visitante -->
       <ng-template appTableCell="visitante" let-row>
@@ -49,16 +52,7 @@
         </div>
       </ng-template>
 
-      <!-- Anfitrião 
-      <ng-template appTableCell="anfitriao" let-row>
-        <div class="td col-anfitriao">
-          <mat-icon class="inline-icon">person_outline</mat-icon>
-          <span>{{ row.anfitriao.anfitriao }}</span>
-        </div>
-      </ng-template>
-      -->
-      
-      <!-- Localização (2 linhas) -->
+      <!-- Localização -->
       <ng-template appTableCell="localizacao" let-row>
         <div class="td col-local">
           <div class="loc-line">
@@ -72,7 +66,7 @@
         </div>
       </ng-template>
 
-      <!-- Motivo (pill) -->
+      <!-- Motivo -->
       <ng-template appTableCell="motivo" let-row>
         <span class="badge">{{ row.motivo }}</span>
       </ng-template>
@@ -90,20 +84,25 @@
         </div>
       </ng-template>
 
-      <!-- Ações: apenas EMITE -->
-      <ng-template appTableCell="acoes" let-row>
-        <button class="exit-btn" mat-button (click)="onOpenConfirm(row.acoes)">
+      <!-- Ações -->
+      <ng-template appTableCell="acoes" let-row let-col="col" let-table="table">
+        <button
+          class="exit-btn"
+          mat-button
+          type="button"
+          (click)="table.onCellAction(col.key, row, $event)">
           <mat-icon>exit_to_app</mat-icon>
           Registar Saída
         </button>
       </ng-template>
+
     </app-table>
   </div>
 </div>
 
 <!-- overlay / confirm reutilizável -->
 <app-confirm-overlay
-  [show]="showingConfirm"
+  *ngIf="showingConfirm"
   title="Registar Saída"
   [message]="'Confirma que deseja registar a saída deste visitante?'"
   (cancel)="onCancelExit()"
