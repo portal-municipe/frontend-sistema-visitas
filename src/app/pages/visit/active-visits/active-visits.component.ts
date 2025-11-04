@@ -57,7 +57,7 @@ export class ActiveVisitsComponent {
 
   get filteredVisits(): ActiveVisit[] {
     const t = this.search.trim().toLowerCase();
-    if (!t) return this.visits;
+    if (!t) { return this.visits; }
     return this.visits.filter(v =>
       v.nome.toLowerCase().includes(t) ||
       v.empresa.toLowerCase().includes(t) ||
@@ -72,17 +72,17 @@ export class ActiveVisitsComponent {
   }
 
   initials(nome: string): string {
-    if (!nome) return '';
+    if (!nome) { return ''; }
     const parts = nome.split(' ').filter(Boolean);
-    if (parts.length === 1) return parts[0].substr(0, 2).toUpperCase();
+    if (parts.length === 1) { return parts[0].substr(0, 2).toUpperCase(); }
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   }
 
   formatDuration(min: number): string {
     const h = Math.floor(min / 60);
     const m = min % 60;
-    if (h && m) return `${h}h ${m}m`;
-    if (h) return `${h}h`;
+    if (h && m) { return `${h}h ${m}m`; }
+    if (h) { return `${h}h`; }
     return `${m}m`;
   }
 
