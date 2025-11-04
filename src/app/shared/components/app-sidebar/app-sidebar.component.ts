@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-interface NavItem {
+export interface NavItem {
   icon: string;
   label: string;
   route?: string;

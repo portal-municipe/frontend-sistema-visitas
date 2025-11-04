@@ -1,14 +1,7 @@
 // src/app/features/visits/visit-create/visit-create.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-export interface Visitor {
-  id: number;
-  nome: string;
-  empresa?: string;
-  documento?: string;
-  telefone?: string;
-}
+import { Visitor } from '@app/core/models/index';
 
 export interface VisitDetailsPayload {
   anfitriao: number | string;

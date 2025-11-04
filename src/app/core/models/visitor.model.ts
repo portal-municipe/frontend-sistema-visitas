@@ -1,5 +1,5 @@
 export interface Visitor {
-  id: string;
+  id?: any;
   nome: string;
   empresa?: string;
   documento?: string;

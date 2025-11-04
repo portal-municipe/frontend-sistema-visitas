@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Visitor } from '../../visit-create.component';
+import { Visitor } from '@app/core/models/index';
 
 @Component({
   selector: 'app-visit-step2-confirm',
