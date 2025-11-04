@@ -1,0 +1,42 @@
+<section class="card-block">
+  <div class="block-head">
+    <div class="icon-box green"><mat-icon>person</mat-icon></div>
+    <div>
+      <h2>Confirmar Dados do Visitante</h2>
+      <p>Verifique se os dados estão corretos antes de prosseguir</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="tag">Visitante Selecionado</div>
+    <div class="info-grid">
+      <div>
+        <label>Nome Completo</label>
+        <p>{{ visitor?.nome }}</p>
+      </div>
+      <div>
+        <label>Documento</label>
+        <p>{{ visitor?.documento }}</p>
+      </div>
+      <div>
+        <label>Telefone</label>
+        <p>{{ visitor?.telefone || '—' }}</p>
+      </div>
+      <div>
+        <label>Empresa</label>
+        <p>{{ visitor?.empresa || '—' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-actions">
+    <button mat-stroked-button (click)="back.emit()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+    <button mat-raised-button color="primary" (click)="next.emit()">
+      Próximo
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </footer>
+</section>

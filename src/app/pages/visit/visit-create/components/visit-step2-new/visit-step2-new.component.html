@@ -1,0 +1,39 @@
+<section class="card-block">
+  <div class="block-head">
+    <div class="icon-box"><mat-icon>person_add</mat-icon></div>
+    <div>
+      <h2>Dados do Novo Visitante</h2>
+      <p>Preencha os dados do visitante para registar no sistema</p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="legacy">
+      <mat-label>Nome Completo *</mat-label>
+      <input matInput formControlName="nome" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>Documento de Identificação *</mat-label>
+      <input matInput formControlName="documento" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <mat-label>Empresa/Origem</mat-label>
+      <input matInput formControlName="empresa" />
+    </mat-form-field>
+  </form>
+
+  <footer class="footer-actions">
+    <button mat-stroked-button (click)="back.emit()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+    <button mat-raised-button color="primary" (click)="onNext()">
+      Próximo
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </footer>
+</section>

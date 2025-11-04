@@ -1,0 +1,50 @@
+<section class="card-block">
+  <div class="block-head">
+    <div class="icon-box"><mat-icon>group</mat-icon></div>
+    <div>
+      <h2>Selecionar Visitante</h2>
+      <p>Procure um visitante existente no sistema ou registe um novo</p>
+    </div>
+  </div>
+
+  <mat-form-field class="full search-field" floatLabel="never">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Pesquisar por nome, documento ou empresa…" />
+  </mat-form-field>
+
+  <div class="visitor-grid">
+    <button
+      type="button"
+      class="visitor-card"
+      *ngFor="let v of visitors"
+      [class.selected]="selectedVisitor?.id === v.id"
+      (click)="onSelect(v)"
+    >
+      <div class="visitor-name">{{ v.nome }}</div>
+      <div class="visitor-sub">{{ v.empresa }}</div>
+      <div class="visitor-doc">Doc: {{ v.documento }}</div>
+    </button>
+  </div>
+
+  <div class="divider-text">Visitante não encontrado?</div>
+
+  <div class="center-line">
+    <button mat-stroked-button color="primary" (click)="newVisitor.emit()">
+      <mat-icon>person_add</mat-icon>
+      Registar Novo Visitante
+    </button>
+  </div>
+
+  <footer class="footer-actions">
+    <span></span>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="next.emit()"
+      [disabled]="!selectedVisitor"
+    >
+      Próximo
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </footer>
+</section>

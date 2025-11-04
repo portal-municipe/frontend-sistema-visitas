@@ -1,0 +1,55 @@
+<section class="card-block">
+  <div class="block-head">
+    <div class="icon-box"><mat-icon>business</mat-icon></div>
+    <div>
+      <h2>Detalhes da Visita</h2>
+      <p>Informe os dados sobre o destino e o motivo da visita</p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="legacy">
+      <mat-label>Funcionário Anfitrião *</mat-label>
+      <mat-select formControlName="anfitriao">
+        <mat-option *ngFor="let h of hosts" [value]="h.id">{{ h.nome }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Departamento de Destino *</mat-label>
+      <mat-select formControlName="departamento">
+        <mat-option *ngFor="let d of departments" [value]="d.id">{{ d.nome }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Área/Sala</mat-label>
+      <mat-select formControlName="area">
+        <mat-option *ngFor="let a of areas" [value]="a">{{ a }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Motivo da Visita *</mat-label>
+      <mat-select formControlName="motivo">
+        <mat-option *ngFor="let m of motives" [value]="m.id">{{ m.nome }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full" appearance="legacy">
+      <mat-label>Observações Adicionais</mat-label>
+      <textarea matInput rows="3" formControlName="observacoes"></textarea>
+    </mat-form-field>
+  </form>
+
+  <footer class="footer-actions">
+    <button mat-stroked-button (click)="back.emit()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+    <button mat-raised-button class="confirm-btn" (click)="onSubmit()">
+      <mat-icon>check</mat-icon>
+      Registar Entrada
+    </button>
+  </footer>
+</section>
