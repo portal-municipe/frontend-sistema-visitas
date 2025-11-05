@@ -15,6 +15,7 @@ import { VisitStep2ConfirmComponent } from './visit/visit-create/components/visi
 import { VisitStep2NewComponent } from './visit/visit-create/components/visit-step2-new/visit-step2-new.component';
 import { VisitStep3DetailsComponent } from './visit/visit-create/components/visit-step3-details/visit-step3-details.component';
 import { ActiveVisitsComponent } from './visit/active-visits/active-visits.component';
+import { VisitorModalCreateOrEditComponent } from './visitors/visitor-modal-create-or-edit/visitor-modal-create-or-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ActiveVisitsComponent } from './visit/active-visits/active-visits.compo
     VisitStep2ConfirmComponent,
     VisitStep2NewComponent,
     VisitStep3DetailsComponent,
-    ActiveVisitsComponent
+    ActiveVisitsComponent,
+    VisitorModalCreateOrEditComponent
   ],
   imports: [
     CommonModule,

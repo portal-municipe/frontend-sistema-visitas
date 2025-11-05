@@ -4,4 +4,6 @@ export interface Visitor {
   empresa?: string;
   documento?: string;
   telefone?: string;
+  totalVisitas?: number;
+  ultimaVisita?: string
 }

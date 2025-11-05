@@ -1,2 +1,91 @@
-<mat-card><mat-card-title>Visitantes</mat-card-title>
-<mat-card-content>Listagem e pesquisa de visitantes (mock)</mat-card-content></mat-card>
+<!-- src/app/features/visitors/visitors.component.html -->
+<div class="visitor-shell" [class.dimmed]="showModal">
+    <div class="top-bar">
+        <div>
+            <h1>Gestão de Visitantes</h1>
+            <p>Registe e gerencie os visitantes do edifício</p>
+        </div>
+
+        <button class="primary-btn" mat-button (click)="openNew()">
+            <mat-icon>person_add</mat-icon>
+            Novo Visitante
+        </button>
+    </div>
+
+    <div class="card">
+        <div class="card-head">
+            <div class="left">
+                <div class="icon-box">
+                    <mat-icon>groups</mat-icon>
+                </div>
+                <div>
+                    <h2>Lista de Visitantes</h2>
+                    <p>Total de {{ totalRegistados }} visitantes registados</p>
+                </div>
+            </div>
+
+            <mat-form-field class="search" floatLabel="never" appearance="legacy">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput placeholder="Pesquisar visitante..." [(ngModel)]="search" />
+            </mat-form-field>
+        </div>
+
+        <!-- reutiliza app-table -->
+        <app-table [data]="filteredVisitors" [columns]="columns" (cellAction)="onTableAction($event)"
+            class="visitors-table">
+
+            <!-- nome -->
+            <ng-template appTableCell="nome" let-row>
+                <div class="name-cell">
+                    <div class="avatar">{{ row.nome | slice:0:1 }}</div>
+                    <div class="stack">
+                        <div class="name">{{ row.nome }}</div>
+                        <div class="doc-line">
+                            <mat-icon>assignment</mat-icon>
+                            <span>{{ row.documento }}</span>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+            <!-- empresa 
+      <ng-template appTableCell="empresa" let-row>
+        <div class="with-icon">
+          <mat-icon>apartment</mat-icon>
+          <span>{{ row.empresa }}</span>
+        </div>
+      </ng-template>-->
+
+            <!-- telefone -->
+            <ng-template appTableCell="telefone" let-row>
+                <div class="with-icon">
+                    <mat-icon>phone</mat-icon>
+                    <span>{{ row.telefone }}</span>
+                </div>
+            </ng-template>
+
+            <!-- total visitas -->
+            <ng-template appTableCell="totalVisitas" let-row>
+                <span class="pill">{{ row.totalVisitas }}</span>
+            </ng-template>
+
+            <!-- ações -->
+            <ng-template appTableCell="acoes" let-row>
+                <button mat-icon-button (click)="$event.stopPropagation(); onTableAction({col: 'edit', row: row})">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="danger"
+                    (click)="$event.stopPropagation(); onTableAction({col: 'delete', row: row})">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </ng-template>
+        </app-table>
+    </div>
+</div>
+
+<!-- overlay -->
+<div class="overlay" *ngIf="showModal"></div>
+
+<!-- modal como componente -->
+<app-visitor-modal *ngIf="showModal" [visitor]="editing" (close)="closeModal()" (save)="saveVisitor($event)">
+</app-visitor-modal>

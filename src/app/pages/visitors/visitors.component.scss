@@ -1,0 +1,155 @@
+/* src/app/features/visitors/visitors.component.scss */
+:host {
+  display: block;
+  background: #f1f3f6;
+  min-height: 100vh;
+}
+
+.visitor-shell {
+  padding: 16px 14px 40px;
+  transition: filter .15s ease;
+}
+.visitor-shell.dimmed {
+  filter: blur(1px);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.top-bar h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+.top-bar p {
+  margin: 4px 0 0;
+  color: #70798a;
+}
+
+.primary-btn {
+  background: #040616;
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 16px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 500;
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #ebeef4;
+  padding: 16px 16px 10px;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.card-head .left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: #eff2f7;
+  display: grid;
+  place-items: center;
+}
+.card-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.card-head p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: #8d95a7;
+}
+
+.search {
+  width: 280px;
+  background: #eef0f3;
+  border-radius: 14px;
+}
+.search .mat-form-field-wrapper { padding-bottom: 0; }
+.search .mat-form-field-underline { display: none; }
+
+.visitors-table ::ng-deep .mat-row {
+  border-radius: 16px;
+  margin-bottom: 8px;
+  border: 1px solid #edf0f5 !important;
+}
+.visitors-table ::ng-deep .mat-table {
+  background: transparent;
+}
+
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #0f5fee;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+.doc-line {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #9099ac;
+  font-size: 12px;
+}
+.doc-line mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.with-icon {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pill {
+  background: #0f5fee;
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.danger mat-icon {
+  color: #d93636;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  z-index: 1000;
+}

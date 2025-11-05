@@ -1,0 +1,61 @@
+/* src/app/features/visitors/visitor-modal/visitor-modal.component.scss */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 16px;
+  width: 520px;
+  max-width: 95%;
+  padding: 18px 18px 16px;
+  box-shadow: 0 25px 55px rgba(0,0,0,.18);
+  z-index: 1100;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.modal-sub {
+  margin: 5px 0 14px;
+  color: #70798a;
+}
+
+.modal-form {
+  display: grid;
+  gap: 12px;
+}
+
+.modal-form .mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
+.modal-form .mat-input-element {
+  background: #f5f6f9;
+  border-radius: 10px;
+  padding: 10px 2px;
+  width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+.ghost {
+  background: #fff;
+  border: 1px solid #d4d7dd;
+  border-radius: 10px;
+}
+.dark {
+  background: #040616;
+  color: #fff;
+  border-radius: 10px;
+}

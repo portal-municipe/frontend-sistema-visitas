@@ -1,0 +1,39 @@
+<!-- src/app/features/visitors/visitor-modal/visitor-modal.component.html -->
+<div class="modal">
+  <div class="modal-head">
+    <h3>{{ form.value.id ? 'Editar Visitante' : 'Novo Visitante' }}</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <p class="modal-sub">Preencha os dados para registar um novo visitante</p>
+
+  <form [formGroup]="form" class="modal-form">
+    <mat-form-field appearance="legacy" class="full">
+      <mat-label>Nome Completo *</mat-label>
+      <input matInput formControlName="nome" placeholder="Nome completo do visitante" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="full">
+      <mat-label>Documento de Identificação *</mat-label>
+      <input matInput formControlName="documento" placeholder="Ex: 004567890LA045" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="full">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" placeholder="+244 9XX XXX XXX" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy" class="full">
+      <mat-label>Empresa/Origem</mat-label>
+      <input matInput formControlName="empresa" placeholder="Nome da empresa" />
+    </mat-form-field>
+  </form>
+
+  <div class="modal-actions">
+    <button mat-button class="ghost" (click)="onClose()">Cancelar</button>
+    <button mat-button class="dark" (click)="onSubmit()">
+      {{ form.value.id ? 'Guardar' : 'Registar' }}
+    </button>
+  </div>
+</div>
