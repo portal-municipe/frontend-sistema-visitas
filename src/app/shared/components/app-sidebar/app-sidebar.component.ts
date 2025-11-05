@@ -31,7 +31,7 @@ export class AppSidebarComponent {
       label: 'Visitantes',
       children: [
         { label: 'Listar Visitantes', route: '/visitantes' },
-        { label: 'Cadastrar Visitante', route: '/visitantes/novo' },
+        //{ label: 'Cadastrar Visitante', route: '/visitantes/novo' },
       ],
     },
     {

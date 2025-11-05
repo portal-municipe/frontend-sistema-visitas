@@ -1,5 +1,16 @@
 <!-- src/app/features/visitors/visitors.component.html -->
 <div class="visitor-shell" [class.dimmed]="showModal">
+    <!-- toast -->
+    <div class="toast" *ngIf="showSuccess">
+        <div class="toast-icon">
+            <mat-icon>check_circle</mat-icon>
+        </div>
+        <div>
+            <div class="toast-title">{{ successMessage }}</div>
+            <div class="toast-sub">{{ successSub }}</div>
+        </div>
+    </div>
+
     <div class="top-bar">
         <div>
             <h1>Gestão de Visitantes</h1>
@@ -30,7 +41,6 @@
             </mat-form-field>
         </div>
 
-        <!-- reutiliza app-table -->
         <app-table [data]="filteredVisitors" [columns]="columns" (cellAction)="onTableAction($event)"
             class="visitors-table">
 
@@ -48,14 +58,6 @@
                 </div>
             </ng-template>
 
-            <!-- empresa 
-      <ng-template appTableCell="empresa" let-row>
-        <div class="with-icon">
-          <mat-icon>apartment</mat-icon>
-          <span>{{ row.empresa }}</span>
-        </div>
-      </ng-template>-->
-
             <!-- telefone -->
             <ng-template appTableCell="telefone" let-row>
                 <div class="with-icon">
@@ -71,11 +73,11 @@
 
             <!-- ações -->
             <ng-template appTableCell="acoes" let-row>
-                <button mat-icon-button (click)="$event.stopPropagation(); onTableAction({col: 'edit', row: row})">
+                <button mat-icon-button (click)="$event.stopPropagation(); onTableAction({ col: 'edit', row: row })">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button class="danger"
-                    (click)="$event.stopPropagation(); onTableAction({col: 'delete', row: row})">
+                    (click)="$event.stopPropagation(); onTableAction({ col: 'delete', row: row })">
                     <mat-icon>delete</mat-icon>
                 </button>
             </ng-template>
@@ -86,6 +88,6 @@
 <!-- overlay -->
 <div class="overlay" *ngIf="showModal"></div>
 
-<!-- modal como componente -->
+<!-- modal -->
 <app-visitor-modal *ngIf="showModal" [visitor]="editing" (close)="closeModal()" (save)="saveVisitor($event)">
 </app-visitor-modal>

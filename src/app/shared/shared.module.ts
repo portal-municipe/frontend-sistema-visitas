@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { DataVoidComponent } from './components/data-void/data-void.component';
 import { AppTableCellDirective } from './directives/app-table-cell.directive';
 import { ConfirmOverlayComponent } from './components/confirm-overlay/confirm-overlay.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ConfirmOverlayComponent } from './components/confirm-overlay/confirm-ov
     AppTopbarComponent,
     DataVoidComponent,
     AppTableCellDirective,
-    ConfirmOverlayComponent
+    ConfirmOverlayComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { ConfirmOverlayComponent } from './components/confirm-overlay/confirm-ov
     DataVoidComponent,
     RouterModule,
     AppTableCellDirective,
-    ConfirmOverlayComponent
+    ConfirmOverlayComponent,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule { }

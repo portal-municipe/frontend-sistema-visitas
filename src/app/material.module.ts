@@ -15,12 +15,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const modules = [
   MatToolbarModule, MatSidenavModule, MatListModule, MatIconModule,
   MatButtonModule, MatCardModule, MatMenuModule, MatTableModule,
   MatInputModule, MatFormFieldModule, MatSnackBarModule,
-  MatSelectModule, MatBadgeModule, MatChipsModule, MatPaginatorModule
+  MatSelectModule, MatBadgeModule, MatChipsModule, MatPaginatorModule, MatDialogModule
 ];
 
 @NgModule({

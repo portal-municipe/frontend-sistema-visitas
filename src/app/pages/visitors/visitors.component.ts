@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Visitor } from '@app/core/models/index';
+import { ConfirmDialogComponent } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-visitors',
   templateUrl: './visitors.component.html',
-  styleUrls: ['./visitors.component.scss']
+  styleUrls: ['./visitors.component.scss'],
 })
 export class VisitorsComponent {
   search = '';
   showModal = false;
   editing: Visitor | null = null;
 
-  // tabela
+  // 👉 toast
+  showSuccess = false;
+  successMessage = '';
+  successSub = '';
+
   columns = [
     { key: 'nome', header: 'Nome Completo' },
-    // { key: 'documento', header: 'Documento', width: '140px' },
     { key: 'empresa', header: 'Empresa' },
     { key: 'telefone', header: 'Telefone', width: '150px' },
     { key: 'totalVisitas', header: 'Total Visitas', width: '110px', align: 'center' },
@@ -62,6 +66,8 @@ export class VisitorsComponent {
     },
   ];
 
+  constructor(private dialog: MatDialog) { }
+
   get filteredVisitors(): Visitor[] {
     const t = this.search.trim().toLowerCase();
     if (!t) {
@@ -93,10 +99,13 @@ export class VisitorsComponent {
     this.showModal = false;
   }
 
+  /** chamado pelo modal */
   saveVisitor(v: Visitor): void {
-    if (v.id) {
-      // update
+    const isEdit = !!v.id;
+
+    if (isEdit) {
       this.visitors = this.visitors.map(item => (item.id === v.id ? v : item));
+      this.triggerToast('Visitante atualizado com sucesso!', `Visitante: ${v.nome}`);
     } else {
       const nextId = this.visitors.length
         ? Math.max(...this.visitors.map(x => x.id)) + 1
@@ -110,17 +119,33 @@ export class VisitorsComponent {
         },
         ...this.visitors,
       ];
+      this.triggerToast('Visitante registado com sucesso!', `Visitante: ${v.nome}`);
     }
+
     this.showModal = false;
   }
 
+  /** abre o dialog de confirmação e, se sim, apaga */
   delete(row: Visitor): void {
-    if (confirm(`Remover visitante "${row.nome}"?`)) {
-      this.visitors = this.visitors.filter(v => v.id !== row.id);
-    }
+    const ref = this.dialog.open(ConfirmDialogComponent, {
+      width: '360px',
+      data: {
+        title: 'Remover visitante',
+        message: `Tem a certeza que deseja remover "${row.nome}"?`,
+        confirmText: 'Remover',
+        cancelText: 'Cancelar',
+      },
+    });
+
+    ref.afterClosed().subscribe(ok => {
+      if (ok) {
+        this.visitors = this.visitors.filter(v => v.id !== row.id);
+        this.triggerToast('Visitante removido com sucesso!', `Visitante: ${row.nome}`);
+      }
+    });
   }
 
-  // quando vem evento do app-table (botão de ações projetado)
+  // evento vindo das células de ação
   onTableAction(e: { col: string; row: any }): void {
     if (e.col === 'edit') {
       this.openEdit(e.row);
@@ -129,5 +154,11 @@ export class VisitorsComponent {
       this.delete(e.row);
     }
   }
-}
 
+  private triggerToast(title: string, sub: string): void {
+    this.successMessage = title;
+    this.successSub = sub;
+    this.showSuccess = true;
+    setTimeout(() => (this.showSuccess = false), 4500);
+  }
+}
