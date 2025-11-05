@@ -63,6 +63,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     AppTableCellDirective,
     ConfirmOverlayComponent,
     ConfirmDialogComponent
-  ]
+  ],
+  entryComponents: [
+    ConfirmDialogComponent,
+  ],
 })
 export class SharedModule { }

@@ -16,7 +16,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-
 const modules = [
   MatToolbarModule, MatSidenavModule, MatListModule, MatIconModule,
   MatButtonModule, MatCardModule, MatMenuModule, MatTableModule,

@@ -5,5 +5,5 @@ export interface Visitor {
   documento?: string;
   telefone?: string;
   totalVisitas?: number;
-  ultimaVisita?: string
+  ultimaVisita?: string;
 }
