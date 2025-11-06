@@ -1,11 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-
-export interface NavItem {
-  icon: string;
-  label: string;
-  route?: string;
-  children?: Array<{ label: string; route: string }>;
-}
+// src/app/shared/components/app-sidebar/app-sidebar.component.ts
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NavItem } from '@core/models/index';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +8,8 @@ export interface NavItem {
   styleUrls: ['./app-sidebar.component.scss']
 })
 export class AppSidebarComponent {
-  @Output() toggle = new EventEmitter<void>();
+  @Input() opened = false;
+  @Output() close = new EventEmitter<void>();
 
   nav: NavItem[] = [
     { icon: 'dashboard', label: 'Dashboard', route: '/dashboard' },
@@ -31,7 +27,6 @@ export class AppSidebarComponent {
       label: 'Visitantes',
       children: [
         { label: 'Listar Visitantes', route: '/visitantes' },
-        // { label: 'Cadastrar Visitante', route: '/visitantes/novo' },
       ],
     },
     {
@@ -44,9 +39,14 @@ export class AppSidebarComponent {
     },
   ];
 
-  opened: { [key: string]: boolean } = {};
+  openedGroups: { [key: string]: boolean } = {};
 
   toggleGroup(label: string) {
-    this.opened[label] = !this.opened[label];
+    this.openedGroups[label] = !this.openedGroups[label];
+  }
+
+  // quando clicar num link em mobile, fecha o menu
+  onNavigate(): void {
+    this.close.emit();
   }
 }

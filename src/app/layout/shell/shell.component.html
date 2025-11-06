@@ -1,8 +1,21 @@
+<!-- src/app/layout/shell/shell.component.html -->
 <div class="app-shell">
-  <app-sidebar class="sidebar"></app-sidebar>
+  <app-sidebar
+    class="sidebar"
+    [opened]="sidebarOpen"
+    [class.opened]="sidebarOpen"
+    (close)="closeSidebar()">
+  </app-sidebar>
+
+  <!-- overlay mobile -->
+  <div
+    class="mobile-overlay"
+    *ngIf="sidebarOpen"
+    (click)="closeSidebar()">
+  </div>
 
   <div class="main">
-    <app-topbar></app-topbar>
+    <app-topbar (menu)="toggleSidebar()"></app-topbar>
 
     <div class="content-wrapper">
       <router-outlet></router-outlet>

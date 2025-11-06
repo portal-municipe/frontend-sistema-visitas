@@ -180,4 +180,8 @@ export class ActiveVisitsComponent implements OnInit {
     this.showingConfirm = false;
     this.visitToExit = null;
   }
+
+  onPage(e: any) {
+    // se precisar de paginação server-side
+  }
 }

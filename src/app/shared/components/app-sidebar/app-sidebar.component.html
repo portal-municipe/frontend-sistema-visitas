@@ -1,24 +1,16 @@
-<aside class="sidebar">
+<!-- src/app/shared/components/app-sidebar/app-sidebar.component.html -->
+<aside class="sidebar" [class.opened]="opened">
   <div class="brand">
     <div class="logo-box">
-      <img
-        src="assets/minfin-logo-branco.png"
-        alt="MINFIN"
-        class="logo-img"
-      />
+      <img src="assets/minfin-logo-branco.png" alt="MINFIN" class="logo-img" />
     </div>
     <div class="brand-text">
-      <!--<span class="brand-title">MINFIN</span>-->
       <small>Controlo de Visitas</small>
     </div>
   </div>
 
   <nav class="nav">
-    <a
-      class="nav-item"
-      routerLink="/dashboard"
-      routerLinkActive="active"
-    >
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" (click)="onNavigate()">
       <mat-icon>dashboard</mat-icon>
       <span>Dashboard</span>
     </a>
@@ -30,30 +22,22 @@
             <mat-icon>{{ item.icon }}</mat-icon>
             <span>{{ item.label }}</span>
           </span>
-          <mat-icon class="chevron" [class.open]="opened[item.label]">
+          <mat-icon class="chevron" [class.open]="openedGroups[item.label]">
             expand_more
           </mat-icon>
         </button>
 
-        <div class="sub" *ngIf="opened[item.label]">
-          <a
-            *ngFor="let c of item.children"
-            class="sub-item"
-            [routerLink]="c.route"
-            routerLinkActive="active"
-          >
+        <div class="sub" *ngIf="openedGroups[item.label]">
+          <a *ngFor="let c of item.children" class="sub-item" [routerLink]="c.route" routerLinkActive="active"
+            (click)="onNavigate()">
             {{ c.label }}
           </a>
         </div>
       </ng-container>
 
       <ng-template #single>
-        <a
-          class="nav-item"
-          *ngIf="item.route && item.label !== 'Dashboard'"
-          [routerLink]="item.route"
-          routerLinkActive="active"
-        >
+        <a class="nav-item" *ngIf="item.route && item.label !== 'Dashboard'" [routerLink]="item.route"
+          routerLinkActive="active" (click)="onNavigate()">
           <mat-icon>{{ item.icon }}</mat-icon>
           <span>{{ item.label }}</span>
         </a>

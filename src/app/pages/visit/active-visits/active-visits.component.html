@@ -86,6 +86,12 @@
       </ng-template>
 
     </app-table>
+    <app-pagination
+    [length]="total"
+    [pageSize]="10"
+    [pageSizeOptions]="[5,10,20]"
+    (page)="onPage($event)">
+  </app-pagination>
   </div>
 </div>
 
