@@ -1,5 +1,6 @@
 import { VISITORS_MOCK } from './visitors.mock';
 import { VISITS_MOCK } from './visits.mock';
+// tslint:disable-next-line:max-line-length
 import { USERS_MOCK } from './users.mock';
 
 export const MockDB = {

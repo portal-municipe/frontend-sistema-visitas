@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterConfig, TableColumn, User } from '@app/core/models';
 import { UserService } from '@app/core/services';
@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   private subs = new Subscription();
@@ -111,7 +111,7 @@ export class UsersComponent implements OnInit {
       departamento: u.department,
       cargo: u.position,
       perfil: u.perfil,
-      status: u['status'] || 'Ativo',
+      status: u.status || 'Ativo',
     }));
   }
 

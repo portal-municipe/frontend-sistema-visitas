@@ -5,4 +5,5 @@ export interface User {
   position: string;
   nome: string;
   perfil: 'ADMIN' | 'STAFF' | 'GUARD';
+  status?: 'Ativo' | 'Inativo';
 }
