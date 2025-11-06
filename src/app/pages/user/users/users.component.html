@@ -17,17 +17,17 @@
 
     <app-table [data]="rowsView" [columns]="tableColumns">
         <!-- Template: Perfil -->
-        <ng-template appTableCell key="perfil" let-row>
+        <ng-template appTableCell="perfil" key="perfil" let-row>
             <mat-chip [color]="getPerfilColor(row.perfil)" selected class="text-xs font-medium">
                 <mat-icon *ngIf="row.perfil === 'ADMIN'">security</mat-icon>
                 <mat-icon *ngIf="row.perfil === 'STAFF'">work</mat-icon>
                 <mat-icon *ngIf="row.perfil === 'GUARD'">shield</mat-icon>
-                {{ row.perfil }} nnn
+                {{ row.perfil }}
             </mat-chip>
         </ng-template>
 
         <!-- Template: Status -->
-        <ng-template appTableCell key="status" let-row>
+        <ng-template appTableCell="status" key="status" let-row>
             <mat-chip [color]="row.status === 'Ativo' ? 'primary' : 'warn'" selected class="text-xs font-medium">
                 <mat-icon>check_circle</mat-icon>
                 {{ row.status }}
@@ -35,7 +35,7 @@
         </ng-template>
 
         <!-- Template: Ações -->
-        <ng-template appTableCell key="acoes" let-row>
+        <ng-template appTableCell="acoes" key="acoes" let-row>
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
