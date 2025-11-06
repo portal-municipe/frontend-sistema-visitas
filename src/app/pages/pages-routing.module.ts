@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VisitsComponent } from './visit/visits/visits.component';
 import { VisitorsComponent } from './visitors/visitors.component';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './user/users/users.component';
 import { VisitCreateComponent } from './visit/visit-create/visit-create.component';
 import { ActiveVisitsComponent } from './visit/active-visits/active-visits.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'visitas/ativas', component: ActiveVisitsComponent },
   { path: 'visitantes', component: VisitorsComponent },
   { path: 'utilizadores', component: UsersComponent },
+  { path: 'utilizadores/novo', component: UserCreateComponent },
 ];
 
 @NgModule({

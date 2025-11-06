@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VisitsComponent } from './visit/visits/visits.component';
 import { VisitorsComponent } from './visitors/visitors.component';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './user/users/users.component';
 import { MaterialModule } from '@app/material.module';
 import { AppFiltersComponent, AppListComponent } from '@app/shared/components';
 import { SharedModule } from '@app/shared/shared.module';
@@ -16,6 +16,7 @@ import { VisitStep2NewComponent } from './visit/visit-create/components/visit-st
 import { VisitStep3DetailsComponent } from './visit/visit-create/components/visit-step3-details/visit-step3-details.component';
 import { ActiveVisitsComponent } from './visit/active-visits/active-visits.component';
 import { VisitorModalCreateOrEditComponent } from './visitors/visitor-modal-create-or-edit/visitor-modal-create-or-edit.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { VisitorModalCreateOrEditComponent } from './visitors/visitor-modal-crea
     VisitStep2NewComponent,
     VisitStep3DetailsComponent,
     ActiveVisitsComponent,
-    VisitorModalCreateOrEditComponent
+    VisitorModalCreateOrEditComponent,
+    UserCreateComponent
   ],
   imports: [
     CommonModule,

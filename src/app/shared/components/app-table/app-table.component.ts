@@ -41,14 +41,18 @@ export class AppTableComponent implements OnChanges, AfterContentInit {
 
   ngAfterContentInit(): void {
     this.templateMap = {};
+    console.log(this.cellTemplates, '---');
     if (this.cellTemplates) {
       this.cellTemplates.forEach(tpl => {
         this.templateMap[tpl.key] = tpl.template;
       });
     }
+    console.log(this.templateMap, '---templateMap');
+
   }
 
   hasTemplate(key: string): boolean {
+    console.log(key);
     return !!this.templateMap[key];
   }
 

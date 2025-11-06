@@ -39,6 +39,7 @@ export class AppSidebarComponent {
       label: 'Utilizadores',
       children: [
         { label: 'Listar Utilizadores', route: '/utilizadores' },
+        { label: 'Cadastrar Utilizadores', route: '/utilizadores/novo' },
       ],
     },
   ];
