@@ -1,3 +1,19 @@
-<p>
-  user-create works!
-</p>
+<div class="user-shell">
+  <!-- toast -->
+  <div class="toast" *ngIf="showSuccess">
+    <div class="toast-icon">
+      <mat-icon>check_circle</mat-icon>
+    </div>
+    <div>
+      <div class="toast-title">Utilizador registado com sucesso!</div>
+      <div class="toast-sub">Nome: {{ savedUser?.nomeCompleto }}</div>
+    </div>
+  </div>
+
+  <header class="page-head">
+    <h1>Registar Novo Utilizador</h1>
+    <p>Preencha os dados do utilizador para criar uma conta no sistema</p>
+  </header>
+
+  <app-user-form (cancel)="onCancel()" (save)="onSave($event)"></app-user-form>
+</div>
