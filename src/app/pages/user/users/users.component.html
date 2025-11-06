@@ -18,18 +18,21 @@
     <app-table [data]="rowsView" [columns]="tableColumns">
         <!-- Template: Perfil -->
         <ng-template appTableCell="perfil" key="perfil" let-row>
-            <mat-chip [color]="getPerfilColor(row.perfil)" selected class="text-xs font-medium">
-                <mat-icon *ngIf="row.perfil === 'ADMIN'">security</mat-icon>
-                <mat-icon *ngIf="row.perfil === 'STAFF'">work</mat-icon>
-                <mat-icon *ngIf="row.perfil === 'GUARD'">shield</mat-icon>
-                {{ row.perfil }}
+            <mat-chip [ngClass]="getPerfilClass(row.perfil)" class="chip-custom">
+                <mat-icon class="chip-icon">{{ getPerfilIcon(row.perfil) }}</mat-icon>
+                {{ getPerfilLabel(row.perfil) }}
             </mat-chip>
         </ng-template>
 
         <!-- Template: Status -->
         <ng-template appTableCell="status" key="status" let-row>
-            <mat-chip [color]="row.status === 'Ativo' ? 'primary' : 'warn'" selected class="text-xs font-medium">
-                <mat-icon>check_circle</mat-icon>
+            <mat-chip [ngClass]="{
+      'chip-active': row.status === 'Ativo',
+      'chip-inactive': row.status !== 'Ativo'
+    }" class="chip-custom">
+                <mat-icon class="chip-icon">
+                    {{ row.status === 'Ativo' ? 'check_circle' : 'cancel' }}
+                </mat-icon>
                 {{ row.status }}
             </mat-chip>
         </ng-template>
@@ -41,18 +44,21 @@
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="verDetalhes(row)">
-                    <mat-icon>visibility</mat-icon> Ver Detalhes
+                    <mat-icon>visibility</mat-icon>
+                    Ver Detalhes
                 </button>
                 <button mat-menu-item (click)="editar(row)">
-                    <mat-icon>edit</mat-icon> Editar
+                    <mat-icon>edit</mat-icon>
+                    Editar
                 </button>
-                <button mat-menu-item color="warn" (click)="excluir(row)">
-                    <mat-icon>delete</mat-icon> Excluir
+                <button mat-menu-item (click)="excluir(row)" color="warn">
+                    <mat-icon>delete</mat-icon>
+                    Excluir
                 </button>
             </mat-menu>
         </ng-template>
-
     </app-table>
+
 
     <app-pagination [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]" (page)="onPage($event)">
     </app-pagination>

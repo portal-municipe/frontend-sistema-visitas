@@ -34,21 +34,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     { key: 'login', header: 'Login' },
     { key: 'departamento', header: 'Departamento' },
     { key: 'cargo', header: 'Cargo' },
-    {
-      key: 'perfil',
-      header: 'Perfil'
-      , align: 'center', width: '90px'
-    },
-    {
-      key: 'status',
-      header: 'Status'
-      , align: 'center', width: '90px'
-    },
-    {
-      key: 'acoes',
-      header: 'Ações'
-      , align: 'center', width: '90px'
-    },
+    { key: 'perfil', header: 'Perfil', align: 'center', width: '90px' },
+    { key: 'status', header: 'Status', align: 'center', width: '90px' },
+    { key: 'acoes', header: 'Ações', align: 'center', width: '90px' },
   ];
 
 
@@ -160,4 +148,32 @@ export class UsersComponent implements OnInit, OnDestroy {
   verDetalhes(row: User) { console.log('Ver detalhes', row); }
   editar(row: User) { console.log('Editar', row); }
   excluir(row: User) { console.log('Excluir', row); }
+
+  getPerfilClass(perfil: string): string {
+    switch (perfil) {
+      case 'ADMIN': return 'chip-admin';
+      case 'STAFF': return 'chip-staff';
+      case 'GUARD': return 'chip-guard';
+      default: return '';
+    }
+  }
+
+  getPerfilIcon(perfil: string): string {
+    switch (perfil) {
+      case 'ADMIN': return 'shield';
+      case 'STAFF': return 'work';
+      case 'GUARD': return 'security';
+      default: return 'person';
+    }
+  }
+
+  getPerfilLabel(perfil: string): string {
+    switch (perfil) {
+      case 'ADMIN': return 'Admin';
+      case 'STAFF': return 'Equipa';
+      case 'GUARD': return 'Segurança';
+      default: return perfil;
+    }
+  }
+
 }

@@ -89,3 +89,42 @@
 .mat-header-cell {
   font-weight: 600;
 }
+
+.chip-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  height: 26px;
+  line-height: 1;
+
+  .chip-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.chip-admin {
+  background-color: #0d1117; // preto elegante
+}
+
+.chip-staff {
+  background-color: #6c63ff; // roxo suave
+}
+
+.chip-guard {
+  background-color: #ff4d4d; // vermelho alaranjado
+}
+
+.chip-active {
+  background-color: #16a34a; // verde moderno
+}
+
+.chip-inactive {
+  background-color: #dc2626; // vermelho forte
+}
