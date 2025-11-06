@@ -4,6 +4,8 @@ import { UserDto } from '@app/core/dto/index';
 export const toUserModel = (dto: UserDto): User => ({
   id: dto.id,
   username: dto.username,
+  department: dto.department,
+  position: dto.position,
   nome: dto.displayName,
   perfil: dto.role
 });
@@ -11,6 +13,8 @@ export const toUserModel = (dto: UserDto): User => ({
 export const toUserDto = (m: User): UserDto => ({
   id: m.id,
   username: m.username,
+  department: m.department,
+  position: m.position,
   displayName: m.nome,
   role: m.perfil
 });

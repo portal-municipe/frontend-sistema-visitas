@@ -1,0 +1,59 @@
+<mat-card class="users-card">
+    <div class="header">
+        <div class="title-wrap">
+            <mat-icon class="mr-8">person</mat-icon>
+            <div>
+                <h2 class="title">Registos de Utilizadores</h2>
+                <div class="subtitle">Total de {{ total }} utilizadores encontrados</div>
+            </div>
+        </div>
+
+        <app-export [actions]="exportActions" [disabled]="!rowsView.length" (action)="onExport($event)">
+        </app-export>
+    </div>
+
+    <app-filters [form]="form" [config]="filterConfig" (clear)="clearFilters()">
+    </app-filters>
+
+    <app-table [data]="rowsView" [columns]="tableColumns">
+        <!-- Template: Perfil -->
+        <ng-template appTableCell key="perfil" let-row>
+            <mat-chip [color]="getPerfilColor(row.perfil)" selected class="text-xs font-medium">
+                <mat-icon *ngIf="row.perfil === 'ADMIN'">security</mat-icon>
+                <mat-icon *ngIf="row.perfil === 'STAFF'">work</mat-icon>
+                <mat-icon *ngIf="row.perfil === 'GUARD'">shield</mat-icon>
+                {{ row.perfil }} nnn
+            </mat-chip>
+        </ng-template>
+
+        <!-- Template: Status -->
+        <ng-template appTableCell key="status" let-row>
+            <mat-chip [color]="row.status === 'Ativo' ? 'primary' : 'warn'" selected class="text-xs font-medium">
+                <mat-icon>check_circle</mat-icon>
+                {{ row.status }}
+            </mat-chip>
+        </ng-template>
+
+        <!-- Template: Ações -->
+        <ng-template appTableCell key="acoes" let-row>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="verDetalhes(row)">
+                    <mat-icon>visibility</mat-icon> Ver Detalhes
+                </button>
+                <button mat-menu-item (click)="editar(row)">
+                    <mat-icon>edit</mat-icon> Editar
+                </button>
+                <button mat-menu-item color="warn" (click)="excluir(row)">
+                    <mat-icon>delete</mat-icon> Excluir
+                </button>
+            </mat-menu>
+        </ng-template>
+
+    </app-table>
+
+    <app-pagination [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]" (page)="onPage($event)">
+    </app-pagination>
+</mat-card>

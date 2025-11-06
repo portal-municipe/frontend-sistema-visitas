@@ -109,6 +109,7 @@ export class ActiveVisitsComponent implements OnInit {
       duracao: this.formatDuration(v.duracaoMin),
       acoes: v,
     }));
+    console.log(this.rows)
   }
 
   get totalAtivos(): number {
