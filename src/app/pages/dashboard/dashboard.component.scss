@@ -4,6 +4,7 @@
   gap: 1.5rem;
 }
 
+/* primeira linha de KPIs */
 .kpi-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -18,6 +19,7 @@
   padding: 1.25rem 1.25rem 1.1rem;
   box-shadow: 0 12px 28px rgba(15,16,22,.05);
   align-items: center;
+  min-height: 92px;
 }
 
 .kpi-icon {
@@ -28,7 +30,10 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  mat-icon { font-size: 1.6rem; }
+
+  mat-icon {
+    font-size: 1.6rem;
+  }
 }
 .kpi-blue { background: #147aff; }
 .kpi-green { background: #06b66b; }
@@ -37,6 +42,7 @@
 
 .kpi-body {
   flex: 1;
+
   .label {
     font-size: .78rem;
     color: #7c8493;
@@ -76,6 +82,7 @@
   }
 }
 
+/* grid de baixo */
 .grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -95,6 +102,7 @@ mat-card {
   border-radius: 1rem;
   padding: .85rem 1rem;
   margin-bottom: .75rem;
+  gap: 1rem;
 
   h4 {
     margin: 0 0 .1rem;
@@ -137,4 +145,61 @@ mat-card {
   height: 100%;
   background: #147aff;
   border-radius: 999px;
+}
+
+/* ========================= */
+/*        RESPONSIVO         */
+/* ========================= */
+
+/* até 1200px: KPIs em 2x2 e grid de baixo ainda em 2 colunas */
+@media (max-width: 1200px) {
+  .kpi-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* até 992px: tudo em uma coluna */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent .visit {
+    align-items: flex-start;
+  }
+}
+
+/* tablets e telemóveis grandes */
+@media (max-width: 768px) {
+  .kpi-row {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-card {
+    gap: .75rem;
+  }
+
+  .recent .visit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* telemóvel pequeno */
+@media (max-width: 480px) {
+  .dashboard {
+    gap: 1rem;
+  }
+
+  .kpi-card {
+    padding: 1rem;
+  }
+
+  .recent .visit {
+    padding: .7rem .75rem;
+  }
+
+  .departments .label span {
+    font-size: .7rem;
+  }
 }
