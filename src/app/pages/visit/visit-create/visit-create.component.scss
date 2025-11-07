@@ -279,3 +279,18 @@
     gap: 10px;
   }
 }
+@media (max-width: 720px) {
+  .wizard {
+    flex-wrap: wrap;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+}

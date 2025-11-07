@@ -2,6 +2,7 @@
   padding: 12px 12px 8px;
 }
 
+/* ========== DESKTOP (padrão) ========== */
 .header {
   display: flex;
   align-items: center;
@@ -9,19 +10,157 @@
   gap: 12px;
   margin-bottom: 8px;
 }
-.title-wrap { display: flex; align-items: center; gap: 10px; }
-.title { margin: 0; font-weight: 600; }
-.subtitle { font-size: 13px; opacity: .85; }
-.actions button + button { margin-left: 8px; }
 
+.title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 13px;
+  opacity: .85;
+}
+
+/* mantém como está no desktop */
 .filters {
   display: grid;
-  grid-template-columns: 1fr 220px 200px 200px auto;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
-  align-items: center;
+  align-items: end;
   margin: 10px 0 12px;
 }
-.search .mat-form-field-infix input { padding-left: 0; }
+
+/* ========== ATÉ 1100px ========== */
+@media (max-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  .header app-export {
+    margin-left: auto;
+  }
+
+  /* tabela do material costuma estourar, então forçamos scroll horizontal */
+  .mat-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .mat-row,
+  .mat-header-row {
+    min-width: 880px; /* valor seguro para tuas colunas */
+  }
+}
+
+/* ========== ATÉ 820px (tablet) ========== */
+@media (max-width: 820px) {
+  .visits-card {
+    padding: 10px 8px 6px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title-wrap {
+    gap: 6px;
+  }
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filters > *:last-child {
+    justify-self: flex-start;
+  }
+
+  /* paginator coladinho em baixo */
+  app-pagination {
+    display: block;
+    margin-top: 8px;
+  }
+}
+
+/* ========== ATÉ 600px (mobile) ========== */
+@media (max-width: 600px) {
+  .visits-card {
+    padding: 8px 6px 4px;
+  }
+
+  .header {
+    gap: 6px;
+  }
+
+  .title {
+    font-size: 1.05rem;
+  }
+
+  .subtitle {
+    font-size: .7rem;
+  }
+
+  /* filtros empilhados */
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  /* botões de export ficam em linha, mas com wrap */
+  app-export .actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  /* tabela rola horizontal */
+  .mat-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .mat-row,
+  .mat-header-row {
+    min-width: 780px;
+  }
+}
+
+/* ========== MUITO PEQUENO ========== */
+@media (max-width: 400px) {
+  .title {
+    font-size: 1rem;
+  }
+
+  app-export .actions button {
+    width: 100%;
+  }
+}
+
+
+.visits-card {
+  padding: 12px 12px 8px;
+}
+
+/* header/topo */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .mr-8 { margin-right: 8px; }
 
 .table {
@@ -30,35 +169,41 @@
   overflow: hidden;
 }
 
-.v-stack { display: grid; }
-.strong { font-weight: 600; }
-.muted { color: rgba(0,0,0,.54); font-size: 12px; }
+/* breakpoints */
+@media (max-width: 1100px) {
+  .header {
+    flex-wrap: wrap;
+  }
 
-.chip {
-  display: inline-block;
-  background: #eef1f6;
-  color: #2b3a55;
-  border-radius: 16px;
-  padding: 4px 10px;
-  font-size: 12px;
-  line-height: 1;
+  /* tabela do material: força scroll */
+  .mat-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .mat-row,
+  .mat-header-row {
+    min-width: 880px;
+  }
 }
 
-.pill {
-  display: inline-block;
-  background: #e8f0ff;
-  color: #1f5bd6;
-  border-radius: 16px;
-  padding: 6px 10px;
-  font-weight: 600;
-  font-size: 12px;
+@media (max-width: 820px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .visits-card {
+    padding: 10px 8px 6px;
+  }
 }
 
-.empty {
-  text-align: center;
-  color: rgba(0,0,0,.54);
-  td { padding: 24px 0; }
+/* filtros: o teu shared já tem um layout responsivo,
+   mas garantimos aqui também */
+@media (max-width: 720px) {
+  app-export .actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
 }
-
-/* compact header cells */
-.mat-header-cell { font-weight: 600; }

@@ -189,3 +189,71 @@
   color: #5c6471;
 }
 
+/* src/app/features/visitors/visitors.component.scss */
+:host {
+  display: block;
+  background: #f1f3f6;
+  min-height: 100vh;
+}
+
+.visitor-shell {
+  padding: 16px 14px 40px;
+  transition: filter .15s ease;
+}
+.visitor-shell.dimmed {
+  filter: blur(1px);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #ebeef4;
+  padding: 16px 16px 10px;
+}
+
+/* tabela material que estás a projetar */
+.visitors-table ::ng-deep .mat-table {
+  background: transparent;
+}
+.visitors-table ::ng-deep .mat-row {
+  border-radius: 16px;
+  margin-bottom: 8px;
+  border: 1px solid #edf0f5 !important;
+}
+
+/* responsivo */
+@media (max-width: 960px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .visitors-table ::ng-deep .mat-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .visitors-table ::ng-deep .mat-row,
+  .visitors-table ::ng-deep .mat-header-row {
+    min-width: 820px;
+  }
+}
+
+@media (max-width: 560px) {
+  .primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

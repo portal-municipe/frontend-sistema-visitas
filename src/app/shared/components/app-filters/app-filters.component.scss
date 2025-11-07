@@ -14,3 +14,18 @@
   align-items: end;
 }
 eld-infix input { padding-left: 0; }
+
+/* src/app/shared/components/filters/filters.component.scss */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+/* mobile: 1 por linha */
+@media (max-width: 560px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

@@ -248,3 +248,28 @@
     color: #606877;
   }
 }
+/* src/app/features/visits/active-visits/active-visits.component.scss */
+.table-shell,
+.active-table {
+  width: 100%;
+}
+
+@media (max-width: 1050px) {
+  .active-table,
+  .table-shell {
+    overflow-x: auto;
+  }
+
+  .table-header,
+  .table-row {
+    min-width: 980px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
