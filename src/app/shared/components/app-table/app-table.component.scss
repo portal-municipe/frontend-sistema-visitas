@@ -66,3 +66,126 @@
     min-width: 820px; /* ajusta se quiseres */
   }
 }
+
+/* src/app/shared/components/table/app-table.component.scss */
+.table {
+  width: 100%;
+  background: transparent;
+}
+
+.mat-table {
+  background: transparent;
+}
+
+.mat-row {
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+.mat-cell,
+.mat-header-cell {
+  border-bottom: none !important;
+}
+
+.cell-content {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+/* RESPONSIVO GERAL */
+@media (max-width: 1100px) {
+  .mat-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .mat-row,
+  .mat-header-row {
+    min-width: 820px;
+  }
+}
+
+/* base */
+.table {
+  width: 100%;
+  background: transparent;
+}
+
+.mat-table {
+  background: transparent;
+}
+
+.mat-row {
+  background: #fff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  margin-bottom: 10px;
+}
+
+.mat-cell,
+.mat-header-cell {
+  border-bottom: none !important;
+}
+
+.cell-content {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+/* ================= RESPONSIVO ================= */
+
+/* ecrãs médios: deixo espaço pra tabela respirar */
+@media (max-width: 992px) {
+  /* o container da tabela vira scroll */
+  :host {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .mat-table {
+    min-width: 720px; /* podes aumentar/diminuir */
+  }
+}
+
+/* ecrãs pequenos mesmo */
+@media (max-width: 560px) {
+  :host {
+    overflow-x: auto;
+  }
+
+  .mat-table {
+    min-width: 650px;
+  }
+
+  .mat-row {
+    border-radius: 14px;
+  }
+}
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  :host {
+    overflow-x: auto;
+  }
+
+  .mat-table {
+    min-width: 720px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mat-table {
+    min-width: 640px;
+  }
+}
+
+

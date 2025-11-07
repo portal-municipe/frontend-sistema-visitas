@@ -89,3 +89,17 @@
     border-radius: 0;
   }
 }
+@media (max-width: 540px) {
+  .modal-head {
+    padding-right: 6px;
+  }
+  .modal-form {
+    gap: 10px;
+  }
+  .modal-actions {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-top: 10px;
+  }
+}

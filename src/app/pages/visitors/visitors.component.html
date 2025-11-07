@@ -40,48 +40,50 @@
                 <input matInput placeholder="Pesquisar visitante..." [(ngModel)]="search" />
             </mat-form-field>
         </div>
+        <div class="table-wrapper">
+            <app-table [data]="filteredVisitors" [columns]="columns" (cellAction)="onTableAction($event)"
+                class="visitors-table">
 
-        <app-table [data]="filteredVisitors" [columns]="columns" (cellAction)="onTableAction($event)"
-            class="visitors-table">
-
-            <!-- nome -->
-            <ng-template appTableCell="nome" let-row>
-                <div class="name-cell">
-                    <div class="avatar">{{ row.nome | slice:0:1 }}</div>
-                    <div class="stack">
-                        <div class="name">{{ row.nome }}</div>
-                        <div class="doc-line">
-                            <mat-icon>assignment</mat-icon>
-                            <span>{{ row.documento }}</span>
+                <!-- nome -->
+                <ng-template appTableCell="nome" let-row>
+                    <div class="name-cell">
+                        <div class="avatar">{{ row.nome | slice:0:1 }}</div>
+                        <div class="stack">
+                            <div class="name">{{ row.nome }}</div>
+                            <div class="doc-line">
+                                <mat-icon>assignment</mat-icon>
+                                <span>{{ row.documento }}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ng-template>
+                </ng-template>
 
-            <!-- telefone -->
-            <ng-template appTableCell="telefone" let-row>
-                <div class="with-icon">
-                    <mat-icon>phone</mat-icon>
-                    <span>{{ row.telefone }}</span>
-                </div>
-            </ng-template>
+                <!-- telefone -->
+                <ng-template appTableCell="telefone" let-row>
+                    <div class="with-icon">
+                        <mat-icon>phone</mat-icon>
+                        <span>{{ row.telefone }}</span>
+                    </div>
+                </ng-template>
 
-            <!-- total visitas -->
-            <ng-template appTableCell="totalVisitas" let-row>
-                <span class="pill">{{ row.totalVisitas }}</span>
-            </ng-template>
+                <!-- total visitas -->
+                <ng-template appTableCell="totalVisitas" let-row>
+                    <span class="pill">{{ row.totalVisitas }}</span>
+                </ng-template>
 
-            <!-- ações -->
-            <ng-template appTableCell="acoes" let-row>
-                <button mat-icon-button (click)="$event.stopPropagation(); onTableAction({ col: 'edit', row: row })">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button class="danger"
-                    (click)="$event.stopPropagation(); onTableAction({ col: 'delete', row: row })">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </ng-template>
-        </app-table>
+                <!-- ações -->
+                <ng-template appTableCell="acoes" let-row>
+                    <button mat-icon-button
+                        (click)="$event.stopPropagation(); onTableAction({ col: 'edit', row: row })">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button class="danger"
+                        (click)="$event.stopPropagation(); onTableAction({ col: 'delete', row: row })">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </ng-template>
+            </app-table>
+        </div>
     </div>
 </div>
 
