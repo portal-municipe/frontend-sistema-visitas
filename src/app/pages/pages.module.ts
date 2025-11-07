@@ -17,6 +17,7 @@ import { VisitStep3DetailsComponent } from './visit/visit-create/components/visi
 import { ActiveVisitsComponent } from './visit/active-visits/active-visits.component';
 import { VisitorModalCreateOrEditComponent } from './visitors/visitor-modal-create-or-edit/visitor-modal-create-or-edit.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
+import { UserFormComponent } from './user/user-create/components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserCreateComponent } from './user/user-create/user-create.component';
     VisitStep3DetailsComponent,
     ActiveVisitsComponent,
     VisitorModalCreateOrEditComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,

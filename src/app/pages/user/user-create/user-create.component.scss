@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  background: #f1f3f6;
+  min-height: 100vh;
+}
+
+.user-shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 14px 40px;
+  position: relative;
+}
+
+.page-head h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.page-head p {
+  margin: 2px 0 16px;
+  color: #657185;
+  font-size: 13.5px;
+}
+
+/* toast */
+.toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+  z-index: 999;
+  min-width: 290px;
+}
+.toast-icon mat-icon {
+  color: #14a44d;
+  font-size: 26px;
+}
+.toast-title {
+  font-weight: 600;
+}
+.toast-sub {
+  font-size: 12px;
+  color: #6b7280;
+}

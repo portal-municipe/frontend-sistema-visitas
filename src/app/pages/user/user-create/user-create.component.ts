@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@app/core/models';
 
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss']
 })
-export class UserCreateComponent implements OnInit {
+export class UserCreateComponent {
 
-  constructor() { }
+  showSuccess = false;
+  savedUser: User | null = null;
 
-  ngOnInit() {
+  onSave(user: User): void {
+    this.savedUser = user;
+    this.showSuccess = true;
+    setTimeout(() => (this.showSuccess = false), 5000);
   }
 
+  onCancel(): void {
+    // pode redirecionar para lista, ou limpar formulário
+    console.log('Operação cancelada.');
+  }
 }

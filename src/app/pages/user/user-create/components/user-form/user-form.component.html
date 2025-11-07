@@ -1,0 +1,75 @@
+<section class="card-block">
+  <div class="block-head">
+    <div class="icon-box">
+      <mat-icon>person_add</mat-icon>
+    </div>
+    <div>
+      <h2>Dados do Novo Utilizador</h2>
+      <p>Preencha as informações obrigatórias para criar o utilizador</p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="form-grid">
+    <mat-form-field appearance="legacy">
+      <mat-label>Nome Completo *</mat-label>
+      <input matInput formControlName="nomeCompleto" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Documento de Identificação *</mat-label>
+      <input matInput formControlName="documento" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Telefone *</mat-label>
+      <input matInput formControlName="telefone" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Nome de Utilizador (Login) *</mat-label>
+      <input matInput formControlName="login" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Senha *</mat-label>
+      <input matInput type="password" formControlName="senha" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Departamento *</mat-label>
+      <mat-select formControlName="departamento">
+        <mat-option value="TI">Tecnologia de Informação</mat-option>
+        <mat-option value="RH">Recursos Humanos</mat-option>
+        <mat-option value="Finanças">Finanças</mat-option>
+        <mat-option value="Administração">Administração</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Cargo *</mat-label>
+      <input matInput formControlName="cargo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Perfil de Acesso *</mat-label>
+      <mat-select formControlName="perfil">
+        <mat-option value="USER">Utilizador</mat-option>
+        <mat-option value="ADMIN">Administrador</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="ativo" color="primary">Conta Ativa</mat-slide-toggle>
+  </form>
+
+  <footer class="footer-actions">
+    <button mat-stroked-button type="button" (click)="onCancel()">
+      <mat-icon>arrow_back</mat-icon>
+      Cancelar
+    </button>
+
+    <button mat-raised-button color="primary" type="submit" (click)="onSave()">
+      <mat-icon>person_add</mat-icon>
+      Registar Utilizador
+    </button>
+  </footer>
+</section>
