@@ -1,3 +1,4 @@
+// src/app/core/services/language.service.ts
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
@@ -11,6 +12,7 @@ type Lang = 'pt' | 'en';
 
 const STORAGE_KEY = 'app.lang';
 const FALLBACK: Lang = 'pt';
+
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
     readonly supported: Lang[] = ['pt', 'en'];
@@ -18,22 +20,33 @@ export class LanguageService {
 
     constructor(private t: TranslateService) { }
 
+    /**
+     * Invocado via APP_INITIALIZER para inicializar o idioma antes do bootstrap.
+     */
     init(): Promise<void> {
         const saved = (localStorage.getItem(STORAGE_KEY) || '') as Lang;
-        const browser = ((navigator.language || 'pt').slice(0, 2) as Lang);
+        const browser = (navigator.language || 'pt').slice(0, 2) as Lang;
+
         const initial: Lang =
-            (saved && this.supported.indexOf(saved) >= 0 ? saved :
-                this.supported.indexOf(browser) >= 0 ? browser : FALLBACK);
+            saved && this.supported.indexOf(saved) >= 0
+                ? saved
+                : this.supported.indexOf(browser) >= 0
+                    ? browser
+                    : FALLBACK;
 
         this.set(initial, false);
-        return Promise.resolve(); // importante para o APP_INITIALIZER
+        return Promise.resolve();
     }
 
-    set(lang: Lang, persist: boolean = true) {
+    set(lang: Lang, persist: boolean = true): void {
         this.current = lang;
         this.t.setDefaultLang(FALLBACK);
         this.t.use(lang);
-        if (persist) localStorage.setItem(STORAGE_KEY, lang);
+
+        if (persist) {
+            localStorage.setItem(STORAGE_KEY, lang);
+        }
+
         document.documentElement.lang = lang;
     }
 }
