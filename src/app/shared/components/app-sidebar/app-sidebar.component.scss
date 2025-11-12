@@ -157,3 +157,99 @@ a {
     height: 100vh;
   }
 }
+
+/* Força tema escuro no painel do mat-select (overlay do CDK) */
+:host ::ng-deep .mat-select-panel {
+  background: #171923 !important;  /* painel escuro */
+  color: #fff !important;
+}
+:host ::ng-deep .mat-option {
+  color: #fff !important;
+}
+:host ::ng-deep .mat-option.mat-selected:not(.mat-option-disabled) {
+  background: rgba(255,255,255,0.08) !important;
+}
+.sidebar { display: flex; flex-direction: column; height: 100vh; }
+.footer-lang { margin-top: auto; padding: .5rem 1rem; border-top: 1px solid rgba(255,255,255,.08); }
+.w-100 { width: 100%; }
+
+/* container do rodapé */
+.footer-lang {
+  margin-top: auto;
+  padding: .75rem .9rem 1rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* pill realçado */
+.lang-picker {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: .25rem .6rem .25rem .5rem;
+  transition: box-shadow .15s ease, border-color .15s ease;
+
+  &:hover {
+    border-color: rgba(59, 130, 246, .4);   /* azul */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .15);
+    cursor: pointer;
+  }
+}
+
+/* ícone do globo */
+.lang-icon {
+  font-size: 18px;
+  line-height: 1;
+  opacity: .9;
+}
+
+/* mat-form-field compacto e sem label visível */
+.lang-field {
+  width: 100%;
+  min-width: 0; // evita estourar
+}
+
+.lang-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+.lang-field .mat-form-field-flex {
+  background: transparent !important;
+  padding: 0 .25rem;
+}
+.lang-field .mat-form-field-infix {
+  padding: .2rem 0 .35rem 0;
+  border-top: 0;
+}
+.lang-field .mat-form-field-outline,
+.lang-field .mat-form-field-outline-thick {
+  display: none; /* usamos a borda do pill */
+}
+
+/* trigger (valor selecionado) */
+::ng-deep .mat-select-value {
+  display: flex !important;
+  align-items: center;
+  gap: .4rem;
+}
+.flag { font-size: 16px; line-height: 1; }
+.label { font-weight: 600; }
+
+/* painel do dropdown (overlay) */
+::ng-deep .lang-panel {
+  background: #171923 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px !important;
+  box-shadow: 0 12px 24px rgba(0,0,0,.35) !important;
+}
+::ng-deep .lang-panel .mat-option {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+::ng-deep .lang-panel .mat-option.mat-selected:not(.mat-option-disabled) {
+  background: rgba(59,130,246,.15) !important; /* realce seleção */
+}
+.option-label { font-weight: 500; }
