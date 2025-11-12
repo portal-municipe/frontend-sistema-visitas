@@ -1,6 +1,7 @@
 // src/app/shared/components/app-sidebar/app-sidebar.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavItem } from '@core/models/index';
+import { LanguageService } from '@core/services/language.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,42 +12,40 @@ export class AppSidebarComponent {
   @Input() opened = false;
   @Output() close = new EventEmitter<void>();
 
+  constructor(public lang: LanguageService) { }
+
   nav: NavItem[] = [
-    { icon: 'dashboard', label: 'Dashboard', route: '/dashboard' },
+    { icon: 'dashboard', labelKey: 'app.nav.dashboard', route: '/dashboard' },
     {
       icon: 'assignment',
-      label: 'Visitas',
+      labelKey: 'app.nav.visits',
       children: [
-        { label: 'Listar Visitas', route: '/visitas' },
-        { label: 'Cadastrar Visita', route: '/visitas/novo' },
-        { label: 'Visitas Ativas', route: '/visitas/ativas' },
-      ],
+        { labelKey: 'app.nav.visits_list', route: '/visitas' },
+        { labelKey: 'app.nav.visits_new', route: '/visitas/novo' },
+        { labelKey: 'app.nav.visits_active', route: '/visitas/ativas' }
+      ]
     },
     {
       icon: 'people',
-      label: 'Visitantes',
-      children: [
-        { label: 'Listar Visitantes', route: '/visitantes' },
-      ],
+      labelKey: 'app.nav.visitors',
+      children: [{ labelKey: 'app.nav.visitors_list', route: '/visitantes' }]
     },
     {
       icon: 'person',
-      label: 'Utilizadores',
+      labelKey: 'app.nav.users',
       children: [
-        { label: 'Listar Utilizadores', route: '/utilizadores' },
-        { label: 'Cadastrar Utilizadores', route: '/utilizadores/novo' },
-      ],
-    },
+        { labelKey: 'app.nav.users_list', route: '/utilizadores' },
+        { labelKey: 'app.nav.users_new', route: '/utilizadores/novo' }
+      ]
+    }
   ];
 
   openedGroups: { [key: string]: boolean } = {};
+  toggleGroup(labelKey: string) { this.openedGroups[labelKey] = !this.openedGroups[labelKey]; }
+  onNavigate(): void { this.close.emit(); }
 
-  toggleGroup(label: string) {
-    this.openedGroups[label] = !this.openedGroups[label];
-  }
-
-  // quando clicar num link em mobile, fecha o menu
-  onNavigate(): void {
-    this.close.emit();
+  // troca o idioma e persiste em localStorage (feito no service)
+  changeLang(code: 'pt' | 'en') {
+    this.lang.set(code);
   }
 }

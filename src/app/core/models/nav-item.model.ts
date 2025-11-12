@@ -1,7 +1,7 @@
 export interface NavItem {
     icon: string;
-    label: string;
+    labelKey: string;
     route?: string;
-    children?: Array<{ label: string; route: string }>;
+    children?: Array<{ labelKey: string; route: string }>;
 }
 

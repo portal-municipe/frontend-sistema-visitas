@@ -1,0 +1,54 @@
+{
+  "app": {
+    "brand": { "subtitle": "Controlo de Visitas" },
+    "nav": {
+      "dashboard": "Dashboard",
+      "visits": "Visitas",
+      "visits_list": "Listar Visitas",
+      "visits_new": "Cadastrar Visita",
+      "visits_active": "Visitas Ativas",
+      "visitors": "Visitantes",
+      "visitors_list": "Listar Visitantes",
+      "users": "Utilizadores",
+      "users_list": "Listar Utilizadores",
+      "users_new": "Cadastrar Utilizadores"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sessão",
+      "username": "Email ou username",
+      "password": "Palavra-passe",
+      "keep_signed": "Manter sessão iniciada",
+      "create_account": "Criar conta",
+      "enter": "Entrar",
+      "terms": "Termos de uso",
+      "privacy": "Política de Privacidade",
+      "required_username": "Informe o username",
+      "required_password": "Informe a palavra-passe",
+      "show": "Mostrar",
+      "hide": "Ocultar",
+      "error": "Falha ao autenticar"
+    },
+    "register": {
+      "title": "Criar conta",
+      "have_account": "Já tens uma conta?",
+      "login": "Inicia sessão",
+      "name": "Como devemos chamar-te?",
+      "email": "Qual é o teu e-mail?",
+      "password": "Cria uma palavra-passe",
+      "hint": "Usa 8 ou mais caracteres com uma combinação de letras, números e símbolos.",
+      "create": "Criar conta",
+      "required_name": "Informe o nome",
+      "required_email": "Informe o e-mail",
+      "invalid_email": "E-mail inválido",
+      "required_password": "Informe a palavra-passe",
+      "min_password": "Mínimo de 8 caracteres",
+      "pattern_password": "Utilize letras, números e símbolos",
+      "error": "Falha ao criar conta",
+      "terms": "Termos de utilização",
+      "privacy": "Política de Privacidade"
+    }
+  },
+  "lang": { "label": "Idioma", "pt": "Português", "en": "Inglês" }
+}
