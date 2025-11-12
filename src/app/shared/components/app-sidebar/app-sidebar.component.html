@@ -41,35 +41,25 @@
     </ng-container>
   </nav>
 
-<!-- Rodapé: seletor de idioma (destacado) -->
-<div class="footer-lang">
-  <div class="lang-picker">
-    <mat-icon class="lang-icon">language</mat-icon>
+  <!-- Rodapé: Language switch (pill card) -->
+  <div class="footer-lang">
+    <div class="lang-card" role="button" tabindex="0" [attr.aria-label]="'lang.label' | translate"
+      (click)="langSelect.open()" (keydown.enter)="langSelect.open()" (keydown.space)="langSelect.open()">
 
-    <mat-form-field appearance="outline" class="lang-field" floatLabel="never">
-      <mat-select
-        [value]="lang.current"
-        (selectionChange)="changeLang($event.value)"
-        [panelClass]="'lang-panel'"
-        disableOptionCentering>
-        
-        <!-- Mostra bandeira + texto quando fechado -->
-        <mat-select-trigger>
-          <span class="flag">{{ lang.current === 'pt' ? '🇵🇹' : '🇬🇧' }}</span>
-          <span class="label">{{ ('lang.' + lang.current) | translate }}</span>
-        </mat-select-trigger>
+      <mat-icon class="lang-icon">language</mat-icon>
 
-        <mat-option value="pt">
-          <span class="flag">🇵🇹</span>
-          <span class="option-label">{{ 'lang.pt' | translate }}</span>
-        </mat-option>
-        <mat-option value="en">
-          <span class="flag">🇬🇧</span>
-          <span class="option-label">{{ 'lang.en' | translate }}</span>
-        </mat-option>
+      <div class="lang-text">
+        <span class="caption">{{ 'lang.label' | translate }}</span>
+        <span class="value">{{ ('lang.' + lang.current) | translate }}</span>
+      </div>
+
+      <mat-icon class="chev">expand_more</mat-icon>
+
+      <mat-select #langSelect [value]="lang.current" (selectionChange)="changeLang($event.value)"
+        [panelClass]="'lang-panel'" disableOptionCentering>
+        <mat-option value="pt" style="color: white;">🇵🇹 {{ 'lang.pt' | translate }}</mat-option>
+        <mat-option value="en" style="color: white;">🇬🇧 {{ 'lang.en' | translate }}</mat-option>
       </mat-select>
-    </mat-form-field>
+    </div>
   </div>
-</div>
-
 </aside>
