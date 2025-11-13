@@ -14,6 +14,15 @@ import { FilterConfig, TableColumn } from '@core/models/index';
   styleUrls: ['./visits.component.scss'],
 })
 export class VisitsComponent implements OnInit, OnDestroy {
+
+  constructor(private fb: FormBuilder, private service: VisitService) {
+    this.form = this.fb.group({
+      q: [''],
+      departamento: [null],
+      dataInicial: [null],
+      dataFinal: [null],
+    });
+  }
   form: FormGroup;
   private subs = new Subscription();
 
@@ -61,14 +70,8 @@ export class VisitsComponent implements OnInit, OnDestroy {
     { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
   ];
 
-  constructor(private fb: FormBuilder, private service: VisitService) {
-    this.form = this.fb.group({
-      q: [''],
-      departamento: [null],
-      dataInicial: [null],
-      dataFinal: [null],
-    });
-  }
+  showDetailModal = false;
+  selectedVisit: Visit | null = null;
 
   ngOnInit(): void {
     this.load();
@@ -168,9 +171,6 @@ export class VisitsComponent implements OnInit, OnDestroy {
   onPage(e: any) {
     // se precisar de paginação server-side
   }
-
-  showDetailModal = false;
-  selectedVisit: Visit | null = null;
 
   verDetalhes(row: Visit): void {
     this.selectedVisit = row;
