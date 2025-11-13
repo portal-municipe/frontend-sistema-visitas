@@ -2,35 +2,42 @@
 <mat-card class="visits-card">
   <div class="header">
     <div class="title-wrap">
-      <mat-icon class="mr-8">history</mat-icon>
+      <mat-icon class="mr-8">list</mat-icon>
       <div>
-        <h2 class="title">Registos de Visitas</h2>
+        <h2 class="title">Lista de Visitas</h2>
         <div class="subtitle">Total de {{ total }} visitas encontradas</div>
       </div>
     </div>
 
-    <app-export
-      [actions]="exportActions"
-      [disabled]="!rowsView.length"
-      (action)="onExport($event)">
+    <app-export [actions]="exportActions" [disabled]="!rowsView.length" (action)="onExport($event)">
     </app-export>
   </div>
 
-  <app-filters
-    [form]="form"
-    [config]="filterConfig"
-    (clear)="clearFilters()">
+  <app-filters [form]="form" [config]="filterConfig" (clear)="clearFilters()">
   </app-filters>
 
-  <app-table
-    [data]="rowsView"
-    [columns]="tableColumns">
+  <app-table [data]="rowsView" [columns]="tableColumns">
+    <!-- Template: Ações -->
+    <ng-template appTableCell="acoes" key="acoes" let-row>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="verDetalhes(row)">
+          <mat-icon>visibility</mat-icon>
+          Ver Detalhes
+        </button>
+      </mat-menu>
+    </ng-template>
   </app-table>
 
-  <app-pagination
-    [length]="total"
-    [pageSize]="10"
-    [pageSizeOptions]="[5,10,20]"
-    (page)="onPage($event)">
+  <app-pagination [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]" (page)="onPage($event)">
   </app-pagination>
 </mat-card>
+
+<!-- overlay -->
+<div class="overlay" *ngIf="showDetailModal"></div>
+
+<!-- modal de detalhes -->
+<app-visit-detail-modal *ngIf="showDetailModal" [visit]="selectedVisit" (close)="closeDetail()">
+</app-visit-detail-modal>
