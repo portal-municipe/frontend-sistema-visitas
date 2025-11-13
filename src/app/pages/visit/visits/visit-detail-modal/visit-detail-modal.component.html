@@ -1,0 +1,56 @@
+<div class="modal">
+  <div class="modal-head">
+    <h3>Detalhes da Visita</h3>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <p class="modal-sub">Informações completas sobre a visita seleccionada</p>
+
+  <div class="detail-grid">
+    <div class="detail-item">
+      <span class="label">Visitante:</span>
+      <span class="value">{{ visit?.visitanteNome }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Anfitrião:</span>
+      <span class="value">{{ visit?.anfitriao || '—' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Departamento:</span>
+      <span class="value">{{ visit?.departamento }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Motivo:</span>
+      <span class="value">{{ visit?.motivo }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Data:</span>
+      <span class="value">{{ visit?.data }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Hora de Entrada:</span>
+      <span class="value">{{ visit?.entrada || '—' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Hora de Saída:</span>
+      <span class="value">{{ visit?.saida || '—' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Duração:</span>
+      <span class="value">{{ formatDuracao(visit?.duracaoMin) }}</span>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button mat-button class="dark" (click)="onClose()">Fechar</button>
+  </div>
+</div>
