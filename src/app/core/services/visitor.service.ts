@@ -1,6 +1,8 @@
+// src/app/core/services/visitor.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { MockDB } from '@app/core/mock/mock-db';
 import { Visitor } from '@app/core/models/index';
 import { toVisitorModel, toVisitorDto } from '@app/core/mappers/index';
@@ -15,13 +17,13 @@ export class VisitorService {
     const t = (term || '').toLowerCase().trim();
 
     return this.list().pipe(
-      map(visitors =>
+      map((visitors: Visitor[]) =>
         visitors.filter(v =>
-          (v.nome && v.nome.toLowerCase().includes(t)) ||
-          (v.documento && v.documento.toLowerCase().includes(t)) ||
-          (v.empresa && v.empresa.toLowerCase().includes(t))
-        )
-      )
+          (v.nome && v.nome.toLowerCase().indexOf(t) > -1) ||
+          (v.documento && v.documento.toLowerCase().indexOf(t) > -1) ||
+          (v.empresa && v.empresa.toLowerCase().indexOf(t) > -1),
+        ),
+      ),
     );
   }
 

@@ -112,6 +112,7 @@ a {
     transition: transform 0.15s ease-out;
     font-size: 1.05rem;
     opacity: 0.85;
+    padding: 0 40px;
 
     &.open {
       transform: rotate(180deg);
@@ -216,7 +217,7 @@ a {
   margin-top: 2px;
 }
 
-.chev { margin-left: auto; opacity: .85; font-size: 18px; }
+.chev { margin-left: auto; opacity: .85; font-size: 18px; padding: 0 0px; }
 
 
 /* painel do dropdown */

@@ -1,75 +1,55 @@
+<!-- src/app/pages/dashboard/dashboard.component.html -->
 <div class="dashboard">
-
   <div class="kpi-row">
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-green">
-        <mat-icon>how_to_reg</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Visitas Ativas</p>
-        <h3>8</h3>
-        <p class="muted">No edifício</p>
-      </div>
-    </div>
+    <app-kpi-card label="Visitas ativas" [value]="activeVisits" sublabel="Atualizado a cada 5 min">
+    </app-kpi-card>
 
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-blue">
-        <mat-icon>groups</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Visitantes Hoje</p>
-        <h3>24</h3>
-        <p class="trend up">
-          <mat-icon>arrow_upward</mat-icon>
-          +12%
-        </p>
-      </div>
-    </div>
+    <app-kpi-card label="Visitantes hoje" [value]="visitorsToday">
+    </app-kpi-card>
 
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-orange">
-        <mat-icon>access_time</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Tempo Médio</p>
-        <h3>2h 15m</h3>
-        <p class="trend down">
-          <mat-icon>arrow_downward</mat-icon>
-          -5%
-        </p>
-      </div>
-    </div>
+    <app-kpi-card label="Tempo médio" [value]="avgTimeDisplay" [sublabel]="avgTimeDay">
+    </app-kpi-card>
 
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-purple">
-        <mat-icon>trending_up</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Total Mensal</p>
-        <h3>486</h3>
-        <p class="trend up">
-          <mat-icon>arrow_upward</mat-icon>
-          +18%
-        </p>
-      </div>
-    </div>
+    <app-kpi-card label="Câmbio do dia" [value]="forexMain" [sublabel]="forexSub">
+    </app-kpi-card>
   </div>
 
   <div class="grid">
     <mat-card class="recent">
       <mat-card-title>Visitas Recentes</mat-card-title>
-      <mat-card-subtitle>Últimas visitas registadas no sistema</mat-card-subtitle>
+      <mat-card-subtitle>Últimas visitas registadas</mat-card-subtitle>
 
-      <div class="visit" *ngFor="let v of recentVisits">
-        <div class="info">
-          <h4>{{ v.name }}</h4>
-          <p>{{ v.company }}</p>
-          <p class="meta">
-            • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
-          </p>
-        </div>
-        <span class="chip chip-green" *ngIf="v.active">No edifício</span>
-      </div>
+      <mat-tab-group [(selectedIndex)]="tabIndex">
+        <mat-tab label="Abertas">
+          <ng-container *ngFor="let v of recentOpen">
+            <div class="visit">
+              <div class="info">
+                <h4>{{ v.name }}</h4>
+                <p>{{ v.company }}</p>
+                <p class="meta">
+                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                </p>
+              </div>
+              <span class="chip chip-green">No edifício</span>
+            </div>
+          </ng-container>
+        </mat-tab>
+
+        <mat-tab label="Fechadas">
+          <ng-container *ngFor="let v of recentClosed">
+            <div class="visit">
+              <div class="info">
+                <h4>{{ v.name }}</h4>
+                <p>{{ v.company }}</p>
+                <p class="meta">
+                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                </p>
+              </div>
+              <span class="chip">Concluída</span>
+            </div>
+          </ng-container>
+        </mat-tab>
+      </mat-tab-group>
     </mat-card>
 
     <mat-card class="departments">
