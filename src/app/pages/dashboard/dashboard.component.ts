@@ -1,30 +1,44 @@
+// src/app/pages/dashboard/dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ForexService } from '@core/services/forex.service';
 import { WeatherService } from '@core/services/weather.service';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  activeVisits = 8; // mock
-  visitorsToday = 24; // mock
+  activeVisits = 8;          // mock
+  visitorsToday = 24;        // mock
   avgTimeDisplay = '2h 15m';
   avgTimeDay = new Date().toLocaleDateString();
-
 
   forexMain = '';
   forexSub = '';
 
-
   tabIndex = 0;
 
+  // põe aqui o teu mock real
+  recentOpen = [
+    {
+      name: 'António Carlos',
+      company: 'BNA',
+      department: 'Finanças',
+      host: 'João Pedro',
+      time: '09:32',
+    },
+  ];
 
-  recentOpen = [ /* ...do teu mock de "active: true"... */];
-  recentClosed = [ /* ...do teu mock de fechadas... */];
-
+  recentClosed = [
+    {
+      name: 'Maria Santos',
+      company: 'Sonangol',
+      department: 'RH',
+      host: 'Ana Paula',
+      time: 'Ontem • 16:40',
+    },
+  ];
 
   departments = [
     { name: 'Finanças', value: 45, percent: 82 },
@@ -34,24 +48,34 @@ export class DashboardComponent implements OnInit {
     { name: 'Outros', value: 19, percent: 40 },
   ];
 
-
-  constructor(private fx: ForexService, private weather: WeatherService) { }
-
+  constructor(
+    private fx: ForexService,
+    private weather: WeatherService,
+  ) {}
 
   ngOnInit(): void {
     this.loadForex();
-    this.weather.getCurrentByCity('Luanda', 'AO').subscribe(); // exemplo de uso
+    this.weather.getCurrentByCity('Luanda', 'AO').subscribe(); // só para “usar” o serviço
   }
 
-
-  private loadForex() {
-    // Ex.: mostrar USD/AOA e EUR/AOA no cartão (apenas texto)
+  private loadForex(): void {
     this.fx.fetchOne('USD', 'AOA').subscribe(r => {
-      const usd = r?.result?.AOA;
+      const usdResult = r && r.result ? r.result.AOA : null;
+
       this.fx.fetchOne('EUR', 'AOA').subscribe(r2 => {
-        const eur = r2?.result?.AOA;
-        this.forexMain = `USD/AOA ${usd?.toFixed?.(2)}`;
-        this.forexSub = `EUR/AOA ${eur?.toFixed?.(2)}`;
+        const eurResult = r2 && r2.result ? r2.result.AOA : null;
+
+        if (usdResult !== null && usdResult !== undefined) {
+          this.forexMain = 'USD/AOA ' + usdResult.toFixed(2);
+        } else {
+          this.forexMain = 'USD/AOA —';
+        }
+
+        if (eurResult !== null && eurResult !== undefined) {
+          this.forexSub = 'EUR/AOA ' + eurResult.toFixed(2);
+        } else {
+          this.forexSub = 'EUR/AOA —';
+        }
       });
     });
   }

@@ -12,10 +12,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
-            catchError((err: HttpErrorResponse) => {
-                const msg = err.error?.message || err.statusText || 'Erro inesperado';
+            catchError((error: HttpErrorResponse) => {
+                const status = error && error.status ? error.status : 0;
+                const msg =
+                    error && error.error && error.error.message
+                        ? error.error.message
+                        : 'Ocorreu um erro inesperado.';
                 this.snack.open(msg, 'Fechar', { panelClass: 'snack-error', duration: 6000 });
-                return throwError(() => err);
+                return throwError(() => error);
             })
         );
     }
