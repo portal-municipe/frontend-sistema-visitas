@@ -112,6 +112,7 @@ a {
     transition: transform 0.15s ease-out;
     font-size: 1.05rem;
     opacity: 0.85;
+    padding: 0 40px;
 
     &.open {
       transform: rotate(180deg);

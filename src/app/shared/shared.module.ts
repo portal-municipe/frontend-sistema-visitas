@@ -65,7 +65,8 @@ import { KpiCardComponent } from './components/kpi-card/kpi-card.component';
     RouterModule,
     AppTableCellDirective,
     ConfirmOverlayComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    KpiCardComponent
   ],
   entryComponents: [
     ConfirmDialogComponent,

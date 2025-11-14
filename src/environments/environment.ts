@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBase: 'https://api.seu-backend.com',
+  apiBase: 'http://localhost:3333',
   fastForex: {
     baseUrl: 'https://api.fastforex.io',
     apiKey: 'YOUR_FASTFOREX_API_KEY'
@@ -12,5 +12,5 @@ export const environment = {
     lang: 'pt'
   },
   wsBaseUrl: 'wss://ws.seu-backend.com',
-  url: 'http://localhost:3000'
+  url: 'http://localhost:3333'
 };
