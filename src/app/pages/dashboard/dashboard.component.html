@@ -1,90 +1,66 @@
 <div class="dashboard">
+  sublabel="Atualizado a cada 5 min">
+  </app-kpi-card>
 
-  <div class="kpi-row">
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-green">
-        <mat-icon>how_to_reg</mat-icon>
+
+  <app-kpi-card label="Tempo Médio" [value]="avgTimeDisplay" [sublabel]="avgTimeDay">
+  </app-kpi-card>
+
+
+  <app-kpi-card label="Câmbio do dia" [value]="forexMain" [sublabel]="forexSub">
+  </app-kpi-card>
+</div>
+
+
+<div class="grid">
+  <mat-card class="recent">
+    <mat-card-title>Visitas Recentes</mat-card-title>
+    <mat-card-subtitle>Últimas visitas registadas</mat-card-subtitle>
+
+
+    <mat-tab-group [(selectedIndex)]="tabIndex">
+      <mat-tab label="Abertas">
+        <ng-container *ngFor="let v of recentOpen">
+          <div class="visit">
+            <div class="info">
+              <h4>{{ v.name }}</h4>
+              <p>{{ v.company }}</p>
+              <p class="meta">• {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}</p>
+            </div>
+            <span class="chip chip-green">No edifício</span>
+          </div>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Fechadas">
+        <ng-container *ngFor="let v of recentClosed">
+          <div class="visit">
+            <div class="info">
+              <h4>{{ v.name }}</h4>
+              <p>{{ v.company }}</p>
+              <p class="meta">• {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}</p>
+            </div>
+            <span class="chip">Concluída</span>
+          </div>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+
+
+  <mat-card class="departments">
+    <mat-card-title>Visitas por Departamento</mat-card-title>
+    <mat-card-subtitle>Distribuição mensal</mat-card-subtitle>
+
+
+    <div class="dept" *ngFor="let d of departments">
+      <div class="label">
+        {{ d.name }}
+        <span>{{ d.value }}</span>
       </div>
-      <div class="kpi-body">
-        <p class="label">Visitas Ativas</p>
-        <h3>8</h3>
-        <p class="muted">No edifício</p>
+      <div class="bar">
+        <div class="bar-fill" [style.width.%]="d.percent"></div>
       </div>
     </div>
-
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-blue">
-        <mat-icon>groups</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Visitantes Hoje</p>
-        <h3>24</h3>
-        <p class="trend up">
-          <mat-icon>arrow_upward</mat-icon>
-          +12%
-        </p>
-      </div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-orange">
-        <mat-icon>access_time</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Tempo Médio</p>
-        <h3>2h 15m</h3>
-        <p class="trend down">
-          <mat-icon>arrow_downward</mat-icon>
-          -5%
-        </p>
-      </div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-icon kpi-purple">
-        <mat-icon>trending_up</mat-icon>
-      </div>
-      <div class="kpi-body">
-        <p class="label">Total Mensal</p>
-        <h3>486</h3>
-        <p class="trend up">
-          <mat-icon>arrow_upward</mat-icon>
-          +18%
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid">
-    <mat-card class="recent">
-      <mat-card-title>Visitas Recentes</mat-card-title>
-      <mat-card-subtitle>Últimas visitas registadas no sistema</mat-card-subtitle>
-
-      <div class="visit" *ngFor="let v of recentVisits">
-        <div class="info">
-          <h4>{{ v.name }}</h4>
-          <p>{{ v.company }}</p>
-          <p class="meta">
-            • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
-          </p>
-        </div>
-        <span class="chip chip-green" *ngIf="v.active">No edifício</span>
-      </div>
-    </mat-card>
-
-    <mat-card class="departments">
-      <mat-card-title>Visitas por Departamento</mat-card-title>
-      <mat-card-subtitle>Distribuição mensal</mat-card-subtitle>
-
-      <div class="dept" *ngFor="let d of departments">
-        <div class="label">
-          {{ d.name }}
-          <span>{{ d.value }}</span>
-        </div>
-        <div class="bar">
-          <div class="bar-fill" [style.width.%]="d.percent"></div>
-        </div>
-      </div>
-    </mat-card>
-  </div>
+  </mat-card>
+</div>
 </div>

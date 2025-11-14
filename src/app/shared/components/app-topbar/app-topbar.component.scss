@@ -102,3 +102,7 @@
   .only-mobile { display: inline-flex; }
   .page-title p { display: none; }
 }
+.btn-primary {
+background: var(--color-primary) !important;
+color: #fff !important;
+}

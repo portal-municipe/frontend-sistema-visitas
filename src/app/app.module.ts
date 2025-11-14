@@ -12,10 +12,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
+import { ApiPrefixInterceptor, AuthTokenInterceptor, ErrorHandlerInterceptor } from '@core/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,11 @@ import { SharedModule } from './shared/shared.module';
         deps: [HttpClient]
       }
     })
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
