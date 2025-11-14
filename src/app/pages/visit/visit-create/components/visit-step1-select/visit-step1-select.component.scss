@@ -5,7 +5,7 @@
 }
 
 .visit-shell {
-  width: #{'min(1180px, 100%)'};
+  width: #{"min(1180px, 100%)"};
   margin: 0 auto;
   padding: 20px 14px 40px;
   position: relative;
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: .4;
+  opacity: 0.4;
 }
 .wizard-step.active,
 .wizard-step.done {
@@ -118,18 +118,48 @@
 }
 
 /* search */
+/* Remover fundo do container search */
 .search-field {
-  background: #f5f6f9;
-  border-radius: 12px;
+  background: transparent !important;
+  border-radius: 0 !important;
 }
+
+/* Remover fundo cinza interno causado pelo legacy */
+.search-field .mat-input-element {
+  background: transparent !important;
+}
+
+/* Garantir que área flex também não force cor */
+.search-field .mat-form-field-flex {
+  background: transparent !important;
+}
+
+/* Ajustar underline para ficar padrão cinza */
+.search-field .mat-form-field-underline {
+  background-color: #bdbdbd !important;
+}
+
+.search-field.mat-focused .mat-form-field-underline {
+  background-color: #616161 !important;
+}
+
+/* Ajustar label para cinza */
+.search-field .mat-form-field-label {
+  color: #616161 !important;
+}
+
+.search-field.mat-focused .mat-form-field-label {
+  color: #616161 !important;
+}
+
 .search-field .mat-form-field-flex {
   background: transparent;
 }
 .full {
   width: 100%;
 }
-.search-field input{
-    width: 100%;
+.search-field input {
+  width: 100%;
 }
 
 /* visitor cards */
@@ -146,15 +176,15 @@
   padding: 12px 14px 10px;
   text-align: left;
   cursor: pointer;
-  transition: .12s ease-in-out;
+  transition: 0.12s ease-in-out;
 }
 .visitor-card:hover {
   border-color: #c2d1ff;
-  box-shadow: 0 1px 6px rgba(19, 82, 255, .1);
+  box-shadow: 0 1px 6px rgba(19, 82, 255, 0.1);
 }
 .visitor-card.selected {
   border-color: #1352ff;
-  box-shadow: 0 0 0 3px rgba(19, 82, 255, .08);
+  box-shadow: 0 0 0 3px rgba(19, 82, 255, 0.08);
 }
 .visitor-name {
   font-weight: 600;
@@ -228,7 +258,7 @@
   padding-bottom: 0;
 }
 .mat-form-field-appearance-legacy .mat-input-element {
-  background: #f5f6f9;
+  background: transparent;
   border-radius: 10px;
 }
 .mat-form-field-appearance-legacy .mat-form-field-flex {
@@ -257,7 +287,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
   z-index: 999;
   min-width: 290px;
 }
