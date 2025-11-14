@@ -5,7 +5,7 @@
 }
 
 .visit-shell {
-  width: #{'min(1180px, 100%)'};
+  width: #{"min(1180px, 100%)"};
   margin: 0 auto;
   padding: 20px 14px 40px;
   position: relative;
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: .4;
+  opacity: 0.4;
 }
 .wizard-step.active,
 .wizard-step.done {
@@ -143,15 +143,15 @@
   padding: 12px 14px 10px;
   text-align: left;
   cursor: pointer;
-  transition: .12s ease-in-out;
+  transition: 0.12s ease-in-out;
 }
 .visitor-card:hover {
   border-color: #c2d1ff;
-  box-shadow: 0 1px 6px rgba(19, 82, 255, .1);
+  box-shadow: 0 1px 6px rgba(19, 82, 255, 0.1);
 }
 .visitor-card.selected {
   border-color: #1352ff;
-  box-shadow: 0 0 0 3px rgba(19, 82, 255, .08);
+  box-shadow: 0 0 0 3px rgba(19, 82, 255, 0.08);
 }
 .visitor-name {
   font-weight: 600;
@@ -225,7 +225,7 @@
   padding-bottom: 0;
 }
 .mat-form-field-appearance-legacy .mat-input-element {
-  background: #f5f6f9;
+  background: transparent;
   border-radius: 10px;
   padding: 10px 12px;
 }
@@ -255,7 +255,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
   z-index: 999;
   min-width: 290px;
 }
@@ -269,6 +269,23 @@
 .toast-sub {
   font-size: 12px;
   color: #6b7280;
+}
+
+.btn-back {
+  border-color: #9e9e9e !important;
+  color: #9e9e9e !important;
+  font-weight: 500;
+
+  &:hover {
+    border-color: #757575 !important;
+    color: #757575 !important;
+    background: rgba(117, 117, 117, 0.08) !important;
+  }
+
+  .mat-icon {
+    font-size: 18px;
+    color: inherit !important;
+  }
 }
 
 @media (max-width: 720px) {
