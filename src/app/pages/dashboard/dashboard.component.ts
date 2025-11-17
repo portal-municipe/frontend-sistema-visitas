@@ -24,9 +24,34 @@ export class DashboardComponent implements OnInit {
 
   tabIndex = 0;
 
-  recentOpen = [/* ... */];
-  recentClosed = [/* ... */];
-  departments = [/* ... */];
+  // põe aqui o teu mock real
+  recentOpen = [
+    {
+      name: 'António Carlos',
+      company: 'BNA',
+      department: 'Finanças',
+      host: 'João Pedro',
+      time: '09:32',
+    },
+  ];
+
+  recentClosed = [
+    {
+      name: 'Maria Santos',
+      company: 'Sonangol',
+      department: 'RH',
+      host: 'Ana Paula',
+      time: 'Ontem • 16:40',
+    },
+  ];
+
+  departments = [
+    { name: 'Finanças', value: 45, percent: 82 },
+    { name: 'Recursos Humanos', value: 38, percent: 70 },
+    { name: 'Administração', value: 32, percent: 58 },
+    { name: 'Orçamento', value: 28, percent: 52 },
+    { name: 'Outros', value: 19, percent: 40 },
+  ];
 
   kpiCards: DashboardKpi[] = [];
 
@@ -70,53 +95,73 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadWeather(): void {
-    this.weather.getCurrentByCity('Luanda', 'AO').subscribe((w: any) => {
-      const main = w?.main;
-      const weather0 = w?.weather?.[0];
+    this.weather.getCurrentByCity('Luanda', 'AO').subscribe(
+      (w: any) => {
+        if (!w) {
+          this.weatherTempDisplay = '-- °C';
+          this.weatherSubLabel = 'Sem dados de previsão';
+          this.weatherIcon = 'wb_cloudy';
+          this.buildKpis();
+          return;
+        }
 
-      const temp = main?.temp;
-      const feels = main?.feels_like;
-      const desc = weather0?.description as string | undefined;
-      const location = w?.name as string | undefined;
+        const main = w.main || {};
+        const weatherArray = w.weather || [];
+        const weather0 = weatherArray.length > 0 ? weatherArray[0] : {};
 
-      if (typeof temp === 'number') {
-        this.weatherTempDisplay = `${Math.round(temp)}°C`;
-      } else {
+        const temp = typeof main.temp === 'number' ? main.temp : null;
+        const feels = typeof main.feels_like === 'number' ? main.feels_like : null;
+        const desc = (weather0.description as string) || '';
+        const location = (w.name as string) || '';
+
+        if (temp !== null) {
+          this.weatherTempDisplay = `${Math.round(temp)}°C`;
+        } else {
+          this.weatherTempDisplay = '-- °C';
+        }
+
+        const parts: string[] = [];
+        if (desc) {
+          parts.push(this.capitalize(desc)); // "céu nublado", "chuva fraca", etc.
+        }
+        if (feels !== null) {
+          parts.push(`sensação ${Math.round(feels)}°C`);
+        }
+        if (location) {
+          parts.push(location);
+        }
+        this.weatherSubLabel = parts.join(' • ');
+
+        // escolhe ícone consoante condição
+        const mainCond = ((weather0.main as string) || '').toLowerCase();
+        if (mainCond.indexOf('cloud') >= 0) {
+          this.weatherIcon = 'cloud_queue';
+        } else if (mainCond.indexOf('rain') >= 0) {
+          this.weatherIcon = 'umbrella';
+        } else if (
+          mainCond.indexOf('storm') >= 0 ||
+          mainCond.indexOf('thunder') >= 0
+        ) {
+          this.weatherIcon = 'thunderstorm';
+        } else if (mainCond.indexOf('clear') >= 0) {
+          this.weatherIcon = 'wb_sunny';
+        } else {
+          this.weatherIcon = 'wb_cloudy';
+        }
+
+        // refresca o card do tempo
+        this.buildKpis();
+      },
+      _err => {
+        // em caso de erro, mantém um estado “seguro”
         this.weatherTempDisplay = '-- °C';
-      }
-
-      const parts: string[] = [];
-
-      if (desc) {
-        parts.push(this.capitalize(desc)); // “céu nublado”, “chuva fraca”, etc.
-      }
-      if (typeof feels === 'number') {
-        parts.push(`sensação ${Math.round(feels)}°C`);
-      }
-      if (location) {
-        parts.push(location);
-      }
-
-      this.weatherSubLabel = parts.join(' • ');
-
-      // escolhe ícone consoante condição
-      const mainCond = (weather0?.main || '').toLowerCase();
-      if (mainCond.includes('cloud')) {
-        this.weatherIcon = 'cloud_queue';
-      } else if (mainCond.includes('rain')) {
-        this.weatherIcon = 'umbrella';
-      } else if (mainCond.includes('storm') || mainCond.includes('thunder')) {
-        this.weatherIcon = 'thunderstorm';
-      } else if (mainCond.includes('clear')) {
-        this.weatherIcon = 'wb_sunny';
-      } else {
+        this.weatherSubLabel = 'Não foi possível obter a previsão';
         this.weatherIcon = 'wb_cloudy';
+        this.buildKpis();
       }
-
-      // refresca o card do tempo
-      this.buildKpis();
-    });
+    );
   }
+
 
   private buildKpis(): void {
     this.kpiCards = [
@@ -134,13 +179,13 @@ export class DashboardComponent implements OnInit {
         variant: 'default',
         icon: 'groups',
       },
-      {
+      /*{
         label: 'Tempo médio',
         value: this.avgTimeDisplay,
         sublabel: this.avgTimeDay,
         variant: 'default',
         icon: 'schedule',
-      },
+      },*/
       {
         label: 'Câmbio do dia',
         value: this.forexMain,
