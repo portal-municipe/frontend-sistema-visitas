@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   // meteorologia
   weatherTempDisplay = '-- °C';
   weatherSubLabel = 'A carregar previsão...';
-  weatherIcon: string = 'wb_cloudy';
+  weatherIcon = 'wb_cloudy';
 
   tabIndex = 0;
 
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit {
         // refresca o card do tempo
         this.buildKpis();
       },
-      _err => {
+      err => {
         // em caso de erro, mantém um estado “seguro”
         this.weatherTempDisplay = '-- °C';
         this.weatherSubLabel = 'Não foi possível obter a previsão';
