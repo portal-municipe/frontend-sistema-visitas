@@ -1,4 +1,8 @@
-<div class="kpi-card" [class.warning]="variant === 'warning'">
+<div class="kpi-card" [ngClass]="{
+    'warning': variant === 'warning',
+    'success': variant === 'success',
+    'default': !variant || variant === 'default'
+  }">
   <div class="kpi-body">
     <p class="label">{{ label }}</p>
     <h3>{{ value }}</h3>

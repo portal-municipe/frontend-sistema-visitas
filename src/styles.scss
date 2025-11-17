@@ -24,7 +24,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: var(--bg-muted); }
 
-
+.sucess { background: #e0f6eb; color: #047857; }
+.warning { background: #fff4e5; color: #b45309; }
 /* Snackbar helpers (mantidos) */
 .snack-success { background: #2e7d32; color: #fff; }
 .snack-error { background: #c62828; color: #fff; }

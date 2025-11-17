@@ -1,10 +1,11 @@
 <!-- src/app/pages/dashboard/dashboard.component.html -->
 <div class="dashboard">
   <div class="kpi-row">
-    <app-kpi-card label="Visitas ativas" [value]="activeVisits" sublabel="Atualizado a cada 5 min">
+    <app-kpi-card [variant]="'warning'" label="Visitas ativas" [value]="activeVisits"
+      sublabel="Atualizado a cada 5 min">
     </app-kpi-card>
 
-    <app-kpi-card label="Visitantes hoje" [value]="visitorsToday">
+    <app-kpi-card label="Visitantes" [value]="visitorsToday" sublabel="Atualizado diariamente">
     </app-kpi-card>
 
     <app-kpi-card label="Tempo médio" [value]="avgTimeDisplay" [sublabel]="avgTimeDay">
@@ -27,10 +28,10 @@
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
                 <p class="meta">
-                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                  {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
                 </p>
               </div>
-              <span class="chip chip-green">No edifício</span>
+              <span class="chip chip-warning">No edifício</span>
             </div>
           </ng-container>
         </mat-tab>
@@ -42,10 +43,10 @@
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
                 <p class="meta">
-                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                  {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
                 </p>
               </div>
-              <span class="chip">Concluída</span>
+              <span class="chip chip-green">Concluída</span>
             </div>
           </ng-container>
         </mat-tab>
