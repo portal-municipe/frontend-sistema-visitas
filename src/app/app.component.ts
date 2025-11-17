@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguageService } from '@core/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'imob-visitas';
+  constructor(public lang: LanguageService) { }
 }

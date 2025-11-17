@@ -21,7 +21,8 @@ import { DataVoidComponent } from './components/data-void/data-void.component';
 import { AppTableCellDirective } from './directives/app-table-cell.directive';
 import { ConfirmOverlayComponent } from './components/confirm-overlay/confirm-overlay.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
+import { TranslateModule } from '@ngx-translate/core';
+import { KpiCardComponent } from './components/kpi-card/kpi-card.component';
 @NgModule({
   declarations: [
     AppListComponent,
@@ -35,7 +36,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     DataVoidComponent,
     AppTableCellDirective,
     ConfirmOverlayComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    KpiCardComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
+    TranslateModule
   ],
   exports: [
     // exporta para os outros módulos poderem usar
@@ -62,7 +65,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     RouterModule,
     AppTableCellDirective,
     ConfirmOverlayComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    KpiCardComponent
   ],
   entryComponents: [
     ConfirmDialogComponent,

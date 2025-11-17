@@ -1,47 +1,66 @@
-<!-- src/app/shared/components/app-sidebar/app-sidebar.component.html -->
 <aside class="sidebar" [class.opened]="opened">
   <div class="brand">
     <div class="logo-box">
       <img src="assets/minfin-logo-branco.png" alt="MINFIN" class="logo-img" />
     </div>
     <div class="brand-text">
-      <small>Controlo de Visitas</small>
+      <small>{{ 'app.brand.subtitle' | translate }}</small>
     </div>
   </div>
 
   <nav class="nav">
     <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" (click)="onNavigate()">
       <mat-icon>dashboard</mat-icon>
-      <span>Dashboard</span>
+      <span>{{ 'app.nav.dashboard' | translate }}</span>
     </a>
-
     <ng-container *ngFor="let item of nav">
-      <ng-container *ngIf="item.children && item.children.length; else single">
-        <button class="nav-item has-children" (click)="toggleGroup(item.label)">
+      <ng-container *ngIf="item.children?.length; else single">
+        <button class="nav-item has-children" (click)="toggleGroup(item.labelKey)">
           <span class="left">
             <mat-icon>{{ item.icon }}</mat-icon>
-            <span>{{ item.label }}</span>
+            <span>{{ item.labelKey | translate }}</span>
           </span>
-          <mat-icon class="chevron" [class.open]="openedGroups[item.label]">
-            expand_more
-          </mat-icon>
+          <mat-icon class="chevron" [class.open]="openedGroups[item.labelKey]">expand_more</mat-icon>
         </button>
 
-        <div class="sub" *ngIf="openedGroups[item.label]">
+        <div class="sub" *ngIf="openedGroups[item.labelKey]">
           <a *ngFor="let c of item.children" class="sub-item" [routerLink]="c.route" routerLinkActive="active"
             (click)="onNavigate()">
-            {{ c.label }}
+            {{ c.labelKey | translate }}
           </a>
         </div>
       </ng-container>
 
       <ng-template #single>
-        <a class="nav-item" *ngIf="item.route && item.label !== 'Dashboard'" [routerLink]="item.route"
+        <a class="nav-item" *ngIf="item.route && item.labelKey !== 'app.nav.dashboard'" [routerLink]="item.route"
           routerLinkActive="active" (click)="onNavigate()">
           <mat-icon>{{ item.icon }}</mat-icon>
-          <span>{{ item.label }}</span>
+          <span>{{ item.labelKey | translate }}</span>
         </a>
       </ng-template>
     </ng-container>
   </nav>
+
+  <!-- Rodapé: Language switch (pill card) -->
+  <div class="footer-lang">
+    <div class="lang-card w-100 align-items-center justify-content-between" role="button" tabindex="0"
+      [attr.aria-label]="'lang.label' | translate" (click)="langSelect.open()" (keydown.enter)="langSelect.open()"
+      (keydown.space)="langSelect.open()">
+
+      <mat-icon class="lang-icon">language</mat-icon>
+
+      <div class="lang-text">
+        <span class="caption">{{ 'lang.label' | translate }}</span>
+        <span class="value">{{ ('lang.' + lang.current) | translate }}</span>
+      </div>
+
+      <mat-icon class="chev">expand_more</mat-icon>
+
+      <mat-select #langSelect [value]="lang.current" (selectionChange)="changeLang($event.value)"
+        [panelClass]="'lang-panel'" disableOptionCentering>
+        <mat-option value="pt" style="color: white;">🇵🇹 {{ 'lang.pt' | translate }}</mat-option>
+        <mat-option value="en" style="color: white;">🇬🇧 {{ 'lang.en' | translate }}</mat-option>
+      </mat-select>
+    </div>
+  </div>
 </aside>

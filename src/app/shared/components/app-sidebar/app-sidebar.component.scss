@@ -112,6 +112,7 @@ a {
     transition: transform 0.15s ease-out;
     font-size: 1.05rem;
     opacity: 0.85;
+    padding: 0 40px;
 
     &.open {
       transform: rotate(180deg);
@@ -157,3 +158,98 @@ a {
     height: 100vh;
   }
 }
+
+/* Força tema escuro no painel do mat-select (overlay do CDK) */
+:host ::ng-deep .mat-select-panel {
+  background: #171923 !important;  /* painel escuro */
+  color: #fff !important;
+}
+:host ::ng-deep .mat-option {
+  color: #fff !important;
+}
+:host ::ng-deep .mat-option.mat-selected:not(.mat-option-disabled) {
+  background: rgba(255,255,255,0.08) !important;
+}
+.sidebar { display: flex; flex-direction: column; height: 100vh; }
+.footer-lang { margin-top: auto; padding: .5rem 1rem; border-top: 1px solid rgba(255,255,255,.08); }
+.w-100 { width: 100%; }
+
+.footer-lang {
+  margin-top: auto;
+  padding: .75rem .9rem 1rem;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+/* pill card */
+.lang-card {
+  --ring: rgba(59,130,246,.25);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: .6rem .9rem;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .04s ease;
+
+  &:hover { border-color: rgba(255,255,255,.22); }
+  &:active { transform: translateY(1px); }
+  &:focus { box-shadow: 0 0 0 3px var(--ring); }
+}
+
+.lang-icon { font-size: 18px; opacity: .92; }
+
+.lang-text {
+  display: grid;
+  line-height: 1.1;
+}
+.lang-text .caption {
+  font-size: 10px;
+  opacity: .7;
+  letter-spacing: .02em;
+}
+.lang-text .value {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.chev { margin-left: auto; opacity: .85; font-size: 18px; padding: 0 0px; }
+
+
+/* painel do dropdown */
+::ng-deep .lang-panel {
+  background: #171923 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px !important;
+  box-shadow: 0 12px 24px rgba(0,0,0,.35) !important;
+}
+::ng-deep .lang-panel .mat-option {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 500;
+}
+::ng-deep .lang-panel .mat-option.mat-selected:not(.mat-option-disabled) {
+  background: rgba(59,130,246,.18) !important;
+}
+.lang-card {
+  position: relative; /* chave: para ancorar o trigger */
+  /* ... resto do teu estilo */
+}
+
+/* torna o host do select invisível mas clicável e com o mesmo tamanho do pill */
+::ng-deep .lang-card mat-select {
+}
+
+/* opcional: se o texto do trigger ainda aparecer, apaga-o só visualmente 
+::ng-deep .lang-card .mat-select-trigger,
+::ng-deep .lang-card .mat-select-value,
+::ng-deep .lang-card .mat-select-arrow {
+  opacity: 0 !important;
+}
+*/

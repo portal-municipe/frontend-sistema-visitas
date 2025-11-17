@@ -1,7 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tema Material pode ficar, mas usamos variáveis próprias */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-html, body { height:100%; }
-body { margin:0; font-family: Roboto,"Helvetica Neue",sans-serif; }
+
+
+:root {
+/* Paleta fornecida */
+--color-primary: #3f51b5; /* Primária */
+--color-secondary: #5c6bc0;/* Secundária */
+--color-tertiary: #7986cb; /* Terciária */
+--color-cancel: #9e9e9e; /* Cinza cancelar */
+
+
+/* Derivadas e de estado */
+--bg-surface: #ffffff;
+--bg-muted: #f7f8fb;
+--text-strong: #131822;
+--text-muted: #6b7280;
+--border-soft: #edf0f5;
+--warning-bg: #fff7e6; /* Destaque p/ Visitas Ativas */
+--warning-border: #ffd199; /* Borda suave de warning */
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: var(--bg-muted); }
+
+
+/* Snackbar helpers (mantidos) */
 .snack-success { background: #2e7d32; color: #fff; }
 .snack-error { background: #c62828; color: #fff; }
 .snack-info { background: #1565c0; color: #fff; }

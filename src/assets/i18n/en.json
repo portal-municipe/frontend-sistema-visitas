@@ -1,0 +1,54 @@
+{
+  "app": {
+    "brand": { "subtitle": "Visits Control" },
+    "nav": {
+      "dashboard": "Dashboard",
+      "visits": "Visits",
+      "visits_list": "List visits",
+      "visits_new": "Create visit",
+      "visits_active": "Active visits",
+      "visitors": "Visitors",
+      "visitors_list": "List visitors",
+      "users": "Users",
+      "users_list": "List users",
+      "users_new": "Create users"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "username": "Email or username",
+      "password": "Password",
+      "keep_signed": "Keep me signed in",
+      "create_account": "Create account",
+      "enter": "Enter",
+      "terms": "Terms of use",
+      "privacy": "Privacy Policy",
+      "required_username": "Enter your username",
+      "required_password": "Enter your password",
+      "show": "Show",
+      "hide": "Hide",
+      "error": "Authentication failed"
+    },
+    "register": {
+      "title": "Create account",
+      "have_account": "Already have an account?",
+      "login": "Sign in",
+      "name": "How should we call you?",
+      "email": "What's your e-mail?",
+      "password": "Create a password",
+      "hint": "Use 8+ characters with a mix of letters, numbers and symbols.",
+      "create": "Create account",
+      "required_name": "Enter your name",
+      "required_email": "Enter your email",
+      "invalid_email": "Invalid email",
+      "required_password": "Enter your password",
+      "min_password": "Minimum 8 characters",
+      "pattern_password": "Use letters, numbers and symbols",
+      "error": "Failed to create account",
+      "terms": "Terms of use",
+      "privacy": "Privacy Policy"
+    }
+  },
+  "lang": { "label": "Language", "pt": "Portuguese", "en": "English" }
+}

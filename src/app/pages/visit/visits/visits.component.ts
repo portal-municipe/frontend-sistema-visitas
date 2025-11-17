@@ -14,6 +14,15 @@ import { FilterConfig, TableColumn } from '@core/models/index';
   styleUrls: ['./visits.component.scss'],
 })
 export class VisitsComponent implements OnInit, OnDestroy {
+
+  constructor(private fb: FormBuilder, private service: VisitService) {
+    this.form = this.fb.group({
+      q: [''],
+      departamento: [null],
+      dataInicial: [null],
+      dataFinal: [null],
+    });
+  }
   form: FormGroup;
   private subs = new Subscription();
 
@@ -48,27 +57,21 @@ export class VisitsComponent implements OnInit, OnDestroy {
   tableColumns: TableColumn[] = [
     { key: 'data', header: 'Data' },
     { key: 'visitanteNome', header: 'Visitante' },
-    { key: 'anfitriao', header: 'Anfitrião' },
+    /* { key: 'anfitriao', header: 'Anfitrião' }, */
     { key: 'departamento', header: 'Departamento' },
     { key: 'motivo', header: 'Motivo' },
-    { key: 'entrada', header: 'Entrada' },
-    { key: 'saida', header: 'Saída' },
+    /* { key: 'entrada', header: 'Entrada' },
+    { key: 'saida', header: 'Saída' }, */
     { key: 'duracaoText', header: 'Duração' },
+    { key: 'acoes', header: 'Ações', align: 'center', width: '90px' },
   ];
 
   exportActions = [
-    { key: 'pdf', label: 'PDF', icon: 'picture_as_pdf' },
-    { key: 'csv', label: 'CSV', icon: 'cloud_download' },
+    { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
   ];
 
-  constructor(private fb: FormBuilder, private service: VisitService) {
-    this.form = this.fb.group({
-      q: [''],
-      departamento: [null],
-      dataInicial: [null],
-      dataFinal: [null],
-    });
-  }
+  showDetailModal = false;
+  selectedVisit: Visit | null = null;
 
   ngOnInit(): void {
     this.load();
@@ -167,5 +170,14 @@ export class VisitsComponent implements OnInit, OnDestroy {
 
   onPage(e: any) {
     // se precisar de paginação server-side
+  }
+
+  verDetalhes(row: Visit): void {
+    this.selectedVisit = row;
+    this.showDetailModal = true;
+  }
+
+  closeDetail(): void {
+    this.showDetailModal = false;
   }
 }

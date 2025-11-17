@@ -1,0 +1,7 @@
+<div class="kpi-card" [class.warning]="variant === 'warning'">
+  <div class="kpi-body">
+    <p class="label">{{ label }}</p>
+    <h3>{{ value }}</h3>
+    <p class="muted" *ngIf="sublabel">{{ sublabel }}</p>
+  </div>
+</div>
