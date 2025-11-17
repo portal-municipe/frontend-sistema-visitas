@@ -15,22 +15,20 @@
     <div class="box-head">
       <div class="title-left">
         <div class="round-icon">
-          <mat-icon>access_time</mat-icon>
+          <mat-icon>list</mat-icon>
         </div>
         <div>
           <h2>Lista de Visitantes</h2>
           <p>Visitantes que ainda não registaram saída</p>
         </div>
       </div>
+      <app-export [actions]="exportActions" [disabled]="!rows.length" (action)="onExport($event)">
+      </app-export>
 
-      <!-- form reativo -->
-      <form [formGroup]="filterForm" class="search-form">
-        <mat-form-field class="search" floatLabel="never" appearance="legacy">
-          <mat-icon matPrefix>search</mat-icon>
-          <input matInput placeholder="Pesquisar visitante..." formControlName="search" />
-        </mat-form-field>
-      </form>
     </div>
+
+    <app-filters [form]="filterForm" [config]="filterConfig" (clear)="clearFilters()">
+    </app-filters>
 
     <app-table [data]="rows" [columns]="columns" class="active-table" (cellAction)="onTableCellAction($event)">
 
@@ -49,11 +47,9 @@
       <ng-template appTableCell="localizacao" let-row>
         <div class="td col-local">
           <div class="loc-line">
-            <mat-icon class="inline-icon">location_city</mat-icon>
             <span>{{ row.localizacao.departamento }}</span>
           </div>
           <div class="loc-line sub small">
-            <mat-icon class="inline-icon small">room</mat-icon>
             <span>{{ row.localizacao.sala }}</span>
           </div>
         </div>
@@ -64,34 +60,29 @@
         <span class="badge">{{ row.motivo }}</span>
       </ng-template>
 
-      <!-- Entrada -->
-      <ng-template appTableCell="entrada" let-row>
-        <span class="col-hora">{{ row.entrada }}</span>
-      </ng-template>
-
       <!-- Duração -->
       <ng-template appTableCell="duracao" let-row>
         <div class="td col-dur">
-          <mat-icon class="inline-icon">access_time</mat-icon>
           <span>{{ row.duracao }}</span>
         </div>
       </ng-template>
 
-      <!-- Ações -->
+      <!-- Template: Ações -->
       <ng-template appTableCell="acoes" let-row let-col="col" let-table="table">
-        <button class="exit-btn" mat-button type="button" (click)="table.onCellAction(col.key, row, $event)">
-          <mat-icon>exit_to_app</mat-icon>
-          Registar Saída
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="table.onCellAction(col.key, row, $event)">
+            <mat-icon>exit_to_app</mat-icon>
+            Registar Saída
+          </button>
+        </mat-menu>
       </ng-template>
 
     </app-table>
-    <app-pagination
-    [length]="total"
-    [pageSize]="10"
-    [pageSizeOptions]="[5,10,20]"
-    (page)="onPage($event)">
-  </app-pagination>
+    <app-pagination [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]" (page)="onPage($event)">
+    </app-pagination>
   </div>
 </div>
 

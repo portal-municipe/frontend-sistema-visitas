@@ -1,18 +1,17 @@
-<!-- src/app/shared/components/app-topbar/app-topbar.component.html -->
 <header class="topbar">
   <div class="left">
     <button mat-icon-button class="only-mobile" (click)="menu.emit()">
       <mat-icon>menu</mat-icon>
     </button>
     <div class="page-title">
-      <p>Visão geral do sistema de controlo de presença</p>
+      <p>{{ 'topbar.title' | translate }}</p>
     </div>
   </div>
 
   <div class="right">
     <!-- SE ESTIVER LOGADO -->
     <ng-container *ngIf="isAuthenticated; else publicActions">
-      <button mat-icon-button class="notif">
+      <button mat-icon-button class="notif" aria-label="Notifications">
         <mat-icon>notifications_none</mat-icon>
         <span class="dot" *ngIf="notif > 0"></span>
       </button>
@@ -24,7 +23,7 @@
         <div class="menu">
           <button mat-button (click)="onLogout()">
             <mat-icon>exit_to_app</mat-icon>
-            Sair
+            {{ 'topbar.logout' | translate }}
           </button>
         </div>
       </div>
@@ -32,7 +31,9 @@
 
     <!-- SE NÃO ESTIVER LOGADO -->
     <ng-template #publicActions>
-      <button mat-flat-button class="btn-primary" (click)="goLogin()">Entrar</button>
+      <button mat-flat-button class="btn-primary" (click)="goLogin()">
+        {{ 'topbar.login' | translate }}
+      </button>
     </ng-template>
   </div>
 </header>

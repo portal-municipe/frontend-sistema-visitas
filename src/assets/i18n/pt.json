@@ -50,5 +50,40 @@
       "privacy": "Política de Privacidade"
     }
   },
-  "lang": { "label": "Idioma", "pt": "Português", "en": "Inglês" }
+  "lang": { "label": "Idioma", "pt": "Português", "en": "Inglês" },
+  "dashboard": {
+    "kpi": {
+      "active_visits": "Visitas ativas",
+      "active_visits_sub": "Atualizado a cada 5 min",
+      "visitors": "Visitantes no dia",
+      "visitors_sub": "Atualizado diariamente",
+      "exchange": "Câmbio do dia",
+      "weather": "Tempo em Luanda",
+      "weather_sub_loading": "A carregar previsão...",
+      "weather_sub_empty": "Sem dados de previsão",
+      "weather_sub_error": "Não foi possível obter a previsão"
+    },
+    "recent": {
+      "title": "Visitas recentes",
+      "subtitle": "Últimas visitas registadas"
+    },
+    "tabs": {
+      "open": "Abertas",
+      "closed": "Fechadas"
+    },
+    "chip": {
+      "in_building": "No edifício",
+      "done": "Concluída"
+    },
+    "departments": {
+      "title": "Visitas por departamento",
+      "subtitle": "Distribuição mensal"
+    },
+    "host": "Anfitrião"
+  },
+   "topbar": {
+    "title": "Visão geral do sistema de controlo de presença",
+    "login": "Entrar",
+    "logout": "Sair"
+  }
 }

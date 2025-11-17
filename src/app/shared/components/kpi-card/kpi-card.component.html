@@ -1,7 +1,24 @@
-<div class="kpi-card" [class.warning]="variant === 'warning'">
+<div class="kpi-card">
   <div class="kpi-body">
-    <p class="label">{{ label }}</p>
-    <h3>{{ value }}</h3>
+    <div class="kpi-header">
+      <p class="label">{{ label }}</p>
+
+      <div class="kpi-icon" *ngIf="icon">
+        <mat-icon>{{ icon }}</mat-icon>
+      </div>
+    </div>
+
+    <h3
+      class="kpi-value"
+      [ngClass]="{
+        'kpi-value--warning': variant === 'warning',
+        'kpi-value--success': variant === 'success',
+        'kpi-value--default': !variant || variant === 'default'
+      }"
+    >
+      {{ value }}
+    </h3>
+
     <p class="muted" *ngIf="sublabel">{{ sublabel }}</p>
   </div>
 </div>

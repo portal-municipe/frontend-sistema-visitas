@@ -29,7 +29,10 @@
     "@angular/router": "^20.3.12",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
+    "bootstrap": "^4.6.2",
     "core-js": "^2.5.4",
+    "jquery": "^3.7.1",
+    "popper.js": "^1.16.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -57,5 +60,8 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.2.4",
     "typescript-tslint-plugin": "^1.0.2"
+  },
+  "overrides": {
+    "js-yaml": "4.1.1"
   }
 }

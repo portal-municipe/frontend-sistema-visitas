@@ -1,51 +1,60 @@
 <!-- src/app/pages/dashboard/dashboard.component.html -->
 <div class="dashboard">
   <div class="kpi-row">
-    <app-kpi-card label="Visitas ativas" [value]="activeVisits" sublabel="Atualizado a cada 5 min">
-    </app-kpi-card>
-
-    <app-kpi-card label="Visitantes hoje" [value]="visitorsToday">
-    </app-kpi-card>
-
-    <app-kpi-card label="Tempo médio" [value]="avgTimeDisplay" [sublabel]="avgTimeDay">
-    </app-kpi-card>
-
-    <app-kpi-card label="Câmbio do dia" [value]="forexMain" [sublabel]="forexSub">
+    <app-kpi-card
+      *ngFor="let card of kpiCards"
+      [label]="card.label"
+      [value]="card.value"
+      [sublabel]="card.sublabel"
+      [variant]="card.variant"
+      [icon]="card.icon">
     </app-kpi-card>
   </div>
 
   <div class="grid">
     <mat-card class="recent">
-      <mat-card-title>Visitas Recentes</mat-card-title>
-      <mat-card-subtitle>Últimas visitas registadas</mat-card-subtitle>
+      <mat-card-title>
+        {{ 'dashboard.recent.title' | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ 'dashboard.recent.subtitle' | translate }}
+      </mat-card-subtitle>
 
       <mat-tab-group [(selectedIndex)]="tabIndex">
-        <mat-tab label="Abertas">
+        <mat-tab label="{{ 'dashboard.tabs.open' | translate }}">
           <ng-container *ngFor="let v of recentOpen">
-            <div class="visit">
+            <div class="visit mt-2">
               <div class="info">
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
                 <p class="meta">
-                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                  {{ v.department }} •
+                  {{ 'dashboard.host' | translate }}: {{ v.host }} •
+                  {{ v.time }}
                 </p>
               </div>
-              <span class="chip chip-green">No edifício</span>
+              <span class="chip chip-warning">
+                {{ 'dashboard.chip.in_building' | translate }}
+              </span>
             </div>
           </ng-container>
         </mat-tab>
 
-        <mat-tab label="Fechadas">
+        <mat-tab label="{{ 'dashboard.tabs.closed' | translate }}">
           <ng-container *ngFor="let v of recentClosed">
-            <div class="visit">
+            <div class="visit mt-2">
               <div class="info">
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
                 <p class="meta">
-                  • {{ v.department }} • Anfitrião: {{ v.host }} • {{ v.time }}
+                  {{ v.department }} •
+                  {{ 'dashboard.host' | translate }}: {{ v.host }} •
+                  {{ v.time }}
                 </p>
               </div>
-              <span class="chip">Concluída</span>
+              <span class="chip chip-green">
+                {{ 'dashboard.chip.done' | translate }}
+              </span>
             </div>
           </ng-container>
         </mat-tab>
@@ -53,8 +62,12 @@
     </mat-card>
 
     <mat-card class="departments">
-      <mat-card-title>Visitas por Departamento</mat-card-title>
-      <mat-card-subtitle>Distribuição mensal</mat-card-subtitle>
+      <mat-card-title>
+        {{ 'dashboard.departments.title' | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ 'dashboard.departments.subtitle' | translate }}
+      </mat-card-subtitle>
 
       <div class="dept" *ngFor="let d of departments">
         <div class="label">

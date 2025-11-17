@@ -5,7 +5,7 @@
 
 mat-card { border-radius: 1.25rem !important; }
 
-
+.mt-2 { margin-top: .5rem; }
 .recent .visit { display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid var(--border-soft); border-radius: 1rem; padding: .85rem 1rem; margin-bottom: .75rem; gap: 1rem; }
 .recent h4 { margin: 0 0 .1rem; }
 .recent p { margin: 0; font-size: .7rem; }
@@ -14,6 +14,7 @@ mat-card { border-radius: 1.25rem !important; }
 
 .chip { font-size: .7rem; padding: .35rem .75rem; border-radius: 9999px; font-weight: 500; background: #eef2ff; color: #334155; }
 .chip-green { background: #e0f6eb; color: #047857; }
+.chip-warning { background: #fff4e5; color: #b45309; }
 
 
 .departments .dept { margin-bottom: 1rem; }
