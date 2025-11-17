@@ -50,5 +50,35 @@
       "privacy": "Privacy Policy"
     }
   },
-  "lang": { "label": "Language", "pt": "Portuguese", "en": "English" }
+  "lang": { "label": "Language", "pt": "Portuguese", "en": "English" },
+  "dashboard": {
+    "kpi": {
+      "active_visits": "Active visits",
+      "active_visits_sub": "Updated every 5 min",
+      "visitors": "Visitors today",
+      "visitors_sub": "Updated daily",
+      "exchange": "Exchange rate",
+      "weather": "Weather in Luanda",
+      "weather_sub_loading": "Loading forecast...",
+      "weather_sub_empty": "No forecast data",
+      "weather_sub_error": "Could not load forecast"
+    },
+    "recent": {
+      "title": "Recent visits",
+      "subtitle": "Latest registered visits"
+    },
+    "tabs": {
+      "open": "Open",
+      "closed": "Closed"
+    },
+    "chip": {
+      "in_building": "In the building",
+      "done": "Completed"
+    },
+    "departments": {
+      "title": "Visits by department",
+      "subtitle": "Monthly distribution"
+    },
+    "host": "Host"
+  }
 }

@@ -19,7 +19,7 @@ import { VisitorModalCreateOrEditComponent } from './visitors/visitor-modal-crea
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserFormComponent } from './user/user-create/components/user-form/user-form.component';
 import { VisitDetailModalComponent } from './visit/visits/visit-detail-modal/visit-detail-modal.component';
-
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -35,13 +35,14 @@ import { VisitDetailModalComponent } from './visit/visits/visit-detail-modal/vis
     VisitorModalCreateOrEditComponent,
     UserCreateComponent,
     UserFormComponent,
-    VisitDetailModalComponent
+    VisitDetailModalComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    TranslateModule
   ]
 })
 export class PagesModule { }

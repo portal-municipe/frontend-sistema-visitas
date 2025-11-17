@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ForexService } from '@core/services/forex.service';
-import { WeatherService } from '@core/services/weather.service';
+import { WeatherService, ForexService } from '@core/services/index';
 import { DashboardKpi } from '@core/models';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,12 +58,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private fx: ForexService,
     private weather: WeatherService,
-  ) { }
+    private translate: TranslateService,
+  ) {
+    this.translate.onLangChange.subscribe(() => this.buildKpis());
+  }
 
   ngOnInit(): void {
     // primeiro desenho com valores default
     this.buildKpis();
-
+    this.weatherSubLabel = this.translate.instant('dashboard.kpi.weather_sub_loading');
     // depois atualizamos à medida que os serviços respondem
     this.loadForex();
     this.loadWeather();
@@ -99,7 +102,7 @@ export class DashboardComponent implements OnInit {
       (w: any) => {
         if (!w) {
           this.weatherTempDisplay = '-- °C';
-          this.weatherSubLabel = 'Sem dados de previsão';
+          this.weatherSubLabel = this.translate.instant('dashboard.kpi.weather_sub_empty');
           this.weatherIcon = 'wb_cloudy';
           this.buildKpis();
           return;
@@ -152,10 +155,9 @@ export class DashboardComponent implements OnInit {
         // refresca o card do tempo
         this.buildKpis();
       },
-      err => {
-        // em caso de erro, mantém um estado “seguro”
+      () => {
         this.weatherTempDisplay = '-- °C';
-        this.weatherSubLabel = 'Não foi possível obter a previsão';
+        this.weatherSubLabel = this.translate.instant('dashboard.kpi.weather_sub_error');
         this.weatherIcon = 'wb_cloudy';
         this.buildKpis();
       }
@@ -166,39 +168,42 @@ export class DashboardComponent implements OnInit {
   private buildKpis(): void {
     this.kpiCards = [
       {
-        label: 'Visitas ativas',
+        label: this.translate.instant('dashboard.kpi.active_visits'),
         value: this.activeVisits,
-        sublabel: 'Atualizado a cada 5 min',
+        sublabel: this.translate.instant('dashboard.kpi.active_visits_sub'),
         variant: 'warning',
         icon: 'analytics',
       },
       {
-        label: 'Visitantes',
+        label: this.translate.instant('dashboard.kpi.visitors'),
         value: this.visitorsToday,
-        sublabel: 'Atualizado diariamente',
+        sublabel: this.translate.instant('dashboard.kpi.visitors_sub'),
         variant: 'default',
         icon: 'groups',
       },
-      /*{
-        label: 'Tempo médio',
+      // se quiser reativar o tempo médio depois é só descomentar e criar as keys
+      /*
+      {
+        label: this.translate.instant('dashboard.kpi.avg_time'),
         value: this.avgTimeDisplay,
         sublabel: this.avgTimeDay,
         variant: 'default',
         icon: 'schedule',
-      },*/
+      },
+      */
       {
-        label: 'Câmbio do dia',
+        label: this.translate.instant('dashboard.kpi.exchange'),
         value: this.forexMain,
         sublabel: this.forexSub,
         variant: 'default',
-        icon: 'paid', // ícone do card de conversões
+        icon: 'paid',
       },
       {
-        label: 'Tempo em Luanda',
+        label: this.translate.instant('dashboard.kpi.weather'),
         value: this.weatherTempDisplay,
         sublabel: this.weatherSubLabel,
         variant: 'default',
-        icon: this.weatherIcon, // ícone do card de tempo (nublado, sol, chuva…)
+        icon: this.weatherIcon,
       },
     ];
   }
