@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForexService } from '@core/services/forex.service';
 import { WeatherService } from '@core/services/weather.service';
-
+import { DashboardKpi } from '@core/models';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -47,11 +47,13 @@ export class DashboardComponent implements OnInit {
     { name: 'Orçamento', value: 28, percent: 52 },
     { name: 'Outros', value: 19, percent: 40 },
   ];
-
+ kpiCards: DashboardKpi[] = [];
   constructor(
     private fx: ForexService,
     private weather: WeatherService,
-  ) {}
+  ) {
+    this.buildKpis();
+  }
 
   ngOnInit(): void {
     this.loadForex();
@@ -78,5 +80,34 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
+  }
+
+  private buildKpis(): void {
+    this.kpiCards = [
+      {
+        label: 'Visitas ativas',
+        value: this.activeVisits,
+        sublabel: 'Atualizado a cada 5 min',
+        variant: 'warning',
+      },
+      {
+        label: 'Visitantes',
+        value: this.visitorsToday,
+        sublabel: 'Atualizado diariamente',
+        variant: 'default',
+      },
+      {
+        label: 'Tempo médio',
+        value: this.avgTimeDisplay,
+        sublabel: this.avgTimeDay,
+        variant: 'default',
+      },
+      {
+        label: 'Câmbio do dia',
+        value: this.forexMain,
+        sublabel: this.forexSub,
+        variant: 'default',
+      },
+    ];
   }
 }

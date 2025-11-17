@@ -1,17 +1,12 @@
 <!-- src/app/pages/dashboard/dashboard.component.html -->
 <div class="dashboard">
-  <div class="kpi-row">
-    <app-kpi-card [variant]="'warning'" label="Visitas ativas" [value]="activeVisits"
-      sublabel="Atualizado a cada 5 min">
-    </app-kpi-card>
-
-    <app-kpi-card label="Visitantes" [value]="visitorsToday" sublabel="Atualizado diariamente">
-    </app-kpi-card>
-
-    <app-kpi-card label="Tempo médio" [value]="avgTimeDisplay" [sublabel]="avgTimeDay">
-    </app-kpi-card>
-
-    <app-kpi-card label="Câmbio do dia" [value]="forexMain" [sublabel]="forexSub">
+   <div class="kpi-row">
+    <app-kpi-card
+      *ngFor="let card of kpiCards"
+      [label]="card.label"
+      [value]="card.value"
+      [sublabel]="card.sublabel"
+      [variant]="card.variant">
     </app-kpi-card>
   </div>
 
