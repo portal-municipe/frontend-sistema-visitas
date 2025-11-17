@@ -80,5 +80,10 @@
       "subtitle": "Monthly distribution"
     },
     "host": "Host"
+  },
+  "topbar": {
+    "title": "Overview of the attendance control system",
+    "login": "Sign in",
+    "logout": "Sign out"
   }
 }

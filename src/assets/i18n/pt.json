@@ -80,5 +80,10 @@
       "subtitle": "Distribuição mensal"
     },
     "host": "Anfitrião"
+  },
+   "topbar": {
+    "title": "Visão geral do sistema de controlo de presença",
+    "login": "Entrar",
+    "logout": "Sair"
   }
 }
