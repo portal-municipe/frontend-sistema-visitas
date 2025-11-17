@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActiveVisit, TableColumn } from '@app/core/models';
+import { ActiveVisit, FilterConfig, TableColumn } from '@app/core/models';
 
 @Component({
   selector: 'app-active-visits',
@@ -10,11 +10,15 @@ import { ActiveVisit, TableColumn } from '@app/core/models';
 export class ActiveVisitsComponent implements OnInit {
   filterForm: FormGroup;
 
+  // filtros dinâmicos
+  filterConfig: FilterConfig[] = [
+    { name: 'search', label: 'Pesquisar', type: 'text', placeholder: 'Pesquisar visitante...', class: 'col-span-2' },
+  ];
+
   columns: TableColumn[] = [
     { key: 'visitante', header: 'Visitante' },
     { key: 'localizacao', header: 'Localização' },
     { key: 'motivo', header: 'Motivo' },
-    { key: 'entrada', header: 'Entrada', align: 'center', width: '90px' },
     { key: 'duracao', header: 'Duração', align: 'center', width: '90px' },
     { key: 'acoes', header: 'Ações', align: 'right', width: '140px' },
   ];
@@ -55,6 +59,10 @@ export class ActiveVisitsComponent implements OnInit {
     },
   ];
 
+  exportActions = [
+    { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
+  ];
+
   // linhas que vão para a tabela (referência estável)
   rows: any[] = [];
 
@@ -81,6 +89,11 @@ export class ActiveVisitsComponent implements OnInit {
         this.buildRows();
       });
     }
+  }
+
+  clearFilters(): void {
+    this.filterForm.reset({ q: '' });
+    this.buildRows();
   }
 
   private buildRows(): void {
@@ -179,6 +192,16 @@ export class ActiveVisitsComponent implements OnInit {
     // fecha modal
     this.showingConfirm = false;
     this.visitToExit = null;
+  }
+
+  onExport(action: string): void {
+    if (action === 'csv') {
+      this.exportCSV();
+    }
+  }
+
+  exportCSV(): void {
+    // igual ao que já tinhas, mas usando this.rowsView
   }
 
   onPage(e: any) {

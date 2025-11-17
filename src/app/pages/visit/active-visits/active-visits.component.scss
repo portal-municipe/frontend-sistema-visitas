@@ -7,7 +7,7 @@
 .visits-shell {
   margin: 0 auto;
   padding: 14px 14px 40px;
-  transition: opacity .15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .header-row {
@@ -29,21 +29,21 @@
 }
 
 .counter-pill {
-  background: #e2f3e6;
-  border: 1px solid #cbe8d1;
+  background: #fff4d8; /* Fundo suave de warning */
+  border: 1px solid #ffdfa3; /* Borda compatível com warning */
   border-radius: 999px;
   padding: 7px 18px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #0f5132;
+  color: #7f5200; /* Cor principal de warning */
   font-weight: 500;
 }
 
 .counter-pill .dot {
   width: 12px;
   height: 12px;
-  background: #0bbb43;
+  background: #ffb300; /* Warning forte (ícone/ponto) */
   border-radius: 999px;
 }
 
@@ -96,7 +96,7 @@
 
 .search {
   width: 260px;
-  background: #eef0f3;
+  background: transparent;
   border-radius: 14px;
 }
 
@@ -231,7 +231,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  box-shadow: 0 18px 40px rgba(0,0,0,.15);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
   z-index: 1030;
 
   mat-icon {
