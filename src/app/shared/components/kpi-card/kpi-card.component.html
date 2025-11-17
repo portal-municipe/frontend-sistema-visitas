@@ -1,11 +1,11 @@
-<div class="kpi-card" [ngClass]="{
+<div class="kpi-card">
+  <div class="kpi-body">
+    <p class="label">{{ label }}</p>
+    <h3 [ngClass]="{
     'warning': variant === 'warning',
     'success': variant === 'success',
     'default': !variant || variant === 'default'
-  }">
-  <div class="kpi-body">
-    <p class="label">{{ label }}</p>
-    <h3>{{ value }}</h3>
+  }">{{ value }}</h3>
     <p class="muted" *ngIf="sublabel">{{ sublabel }}</p>
   </div>
 </div>

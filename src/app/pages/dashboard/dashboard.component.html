@@ -23,7 +23,7 @@
       <mat-tab-group [(selectedIndex)]="tabIndex">
         <mat-tab label="Abertas">
           <ng-container *ngFor="let v of recentOpen">
-            <div class="visit">
+            <div class="visit mt-2">
               <div class="info">
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
@@ -38,7 +38,7 @@
 
         <mat-tab label="Fechadas">
           <ng-container *ngFor="let v of recentClosed">
-            <div class="visit">
+            <div class="visit mt-2">
               <div class="info">
                 <h4>{{ v.name }}</h4>
                 <p>{{ v.company }}</p>
