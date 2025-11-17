@@ -1,14 +1,16 @@
 <!-- src/app/pages/dashboard/dashboard.component.html -->
 <div class="dashboard">
-   <div class="kpi-row">
-    <app-kpi-card
+  <div class="kpi-row">
+   <app-kpi-card
       *ngFor="let card of kpiCards"
       [label]="card.label"
       [value]="card.value"
       [sublabel]="card.sublabel"
-      [variant]="card.variant">
-    </app-kpi-card>
-  </div>
+      [variant]="card.variant"
+      [icon]="card.icon">
+   </app-kpi-card>
+ </div>
+
 
   <div class="grid">
     <mat-card class="recent">

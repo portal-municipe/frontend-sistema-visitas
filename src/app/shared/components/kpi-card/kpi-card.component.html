@@ -1,13 +1,21 @@
-<!-- kpi-card.component.html -->
 <div class="kpi-card">
   <div class="kpi-body">
-    <p class="label">{{ label }}</p>
+    <div class="kpi-header">
+      <p class="label">{{ label }}</p>
 
-    <h3 class="kpi-value" [ngClass]="{
+      <div class="kpi-icon" *ngIf="icon">
+        <mat-icon>{{ icon }}</mat-icon>
+      </div>
+    </div>
+
+    <h3
+      class="kpi-value"
+      [ngClass]="{
         'kpi-value--warning': variant === 'warning',
         'kpi-value--success': variant === 'success',
         'kpi-value--default': !variant || variant === 'default'
-      }">
+      }"
+    >
       {{ value }}
     </h3>
 

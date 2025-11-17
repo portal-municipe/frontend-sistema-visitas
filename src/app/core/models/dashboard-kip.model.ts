@@ -5,5 +5,6 @@ export interface DashboardKpi {
     value: string | number;
     sublabel: string;
     variant: KpiVariant;
+    icon?: string;
 }
 
