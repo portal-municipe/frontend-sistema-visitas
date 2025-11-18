@@ -85,5 +85,62 @@
     "title": "Overview of the attendance control system",
     "login": "Sign in",
     "logout": "Sign out"
+  },
+  "common": {
+    "clear": "Clear",
+    "close": "Close"
+  },
+  "table": {
+    "empty": {
+      "title": "No data",
+      "desc": "No records were found."
+    }
+  },
+  "visits": {
+    "list": {
+      "title": "Visits list",
+      "subtitle": "Total of {{total}} visits found"
+    },
+    "actions": {
+      "new_visit": "New visit",
+      "view_details": "View details"
+    },
+    "filters": {
+      "search_label": "Search",
+      "search_placeholder": "Search...",
+      "department": "Department",
+      "department_all": "All",
+      "department_finance": "Finance",
+      "department_hr": "Human Resources",
+      "department_admin": "Administration",
+      "department_budget": "Budget",
+      "date_start": "Start date",
+      "date_end": "End date"
+    },
+    "export": {
+      "export": "Export"
+    },
+    "table": {
+      "date": "Date",
+      "visitor": "Visitor",
+      "department": "Department",
+      "reason": "Reason",
+      "duration": "Duration",
+      "actions": "Actions"
+    },
+    "detail": {
+      "title": "Visit details",
+      "subtitle": "Full information about the selected visit",
+      "fields": {
+        "visitor": "Visitor",
+        "host": "Host",
+        "department": "Department",
+        "reason": "Reason",
+        "date": "Date",
+        "start": "Check-in time",
+        "end": "Check-out time",
+        "duration": "Duration"
+      }
+    }
   }
 }

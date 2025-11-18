@@ -81,9 +81,67 @@
     },
     "host": "Anfitrião"
   },
-   "topbar": {
+  "topbar": {
     "title": "Visão geral do sistema de controlo de presença",
     "login": "Entrar",
     "logout": "Sair"
+  },
+  "common": {
+    "clear": "Limpar",
+    "close": "Fechar"
+  },
+  "table": {
+    "empty": {
+      "title": "Sem dados",
+      "desc": "Não foram encontrados registos."
+    }
+  },
+  "visits": {
+    "list": {
+      "title": "Lista de Visitas",
+      "subtitle": "Total de {{total}} visitas encontradas"
+    },
+    "actions": {
+      "new_visit": "Nova visita",
+      "view_details": "Ver detalhes"
+    },
+    "filters": {
+      "search_label": "Pesquisar",
+      "search_placeholder": "Pesquisar...",
+      "department": "Departamento",
+      "department_all": "Todos",
+      "department_finance": "Finanças",
+      "department_hr": "Recursos Humanos",
+      "department_admin": "Administração",
+      "department_budget": "Orçamento",
+      "date_start": "Data inicial",
+      "date_end": "Data final"
+    },
+    "export": {
+      "export": "Exportar"
+    },
+    "table": {
+      "date": "Data",
+      "visitor": "Visitante",
+      "department": "Departamento",
+      "reason": "Motivo",
+      "duration": "Duração",
+      "actions": "Ações"
+    },
+    "detail": {
+      "title": "Detalhes da Visita",
+      "subtitle": "Informações completas sobre a visita seleccionada",
+      "fields": {
+        "visitor": "Visitante",
+        "host": "Anfitrião",
+        "department": "Departamento",
+        "reason": "Motivo",
+        "date": "Data",
+        "start": "Hora de entrada",
+        "end": "Hora de saída",
+        "duration": "Duração"
+      }
+    }
   }
+
 }

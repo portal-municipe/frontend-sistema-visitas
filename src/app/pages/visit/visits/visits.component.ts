@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
+import { TranslateService } from '@ngx-translate/core';
 import { VisitService } from '@app/core/services/visit.service';
 import { Visit } from '@app/core/models/visit.model';
 import { FilterConfig, TableColumn } from '@core/models/index';
@@ -15,13 +15,16 @@ import { FilterConfig, TableColumn } from '@core/models/index';
 })
 export class VisitsComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder, private service: VisitService) {
+  constructor(private fb: FormBuilder, private service: VisitService, private translate: TranslateService) {
     this.form = this.fb.group({
       q: [''],
       departamento: [null],
       dataInicial: [null],
       dataFinal: [null],
     });
+    this.buildFilters();
+    this.buildTableColumns();
+    this.buildExportActions();
   }
   form: FormGroup;
   private subs = new Subscription();
@@ -36,38 +39,41 @@ export class VisitsComponent implements OnInit, OnDestroy {
 
   // filtros dinâmicos
   filterConfig: FilterConfig[] = [
-    { name: 'q', label: 'Pesquisar', type: 'text', placeholder: 'Pesquisar...', class: 'col-span-2' },
+    {
+      name: 'q',
+      label: 'visits.filters.search',
+      type: 'text',
+      placeholder: 'visits.filters.search_placeholder',
+      class: 'col-span-2',
+    },
     {
       name: 'departamento',
-      label: 'Departamento',
+      label: 'visits.filters.department',
       type: 'select',
       options: [
-        { label: 'Todos', value: null },
-        { label: 'Finanças', value: 'Finanças' },
-        { label: 'Recursos Humanos', value: 'Recursos Humanos' },
-        { label: 'Administração', value: 'Administração' },
-        { label: 'Orçamento', value: 'Orçamento' },
+        { label: 'visits.filters.department_all', value: null },
+        { label: 'visits.filters.department_financas', value: 'Finanças' },
+        { label: 'visits.filters.department_rh', value: 'Recursos Humanos' },
+        { label: 'visits.filters.department_admin', value: 'Administração' },
+        { label: 'visits.filters.department_orcamento', value: 'Orçamento' },
       ],
     },
-    { name: 'dataInicial', label: 'Data Inicial', type: 'date' },
-    { name: 'dataFinal', label: 'Data Final', type: 'date' },
+    { name: 'dataInicial', label: 'visits.filters.date_start', type: 'date' },
+    { name: 'dataFinal', label: 'visits.filters.date_end', type: 'date' },
   ];
 
   // colunas dinâmicas
   tableColumns: TableColumn[] = [
-    { key: 'data', header: 'Data' },
-    { key: 'visitanteNome', header: 'Visitante' },
-    /* { key: 'anfitriao', header: 'Anfitrião' }, */
-    { key: 'departamento', header: 'Departamento' },
-    { key: 'motivo', header: 'Motivo' },
-    /* { key: 'entrada', header: 'Entrada' },
-    { key: 'saida', header: 'Saída' }, */
-    { key: 'duracaoText', header: 'Duração' },
-    { key: 'acoes', header: 'Ações', align: 'center', width: '90px' },
+    { key: 'data', header: 'visits.table.date' },
+    { key: 'visitanteNome', header: 'visits.table.visitor' },
+    { key: 'departamento', header: 'visits.table.department' },
+    { key: 'motivo', header: 'visits.table.reason' },
+    { key: 'duracaoText', header: 'visits.table.duration' },
+    { key: 'acoes', header: 'visits.table.actions', align: 'center', width: '90px' },
   ];
 
   exportActions = [
-    { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
+    { key: 'csv', label: 'visits.export.csv', icon: 'cloud_download' },
   ];
 
   showDetailModal = false;
@@ -89,6 +95,57 @@ export class VisitsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  private buildFilters(): void {
+    this.filterConfig = [
+      {
+        name: 'q',
+        label: 'visits.filters.search_label',
+        type: 'text',
+        placeholder: 'visits.filters.search_placeholder',
+        class: 'col-span-2',
+      },
+      {
+        name: 'departamento',
+        label: 'visits.filters.department',
+        type: 'select',
+        options: [
+          { label: 'visits.filters.department_all', value: null },
+          { label: 'visits.filters.department_finance', value: 'Finanças' },
+          { label: 'visits.filters.department_hr', value: 'Recursos Humanos' },
+          { label: 'visits.filters.department_admin', value: 'Administração' },
+          { label: 'visits.filters.department_budget', value: 'Orçamento' },
+        ],
+      },
+      {
+        name: 'dataInicial',
+        label: 'visits.filters.date_start',
+        type: 'date',
+      },
+      {
+        name: 'dataFinal',
+        label: 'visits.filters.date_end',
+        type: 'date',
+      },
+    ];
+  }
+
+  private buildTableColumns(): void {
+    this.tableColumns = [
+      { key: 'data', header: 'visits.table.date' },
+      { key: 'visitanteNome', header: 'visits.table.visitor' },
+      { key: 'departamento', header: 'visits.table.department' },
+      { key: 'motivo', header: 'visits.table.reason' },
+      { key: 'duracaoText', header: 'visits.table.duration' },
+      { key: 'acoes', header: 'visits.table.actions', align: 'center', width: '90px' },
+    ];
+  }
+
+  private buildExportActions(): void {
+    this.exportActions = [
+      { key: 'csv', label: 'visits.export.export', icon: 'cloud_download' },
+    ];
   }
 
   private load(): void {
@@ -174,6 +231,7 @@ export class VisitsComponent implements OnInit, OnDestroy {
 
   verDetalhes(row: Visit): void {
     this.selectedVisit = row;
+    console.log('Ver detalhes da visita', row);
     this.showDetailModal = true;
   }
 
