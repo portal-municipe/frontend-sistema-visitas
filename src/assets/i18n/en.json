@@ -1,6 +1,8 @@
 {
   "app": {
-    "brand": { "subtitle": "Visits Control" },
+    "brand": {
+      "subtitle": "Visits Control"
+    },
     "nav": {
       "dashboard": "Dashboard",
       "visits": "Visits",
@@ -50,7 +52,11 @@
       "privacy": "Privacy Policy"
     }
   },
-  "lang": { "label": "Language", "pt": "Portuguese", "en": "English" },
+  "lang": {
+    "label": "Language",
+    "pt": "Portuguese",
+    "en": "English"
+  },
   "dashboard": {
     "kpi": {
       "active_visits": "Active visits",
@@ -103,7 +109,8 @@
     },
     "actions": {
       "new_visit": "New visit",
-      "view_details": "View details"
+      "view_details": "View details",
+      "register_exit": "Register exit"
     },
     "filters": {
       "search_label": "Search",
@@ -141,6 +148,17 @@
         "end": "Check-out time",
         "duration": "Duration"
       }
+    },
+    "active": {
+      "title": "Active Visits",
+      "subtitle": "Visitors currently in the building",
+      "pill_single": "visitor in the building",
+      "pill_plural": "visitors in the building",
+      "list_title": "Visitors list",
+      "list_subtitle": "Visitors that haven't checked out yet",
+      "confirm_message": "Do you confirm you want to register this visitor's exit?",
+      "toast_success_title": "Exit registered successfully!",
+      "toast_success_sub": "{{name}} - Duration: {{duration}}"
     }
   }
 }

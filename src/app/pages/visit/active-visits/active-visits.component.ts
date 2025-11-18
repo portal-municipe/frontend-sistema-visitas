@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { ActiveVisit, FilterConfig, TableColumn } from '@app/core/models';
 
 @Component({
@@ -10,17 +11,17 @@ import { ActiveVisit, FilterConfig, TableColumn } from '@app/core/models';
 export class ActiveVisitsComponent implements OnInit {
   filterForm: FormGroup;
 
-  // filtros dinâmicos
+  // filtros dinâmicos (usam chaves de i18n)
   filterConfig: FilterConfig[] = [
-    { name: 'search', label: 'Pesquisar', type: 'text', placeholder: 'Pesquisar visitante...', class: 'col-span-2' },
+    { name: 'search', label: 'visits.filters.search_label', type: 'text', placeholder: 'visits.filters.search_placeholder', class: 'col-span-2' },
   ];
 
   columns: TableColumn[] = [
-    { key: 'visitante', header: 'Visitante' },
-    { key: 'localizacao', header: 'Localização' },
-    { key: 'motivo', header: 'Motivo' },
-    { key: 'duracao', header: 'Duração', align: 'center', width: '90px' },
-    { key: 'acoes', header: 'Ações', align: 'right', width: '140px' },
+    { key: 'visitante', header: 'visits.table.visitor' },
+    { key: 'localizacao', header: 'visits.table.department' },
+    { key: 'motivo', header: 'visits.table.reason' },
+    { key: 'duracao', header: 'visits.table.duration', align: 'center', width: '90px' },
+    { key: 'acoes', header: 'visits.table.actions', align: 'right', width: '140px' },
   ];
 
   private visits: ActiveVisit[] = [
@@ -60,7 +61,7 @@ export class ActiveVisitsComponent implements OnInit {
   ];
 
   exportActions = [
-    { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
+    { key: 'csv', label: 'visits.export.export', icon: 'cloud_download' },
   ];
 
   // linhas que vão para a tabela (referência estável)
@@ -74,7 +75,7 @@ export class ActiveVisitsComponent implements OnInit {
   showToast = false;
   lastToastMsg = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
@@ -92,7 +93,8 @@ export class ActiveVisitsComponent implements OnInit {
   }
 
   clearFilters(): void {
-    this.filterForm.reset({ q: '' });
+    // corrige reset para o nome correto do controle (search)
+    this.filterForm.reset({ search: '' });
     this.buildRows();
   }
 
@@ -183,9 +185,10 @@ export class ActiveVisitsComponent implements OnInit {
     // rebuild das rows
     this.buildRows();
 
-    // toast
+    // toast: usar i18n com interpolation para o subtítulo
     const dur = this.formatDuration(visit.duracaoMin);
-    this.lastToastMsg = `${visit.nome} - Duração: ${dur}`;
+    // ex: "António Carlos Silva - Duração: 2h 15m"
+    this.lastToastMsg = this.translate.instant('visits.active.toast_success_sub', { name: visit.nome, duration: dur });
     this.showToast = true;
     setTimeout(() => (this.showToast = false), 5000);
 
@@ -201,7 +204,7 @@ export class ActiveVisitsComponent implements OnInit {
   }
 
   exportCSV(): void {
-    // igual ao que já tinhas, mas usando this.rowsView
+    // manter lógica de export existente (adaptar se necessário para usar i18n nos headings)
   }
 
   onPage(e: any) {

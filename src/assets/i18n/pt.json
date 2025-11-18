@@ -1,6 +1,8 @@
 {
   "app": {
-    "brand": { "subtitle": "Controlo de Visitas" },
+    "brand": {
+      "subtitle": "Controlo de Visitas"
+    },
     "nav": {
       "dashboard": "Dashboard",
       "visits": "Visitas",
@@ -50,7 +52,11 @@
       "privacy": "Política de Privacidade"
     }
   },
-  "lang": { "label": "Idioma", "pt": "Português", "en": "Inglês" },
+  "lang": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "Inglês"
+  },
   "dashboard": {
     "kpi": {
       "active_visits": "Visitas ativas",
@@ -103,7 +109,8 @@
     },
     "actions": {
       "new_visit": "Nova visita",
-      "view_details": "Ver detalhes"
+      "view_details": "Ver detalhes",
+      "register_exit": "Registar Saída"
     },
     "filters": {
       "search_label": "Pesquisar",
@@ -141,7 +148,17 @@
         "end": "Hora de saída",
         "duration": "Duração"
       }
+    },
+    "active": {
+      "title": "Visitas Ativas",
+      "subtitle": "Visitantes atualmente no edifício",
+      "pill_single": "visitante no edifício",
+      "pill_plural": "visitantes no edifício",
+      "list_title": "Lista de Visitantes",
+      "list_subtitle": "Visitantes que ainda não registaram saída",
+      "confirm_message": "Confirma que deseja registar a saída deste visitante?",
+      "toast_success_title": "Saída registada com sucesso!",
+      "toast_success_sub": "{{name}} - Duração: {{duration}}"
     }
   }
-
 }
