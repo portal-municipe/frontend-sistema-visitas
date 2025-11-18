@@ -94,7 +94,9 @@
   },
   "common": {
     "clear": "Clear",
-    "close": "Close"
+    "close": "Close",
+    "next": "Next",
+    "back": "Back"
   },
   "table": {
     "empty": {
@@ -159,6 +161,57 @@
       "confirm_message": "Do you confirm you want to register this visitor's exit?",
       "toast_success_title": "Exit registered successfully!",
       "toast_success_sub": "{{name}} - Duration: {{duration}}"
+    },
+    "create": {
+      "title": "Register New Visit",
+      "subtitle": "Record a visitor's entry to the MINFIN building",
+      "toast_success_title": "Visit registered successfully!",
+      "toast_success_sub": "Visitor: {{name}}",
+      "wizard": {
+        "step1": {
+          "title": "Identify Visitor",
+          "sub": "Select or register the visitor"
+        },
+        "step2": {
+          "title": "Visitor Data",
+          "sub": "Confirm personal data"
+        },
+        "step3": {
+          "title": "Visit Details",
+          "sub": "Provide visit information"
+        }
+      },
+      "step1": {
+        "select_title": "Select Visitor",
+        "select_sub": "Search an existing visitor or register a new one",
+        "search_placeholder": "Search by name, document or company…",
+        "doc_label": "Doc",
+        "not_found": "Visitor not found?",
+        "register_new": "Register New Visitor"
+      },
+      "step2": {
+        "confirm_title": "Confirm Visitor Data",
+        "confirm_sub": "Verify the data before proceeding",
+        "selected_tag": "Selected visitor",
+        "new_title": "New Visitor Data",
+        "new_sub": "Fill visitor data to register in the system"
+      },
+      "step3": {
+        "title": "Visit Details",
+        "sub": "Inform destination and reason"
+      },
+      "labels": {
+        "name": "Full name",
+        "document": "Identification document",
+        "phone": "Phone",
+        "company": "Company / Origin",
+        "host": "Host employee",
+        "department": "Destination department",
+        "area": "Area / Room",
+        "reason": "Visit reason",
+        "observations": "Additional notes"
+      },
+      "register_entry": "Register entry"
     }
   }
 }

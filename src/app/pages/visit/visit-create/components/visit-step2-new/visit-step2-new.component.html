@@ -2,26 +2,26 @@
   <div class="block-head">
     <div class="icon-box"><mat-icon>person_add</mat-icon></div>
     <div>
-      <h2>Dados do Novo Visitante</h2>
-      <p>Preencha os dados do visitante para registar no sistema</p>
+      <h2>{{ 'visits.create.step2.new_title' | translate }}</h2>
+      <p>{{ 'visits.create.step2.new_sub' | translate }}</p>
     </div>
   </div>
 
   <form [formGroup]="form" class="form-grid">
     <mat-form-field appearance="legacy">
-      <mat-label>Nome Completo *</mat-label>
+      <mat-label>{{ 'visits.create.labels.name' | translate }} *</mat-label>
       <input matInput formControlName="nome" />
     </mat-form-field>
     <mat-form-field appearance="legacy">
-      <mat-label>Documento de Identificação *</mat-label>
+      <mat-label>{{ 'visits.create.labels.document' | translate }} *</mat-label>
       <input matInput formControlName="documento" />
     </mat-form-field>
     <mat-form-field appearance="legacy">
-      <mat-label>Telefone</mat-label>
+      <mat-label>{{ 'visits.create.labels.phone' | translate }}</mat-label>
       <input matInput formControlName="telefone" />
     </mat-form-field>
     <mat-form-field appearance="legacy">
-      <mat-label>Empresa/Origem</mat-label>
+      <mat-label>{{ 'visits.create.labels.company' | translate }}</mat-label>
       <input matInput formControlName="empresa" />
     </mat-form-field>
   </form>
@@ -29,10 +29,10 @@
   <footer class="footer-actions">
     <button mat-stroked-button class="btn-back" (click)="back.emit()">
       <mat-icon>arrow_back</mat-icon>
-      Voltar
+      {{ 'common.back' | translate }}
     </button>
     <button mat-raised-button color="primary" (click)="onNext()">
-      Próximo
+      {{ 'common.next' | translate }}
       <mat-icon>arrow_forward</mat-icon>
     </button>
   </footer>

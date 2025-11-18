@@ -94,7 +94,9 @@
   },
   "common": {
     "clear": "Limpar",
-    "close": "Fechar"
+    "close": "Fechar",
+    "next": "Próximo",
+    "back": "Voltar"
   },
   "table": {
     "empty": {
@@ -159,6 +161,57 @@
       "confirm_message": "Confirma que deseja registar a saída deste visitante?",
       "toast_success_title": "Saída registada com sucesso!",
       "toast_success_sub": "{{name}} - Duração: {{duration}}"
+    },
+    "create": {
+      "title": "Cadastrar Nova Visita",
+      "subtitle": "Registe a entrada de um visitante no edifício do MINFIN",
+      "toast_success_title": "Visita registada com sucesso!",
+      "toast_success_sub": "Visitante: {{name}}",
+      "wizard": {
+        "step1": {
+          "title": "Identificar Visitante",
+          "sub": "Selecione ou registe o visitante"
+        },
+        "step2": {
+          "title": "Dados do Visitante",
+          "sub": "Confirme os dados pessoais"
+        },
+        "step3": {
+          "title": "Detalhes da Visita",
+          "sub": "Informe os dados da visita"
+        }
+      },
+      "step1": {
+        "select_title": "Selecionar Visitante",
+        "select_sub": "Procure um visitante existente no sistema ou registe um novo",
+        "search_placeholder": "Pesquisar por nome, documento ou empresa…",
+        "doc_label": "Doc",
+        "not_found": "Visitante não encontrado?",
+        "register_new": "Registar Novo Visitante"
+      },
+      "step2": {
+        "confirm_title": "Confirmar Dados do Visitante",
+        "confirm_sub": "Verifique se os dados estão corretos antes de prosseguir",
+        "selected_tag": "Visitante Selecionado",
+        "new_title": "Dados do Novo Visitante",
+        "new_sub": "Preencha os dados do visitante para registar no sistema"
+      },
+      "step3": {
+        "title": "Detalhes da Visita",
+        "sub": "Informe os dados sobre o destino e o motivo da visita"
+      },
+      "labels": {
+        "name": "Nome Completo",
+        "document": "Documento de Identificação",
+        "phone": "Telefone",
+        "company": "Empresa/Origem",
+        "host": "Funcionário Anfitrião",
+        "department": "Departamento de Destino",
+        "area": "Área/Sala",
+        "reason": "Motivo da Visita",
+        "observations": "Observações Adicionais"
+      },
+      "register_entry": "Registar Entrada"
     }
   }
 }
