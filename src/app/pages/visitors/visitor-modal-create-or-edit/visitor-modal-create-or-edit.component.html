@@ -1,12 +1,17 @@
 <!-- src/app/features/visitors/visitor-modal/visitor-modal.component.html -->
-<div class="modal">
+<div class="backdrop" (click)="onClose()"></div>
+
+<div class="visitor-modal">
   <div class="modal-head">
     <h3>{{ form.value.id ? 'Editar Visitante' : 'Novo Visitante' }}</h3>
     <button mat-icon-button (click)="onClose()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <p class="modal-sub">Preencha os dados para registar um novo visitante</p>
+
+  <p class="modal-sub">
+    Preencha os dados para registar um novo visitante
+  </p>
 
   <form [formGroup]="form" class="modal-form">
     <mat-form-field appearance="legacy" class="full">

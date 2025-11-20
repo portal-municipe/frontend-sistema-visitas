@@ -83,7 +83,7 @@ export class VisitorsComponent implements OnInit {
   successMessage = '';
   successSub = '';
 
-  constructor(private fb: FormBuilder, private translate: TranslateService) {}
+  constructor(private fb: FormBuilder, private translate: TranslateService) { }
 
   get totalRegistados() {
     return this.visitors.length;
@@ -94,10 +94,15 @@ export class VisitorsComponent implements OnInit {
 
     this.buildRows();
 
-    this.filterForm.get('search')!.valueChanges.subscribe(() => {
-      this.buildRows();
-    });
+    const searchControl = this.filterForm.get('search');
+
+    if (searchControl) {
+      searchControl.valueChanges.subscribe(() => {
+        this.buildRows();
+      });
+    }
   }
+
 
   buildRows() {
     const searchValue = this.filterForm.value.search;
@@ -106,10 +111,10 @@ export class VisitorsComponent implements OnInit {
     const filtered = !text
       ? this.visitors
       : this.visitors.filter(v =>
-          v.nome.toLowerCase().includes(text) ||
-          v.empresa.toLowerCase().includes(text) ||
-          v.telefone.toLowerCase().includes(text)
-        );
+        v.nome.toLowerCase().includes(text) ||
+        v.empresa.toLowerCase().includes(text) ||
+        v.telefone.toLowerCase().includes(text)
+      );
 
     this.rows = filtered.map(v => ({
       ...v,
