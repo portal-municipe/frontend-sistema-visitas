@@ -1,44 +1,80 @@
 <!-- src/app/features/visitors/visitor-modal/visitor-modal.component.html -->
-<div class="backdrop" (click)="onClose()"></div>
-
-<div class="visitor-modal">
+<div class="modal">
   <div class="modal-head">
-    <h3>{{ form.value.id ? 'Editar Visitante' : 'Novo Visitante' }}</h3>
+    <h3>
+      {{
+        form.value.id
+          ? ('visitors.modal.edit_title' | translate)
+          : ('visitors.modal.create_title' | translate)
+      }}
+    </h3>
+
     <button mat-icon-button (click)="onClose()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
 
   <p class="modal-sub">
-    Preencha os dados para registar um novo visitante
+    {{ 'visitors.modal.subtitle' | translate }}
   </p>
 
   <form [formGroup]="form" class="modal-form">
     <mat-form-field appearance="legacy" class="full">
-      <mat-label>Nome Completo *</mat-label>
-      <input matInput formControlName="nome" placeholder="Nome completo do visitante" />
+      <mat-label>
+        {{ 'visitors.modal.labels.name' | translate }}
+      </mat-label>
+      <input
+        matInput
+        formControlName="nome"
+        [placeholder]="'visitors.modal.labels.name' | translate"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="legacy" class="full">
-      <mat-label>Documento de Identificação *</mat-label>
-      <input matInput formControlName="documento" placeholder="Ex: 004567890LA045" />
+      <mat-label>
+        {{ 'visitors.modal.labels.document' | translate }}
+      </mat-label>
+      <input
+        matInput
+        formControlName="documento"
+        [placeholder]="'visitors.modal.labels.document' | translate"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="legacy" class="full">
-      <mat-label>Telefone</mat-label>
-      <input matInput formControlName="telefone" placeholder="+244 9XX XXX XXX" />
+      <mat-label>
+        {{ 'visitors.modal.labels.phone' | translate }}
+      </mat-label>
+      <input
+        matInput
+        formControlName="telefone"
+        [placeholder]="'visitors.modal.labels.phone' | translate"
+      />
     </mat-form-field>
 
     <mat-form-field appearance="legacy" class="full">
-      <mat-label>Empresa/Origem</mat-label>
-      <input matInput formControlName="empresa" placeholder="Nome da empresa" />
+      <mat-label>
+        {{ 'visitors.modal.labels.company' | translate }}
+      </mat-label>
+      <input
+        matInput
+        formControlName="empresa"
+        [placeholder]="'visitors.modal.labels.company' | translate"
+      />
     </mat-form-field>
   </form>
 
   <div class="modal-actions">
-    <button mat-button class="ghost" (click)="onClose()">Cancelar</button>
+    <button mat-button class="ghost" (click)="onClose()">
+      {{ 'visitors.modal.actions.cancel' | translate }}
+    </button>
+
     <button mat-button class="dark" (click)="onSubmit()">
-      {{ form.value.id ? 'Guardar' : 'Registar' }}
+      {{
+        form.value.id
+          ? ('visitors.modal.actions.save' | translate)
+          : ('visitors.modal.actions.create' | translate)
+      }}
     </button>
   </div>
 </div>
