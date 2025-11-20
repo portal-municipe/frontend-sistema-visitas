@@ -213,5 +213,56 @@
       },
       "register_entry": "Registar Entrada"
     }
+  },
+  "visitors": {
+    "page": {
+      "title": "Gestão de Visitantes",
+      "subtitle": "Registe e faça a gestão de todos os visitantes do edifício"
+    },
+    "list": {
+      "title": "Lista de Visitantes",
+      "subtitle": "Total de {{total}} visitantes registados"
+    },
+    "actions": {
+      "new_visitor": "Novo Visitante",
+      "edit": "Editar",
+      "delete": "Excluir"
+    },
+    "filters": {
+      "search_label": "Pesquisar",
+      "search_placeholder": "Pesquisar visitante..."
+    },
+    "table": {
+      "name": "Nome",
+      "company": "Empresa / Origem",
+      "phone": "Telefone",
+      "total_visits": "Total de visitas",
+      "last_visit": "Última visita",
+      "actions": "Ações"
+    },
+    "modal": {
+      "create_title": "Novo Visitante",
+      "edit_title": "Editar Visitante",
+      "subtitle": "Preencha os dados para registar um visitante",
+      "labels": {
+        "name": "Nome Completo *",
+        "document": "Documento de Identificação *",
+        "phone": "Telefone",
+        "company": "Empresa/Origem"
+      },
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "create": "Registar"
+      }
+    },
+    "toast": {
+      "created_title": "Visitante registado!",
+      "updated_title": "Visitante atualizado!",
+      "sub": "{{name}}"
+    },
+    "export": {
+      "export": "Exportar"
+    }
   }
 }

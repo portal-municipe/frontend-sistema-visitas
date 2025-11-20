@@ -213,5 +213,56 @@
       },
       "register_entry": "Register entry"
     }
+  },
+  "visitors": {
+    "page": {
+      "title": "Visitors management",
+      "subtitle": "Register and manage all visitors of the building"
+    },
+    "list": {
+      "title": "Visitors list",
+      "subtitle": "Total of {{total}} registered visitors"
+    },
+    "actions": {
+      "new_visitor": "New visitor",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "search_label": "Search",
+      "search_placeholder": "Search visitor..."
+    },
+    "table": {
+      "name": "Name",
+      "company": "Company / Origin",
+      "phone": "Phone",
+      "total_visits": "Total visits",
+      "last_visit": "Last visit",
+      "actions": "Actions"
+    },
+    "modal": {
+      "create_title": "New visitor",
+      "edit_title": "Edit visitor",
+      "subtitle": "Fill in the data to register a visitor",
+      "labels": {
+        "name": "Full name *",
+        "document": "Identification document *",
+        "phone": "Phone",
+        "company": "Company / Origin"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "create": "Register"
+      }
+    },
+    "toast": {
+      "created_title": "Visitor registered!",
+      "updated_title": "Visitor updated!",
+      "sub": "{{name}}"
+    },
+    "export": {
+      "export": "Export"
+    }
   }
 }

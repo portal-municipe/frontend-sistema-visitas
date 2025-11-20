@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterConfig, Visitor } from '@app/core/models/index';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-visitors',
@@ -11,23 +12,66 @@ export class VisitorsComponent implements OnInit {
   filterForm: FormGroup;
 
   filterConfig: FilterConfig[] = [
-    { name: 'search', label: 'Pesquisar', type: 'text', placeholder: 'Pesquisar visitante...', class: 'col-span-2' },
+    {
+      name: 'search',
+      label: 'visitors.filters.search_label',
+      type: 'text',
+      placeholder: 'visitors.filters.search_placeholder',
+      class: 'col-span-2',
+    },
   ];
 
   columns = [
-    { key: 'nome', header: 'Nome' },
-    { key: 'empresa', header: 'Empresa' },
-    { key: 'telefone', header: 'Telefone' },
-    { key: 'totalVisitas', header: 'Total Visitas', align: 'center' },
-    { key: 'ultimaVisita', header: 'Última Visita' },
-    { key: 'acoes', header: 'Ações', align: 'right', width: '120px' },
+    { key: 'nome', header: 'visitors.table.name' },
+    { key: 'empresa', header: 'visitors.table.company' },
+    { key: 'telefone', header: 'visitors.table.phone' },
+    { key: 'totalVisitas', header: 'visitors.table.total_visits', align: 'center' },
+    { key: 'ultimaVisita', header: 'visitors.table.last_visit' },
+    { key: 'acoes', header: 'visitors.table.actions', align: 'right', width: '120px' },
   ];
 
-  visitors: Visitor[] = [{ id: 1, nome: 'António Carlos Silva', documento: '004567890LA045', empresa: 'Banco Nacional de Angola', telefone: '+244 923 456 789', totalVisitas: 12, ultimaVisita: '28/10/2024', }, { id: 2, nome: 'Maria Santos Costa', documento: '005678901LA046', empresa: 'Sonangol EP', telefone: '+244 924 567 890', totalVisitas: 8, ultimaVisita: '27/10/2024', }, { id: 3, nome: 'Pedro Manuel Neto', documento: '006789012LA047', empresa: 'TAAG Linhas Aéreas', telefone: '+244 925 678 901', totalVisitas: 5, ultimaVisita: '26/10/2024', }, { id: 4, nome: 'Ana Paula Rodrigues', documento: '007890123LA048', empresa: 'Ministério do Plano', telefone: '+244 926 789 012', totalVisitas: 15, ultimaVisita: '25/10/2024', }, ];
+  visitors: Visitor[] = [
+    {
+      id: 1,
+      nome: 'António Carlos Silva',
+      documento: '004567890LA045',
+      empresa: 'Banco Nacional de Angola',
+      telefone: '+244 923 456 789',
+      totalVisitas: 12,
+      ultimaVisita: '28/10/2024',
+    },
+    {
+      id: 2,
+      nome: 'Maria Santos Costa',
+      documento: '005678901LA046',
+      empresa: 'Sonangol EP',
+      telefone: '+244 924 567 890',
+      totalVisitas: 8,
+      ultimaVisita: '27/10/2024',
+    },
+    {
+      id: 3,
+      nome: 'Pedro Manuel Neto',
+      documento: '006789012LA047',
+      empresa: 'TAAG Linhas Aéreas',
+      telefone: '+244 925 678 901',
+      totalVisitas: 5,
+      ultimaVisita: '26/10/2024',
+    },
+    {
+      id: 4,
+      nome: 'Ana Paula Rodrigues',
+      documento: '007890123LA048',
+      empresa: 'Ministério do Plano',
+      telefone: '+244 926 789 012',
+      totalVisitas: 15,
+      ultimaVisita: '25/10/2024',
+    },
+  ];
   rows: any[] = [];
 
   exportActions = [
-    { key: 'csv', label: 'Exportar', icon: 'cloud_download' },
+    { key: 'csv', label: 'visitors.export.export', icon: 'cloud_download' },
   ];
 
   // modal
@@ -39,7 +83,7 @@ export class VisitorsComponent implements OnInit {
   successMessage = '';
   successSub = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private translate: TranslateService) {}
 
   get totalRegistados() {
     return this.visitors.length;
@@ -50,31 +94,28 @@ export class VisitorsComponent implements OnInit {
 
     this.buildRows();
 
-    this.filterForm.get('search').valueChanges.subscribe(() => {
+    this.filterForm.get('search')!.valueChanges.subscribe(() => {
       this.buildRows();
     });
   }
 
   buildRows() {
     const searchValue = this.filterForm.value.search;
-    const text = searchValue
-      ? searchValue.trim().toLowerCase()
-      : '';
+    const text = searchValue ? searchValue.trim().toLowerCase() : '';
 
     const filtered = !text
       ? this.visitors
       : this.visitors.filter(v =>
-        v.nome.toLowerCase().includes(text) ||
-        v.empresa.toLowerCase().includes(text) ||
-        v.telefone.toLowerCase().includes(text)
-      );
+          v.nome.toLowerCase().includes(text) ||
+          v.empresa.toLowerCase().includes(text) ||
+          v.telefone.toLowerCase().includes(text)
+        );
 
     this.rows = filtered.map(v => ({
       ...v,
-      acoes: v
+      acoes: v,
     }));
   }
-
 
   initials(nome: string) {
     const p = nome.split(' ');
@@ -84,7 +125,6 @@ export class VisitorsComponent implements OnInit {
 
     return (first + second).toUpperCase();
   }
-
 
   clearFilters() {
     this.filterForm.reset({ search: '' });
@@ -107,21 +147,24 @@ export class VisitorsComponent implements OnInit {
   }
 
   exportCSV(): void {
-    // igual ao que já tinhas, mas usando this.rowsView
+    // igual ao que já tinhas, mas usando this.rows
   }
 
   saveVisitor(data: Visitor) {
     if (!data.id) {
       data.id = this.visitors.length + 1;
       this.visitors.push(data);
-      this.successMessage = 'Visitante registado!';
+      this.successMessage = this.translate.instant('visitors.toast.created_title');
     } else {
       const idx = this.visitors.findIndex(v => v.id === data.id);
       this.visitors[idx] = data;
-      this.successMessage = 'Visitante atualizado!';
+      this.successMessage = this.translate.instant('visitors.toast.updated_title');
     }
 
-    this.successSub = data.nome;
+    this.successSub = this.translate.instant('visitors.toast.sub', {
+      name: data.nome,
+    });
+
     this.showSuccess = true;
     setTimeout(() => (this.showSuccess = false), 5000);
 
@@ -140,5 +183,8 @@ export class VisitorsComponent implements OnInit {
       this.buildRows();
     }
   }
-}
 
+  onPage(e: any) {
+    // paginação se precisares
+  }
+}
