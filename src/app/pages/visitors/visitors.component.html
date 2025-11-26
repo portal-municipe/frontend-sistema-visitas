@@ -1,108 +1,127 @@
 <div class="visitors-shell" [class.dimmed]="showModal">
 
-    <!-- TOAST PADRÃO -->
-    <div class="toast" *ngIf="showSuccess">
-        <mat-icon>check_circle</mat-icon>
-        <div>
-            <div class="t-title">{{ successMessage }}</div>
-            <div class="t-sub">{{ successSub }}</div>
-        </div>
+  <!-- TOAST PADRÃO -->
+  <div class="toast" *ngIf="showSuccess">
+    <mat-icon>check_circle</mat-icon>
+    <div>
+      <div class="t-title">{{ successMessage }}</div>
+      <div class="t-sub">{{ successSub }}</div>
+    </div>
+  </div>
+
+  <!-- HEADER PADRÃO -->
+  <div class="header-row">
+    <div>
+      <h1>{{ 'visitors.page.title' | translate }}</h1>
+      <p>{{ 'visitors.page.subtitle' | translate }}</p>
     </div>
 
-    <!-- HEADER PADRÃO -->
-    <div class="header-row">
-        <div>
-            <h1>Gestão de Visitantes</h1>
-            <p>Registe e gerencie todos os visitantes do edifício</p>
-        </div>
+    <button mat-raised-button color="primary" (click)="openNew()">
+      {{ 'visitors.actions.new_visitor' | translate }}
+    </button>
+  </div>
 
-        <button mat-raised-button color="primary" (click)="openNew()">
-            Novo Visitante
+  <!-- BOX PRINCIPAL -->
+  <div class="box">
+    <div class="box-head">
+      <div class="title-left">
+        <div class="round-icon">
+          <mat-icon>list</mat-icon>
+        </div>
+        <div>
+          <h2>{{ 'visitors.list.title' | translate }}</h2>
+          <p>
+            {{ 'visitors.list.subtitle' | translate:{ total: totalRegistados } }}
+          </p>
+        </div>
+      </div>
+
+      <app-export
+        [actions]="exportActions"
+        [disabled]="!rows.length"
+        (action)="onExport($event)">
+      </app-export>
+    </div>
+
+    <!-- FILTROS -->
+    <app-filters
+      [form]="filterForm"
+      [config]="filterConfig"
+      (clear)="clearFilters()">
+    </app-filters>
+
+    <!-- TABELA PADRÃO -->
+    <app-table
+      class="visitors-table"
+      [data]="rows"
+      [columns]="columns"
+      (cellAction)="onTableAction($event)">
+
+      <!-- Nome -->
+      <ng-template appTableCell="nome" let-row>
+        <div class="td col-nome">
+          <div class="avatar">{{ initials(row.nome) }}</div>
+          <div class="v-stack">
+            <div class="name">{{ row.nome }}</div>
+            <div class="sub">{{ row.documento }}</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Empresa -->
+      <ng-template appTableCell="empresa" let-row>
+        <span>{{ row.empresa }}</span>
+      </ng-template>
+
+      <!-- Telefone -->
+      <ng-template appTableCell="telefone" let-row>
+        <span>{{ row.telefone }}</span>
+      </ng-template>
+
+      <!-- Total visitas -->
+      <ng-template appTableCell="totalVisitas" let-row>
+        <span class="badge">{{ row.totalVisitas }}</span>
+      </ng-template>
+
+      <!-- Última visita -->
+      <ng-template appTableCell="ultimaVisita" let-row>
+        <span>{{ row.ultimaVisita }}</span>
+      </ng-template>
+
+      <!-- AÇÕES PADRÃO -->
+      <ng-template appTableCell="acoes" let-row let-col="col" let-table="table">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-    </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="table.onCellAction('edit', row)">
+            <mat-icon>edit</mat-icon>
+            <span>{{ 'visitors.actions.edit' | translate }}</span>
+          </button>
+          <button mat-menu-item (click)="table.onCellAction('delete', row)">
+            <mat-icon>delete</mat-icon>
+            <span>{{ 'visitors.actions.delete' | translate }}</span>
+          </button>
+        </mat-menu>
+      </ng-template>
 
-    <!-- BOX PRINCIPAL -->
-    <div class="box">
-        <div class="box-head">
-            <div class="title-left">
-                <div class="round-icon">
-                    <mat-icon>list</mat-icon>
-                </div>
-                <div>
-                    <h2>Lista de Visitantes</h2>
-                    <p>Total de {{ totalRegistados }} visitantes registados</p>
-                </div>
-            </div>
+    </app-table>
 
-            <app-export [actions]="exportActions" [disabled]="!rows.length" (action)="onExport($event)">
-            </app-export>
-        </div>
+    <!-- Paginação -->
+    <app-pagination
+      [length]="totalRegistados"
+      [pageSize]="10"
+      [pageSizeOptions]="[5,10,20]"
+      (page)="onPage($event)">
+    </app-pagination>
+  </div>
 
-        <!-- FILTROS -->
-        <app-filters [form]="filterForm" [config]="filterConfig" (clear)="clearFilters()">
-        </app-filters>
-
-        <!-- TABELA PADRÃO -->
-        <app-table class="visitors-table" [data]="rows" [columns]="columns" (cellAction)="onTableAction($event)">
-
-            <!-- Nome -->
-            <ng-template appTableCell="nome" let-row>
-                <div class="td col-nome">
-                    <div class="avatar">{{ initials(row.nome) }}</div>
-                    <div class="v-stack">
-                        <div class="name">{{ row.nome }}</div>
-                        <div class="sub">{{ row.documento }}</div>
-                    </div>
-                </div>
-            </ng-template>
-
-            <!-- Empresa -->
-            <ng-template appTableCell="empresa" let-row>
-                <span>{{ row.empresa }}</span>
-            </ng-template>
-
-            <!-- Telefone -->
-            <ng-template appTableCell="telefone" let-row>
-                <span>{{ row.telefone }}</span>
-            </ng-template>
-
-            <!-- Total visitas -->
-            <ng-template appTableCell="totalVisitas" let-row>
-                <span class="badge">{{ row.totalVisitas }}</span>
-            </ng-template>
-
-            <!-- Última visita -->
-            <ng-template appTableCell="ultimaVisita" let-row>
-                <span>{{ row.ultimaVisita }}</span>
-            </ng-template>
-
-            <!-- AÇÕES PADRÃO -->
-            <ng-template appTableCell="acoes" let-row let-col="col" let-table="table">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="table.onCellAction('edit', row)">
-                        <mat-icon>edit</mat-icon>
-                        Editar
-                    </button>
-                    <button mat-menu-item (click)="table.onCellAction('delete', row)">
-                        <mat-icon>delete</mat-icon>
-                        Excluir
-                    </button>
-                </mat-menu>
-            </ng-template>
-
-        </app-table>
-
-        <!-- Paginação se quiser -->
-        <app-pagination [length]="totalRegistados" [pageSize]="10" [pageSizeOptions]="[5,10,20]"
-            (page)="onPage($event)">
-        </app-pagination>
-    </div>
-
-    <!-- MODAL -->
-    <app-visitor-modal *ngIf="showModal" [visitor]="editing" (close)="closeModal()" (save)="saveVisitor($event)">
-    </app-visitor-modal>
+  <!-- MODAL -->
+  <app-visitor-modal
+    *ngIf="showModal"
+    [visitor]="editing"
+    (close)="closeModal()"
+    (save)="saveVisitor($event)">
+  </app-visitor-modal>
 
 </div>

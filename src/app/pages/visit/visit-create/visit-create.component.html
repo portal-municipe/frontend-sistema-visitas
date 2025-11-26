@@ -5,14 +5,14 @@
       <mat-icon>check_circle</mat-icon>
     </div>
     <div>
-      <div class="toast-title">Visita registada com sucesso!</div>
-      <div class="toast-sub">Visitante: {{ selectedVisitor?.nome }}</div>
+      <div class="toast-title">{{ 'visits.create.toast_success_title' | translate }}</div>
+      <div class="toast-sub">{{ 'visits.create.toast_success_sub' | translate:{ name: selectedVisitor?.nome } }}</div>
     </div>
   </div>
 
   <header class="page-head">
-    <h1>Cadastrar Nova Visita</h1>
-    <p>Registe a entrada de um visitante no edifício do MINFIN</p>
+    <h1>{{ 'visits.create.title' | translate }}</h1>
+    <p>{{ 'visits.create.subtitle' | translate }}</p>
   </header>
 
   <!-- wizard -->
@@ -23,8 +23,8 @@
         <mat-icon *ngIf="step > 1">check</mat-icon>
       </div>
       <div class="wizard-text">
-        <div class="wizard-title">Identificar Visitante</div>
-        <div class="wizard-sub">Selecione ou registe o visitante</div>
+        <div class="wizard-title">{{ 'visits.create.wizard.step1.title' | translate }}</div>
+        <div class="wizard-sub">{{ 'visits.create.wizard.step1.sub' | translate }}</div>
       </div>
     </div>
     <div class="wizard-line" [class.done]="step > 1"></div>
@@ -34,16 +34,16 @@
         <mat-icon *ngIf="step > 2">check</mat-icon>
       </div>
       <div class="wizard-text">
-        <div class="wizard-title">Dados do Visitante</div>
-        <div class="wizard-sub">Confirme os dados pessoais</div>
+        <div class="wizard-title">{{ 'visits.create.wizard.step2.title' | translate }}</div>
+        <div class="wizard-sub">{{ 'visits.create.wizard.step2.sub' | translate }}</div>
       </div>
     </div>
     <div class="wizard-line" [class.done]="step > 2"></div>
     <div class="wizard-step" [class.active]="step === 3">
       <div class="wizard-circle"><span>3</span></div>
       <div class="wizard-text">
-        <div class="wizard-title">Detalhes da Visita</div>
-        <div class="wizard-sub">Informe os dados da visita</div>
+        <div class="wizard-title">{{ 'visits.create.wizard.step3.title' | translate }}</div>
+        <div class="wizard-sub">{{ 'visits.create.wizard.step3.sub' | translate }}</div>
       </div>
     </div>
   </div>

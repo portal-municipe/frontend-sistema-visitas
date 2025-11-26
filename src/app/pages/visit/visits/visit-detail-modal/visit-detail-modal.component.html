@@ -1,56 +1,64 @@
-<div class="modal">
+<!-- src/app/features/visits/visit-detail-modal/visit-detail-modal.component.html -->
+
+<div class="backdrop" (click)="onClose()"></div>
+
+<div class="visit-detail-modal">
   <div class="modal-head">
-    <h3>Detalhes da Visita</h3>
+    <h3>{{ 'visits.detail.title' | translate }}</h3>
     <button mat-icon-button (click)="onClose()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
 
-  <p class="modal-sub">Informações completas sobre a visita seleccionada</p>
+  <p class="modal-sub">
+    {{ 'visits.detail.subtitle' | translate }}
+  </p>
 
   <div class="detail-grid">
     <div class="detail-item">
-      <span class="label">Visitante:</span>
+      <span class="label">{{ 'visits.detail.fields.visitor' | translate }}</span>
       <span class="value">{{ visit?.visitanteNome }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Anfitrião:</span>
+      <span class="label">{{ 'visits.detail.fields.host' | translate }}</span>
       <span class="value">{{ visit?.anfitriao || '—' }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Departamento:</span>
+      <span class="label">{{ 'visits.detail.fields.department' | translate }}</span>
       <span class="value">{{ visit?.departamento }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Motivo:</span>
+      <span class="label">{{ 'visits.detail.fields.reason' | translate }}</span>
       <span class="value">{{ visit?.motivo }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Data:</span>
+      <span class="label">{{ 'visits.detail.fields.date' | translate }}</span>
       <span class="value">{{ visit?.data }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Hora de Entrada:</span>
+      <span class="label">{{ 'visits.detail.fields.start' | translate }}</span>
       <span class="value">{{ visit?.entrada || '—' }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Hora de Saída:</span>
+      <span class="label">{{ 'visits.detail.fields.end' | translate }}</span>
       <span class="value">{{ visit?.saida || '—' }}</span>
     </div>
 
     <div class="detail-item">
-      <span class="label">Duração:</span>
+      <span class="label">{{ 'visits.detail.fields.duration' | translate }}</span>
       <span class="value">{{ formatDuracao(visit?.duracaoMin) }}</span>
     </div>
   </div>
 
   <div class="modal-actions">
-    <button mat-button class="dark" (click)="onClose()">Fechar</button>
+    <button mat-button class="dark" (click)="onClose()">
+      {{ 'common.close' | translate }}
+    </button>
   </div>
 </div>

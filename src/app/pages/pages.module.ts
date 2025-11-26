@@ -7,7 +7,6 @@ import { VisitsComponent } from './visit/visits/visits.component';
 import { VisitorsComponent } from './visitors/visitors.component';
 import { UsersComponent } from './user/users/users.component';
 import { MaterialModule } from '@app/material.module';
-import { AppFiltersComponent, AppListComponent } from '@app/shared/components';
 import { SharedModule } from '@app/shared/shared.module';
 import { VisitCreateComponent } from './visit/visit-create/visit-create.component';
 import { VisitStep1SelectComponent } from './visit/visit-create/components/visit-step1-select/visit-step1-select.component';

@@ -1,15 +1,32 @@
-.modal {
+/* src/app/features/visits/visit-detail-modal/visit-detail-modal.component.scss */
+
+:host {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  z-index: 1300; // acima de qualquer coisa do Material
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* fundo escuro */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+/* cartão da modal */
+.visit-detail-modal {
+  position: relative;
   background: #fff;
   border-radius: 16px;
   width: 480px;
   max-width: 95%;
   padding: 20px;
   box-shadow: 0 25px 55px rgba(0, 0, 0, 0.18);
-  z-index: 1100;
+  z-index: 1;
 }
 
 .modal-head {

@@ -1,30 +1,33 @@
-<!-- src/app/shared/components/filters/filters.component.html -->
 <div class="filters" *ngIf="form && config?.length">
   <ng-container *ngFor="let field of config; trackBy: trackByName">
 
     <!-- TEXT -->
     <mat-form-field *ngIf="field.type === 'text'" [ngClass]="field.class">
-      <mat-label>{{ field.label }}</mat-label>
-      <input matInput [placeholder]="field.placeholder" [formControl]="form.controls[field.name]">
+      <mat-label>{{ field.label | translate }}</mat-label>
+      <input matInput [placeholder]="field.placeholder ? (field.placeholder | translate) : ''"
+        [formControl]="form.controls[field.name]">
     </mat-form-field>
 
     <!-- DATE -->
     <mat-form-field *ngIf="field.type === 'date'" [ngClass]="field.class">
-      <mat-label>{{ field.label }}</mat-label>
-      <input matInput type="date" [placeholder]="field.placeholder" [formControl]="form.controls[field.name]">
+      <mat-label>{{ field.label | translate }}</mat-label>
+      <input matInput type="date" [placeholder]="field.placeholder ? (field.placeholder | translate) : ''"
+        [formControl]="form.controls[field.name]">
     </mat-form-field>
 
     <!-- SELECT -->
     <mat-form-field *ngIf="field.type === 'select'" [ngClass]="field.class">
-      <mat-label>{{ field.label }}</mat-label>
+      <mat-label>{{ field.label | translate }}</mat-label>
       <mat-select [formControl]="form.controls[field.name]">
         <mat-option *ngFor="let opt of field.options" [value]="opt.value">
-          {{ opt.label }}
+          {{ opt.label | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
   </ng-container>
 
-  <button *ngIf="showClear" mat-button type="button" (click)="onClear()">Limpar</button>
+  <button *ngIf="showClear" mat-button type="button" (click)="onClear()">
+    {{ 'common.clear' | translate }}
+  </button>
 </div>

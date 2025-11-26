@@ -1,13 +1,7 @@
-<!-- src/app/shared/components/export/export.component.html -->
 <div class="actions" *ngIf="actions?.length">
-  <button
-    *ngFor="let a of actions"
-    mat-stroked-button
-    type="button"
-    (click)="onClick(a.key)"
-    [disabled]="disabled">
+  <button *ngFor="let a of actions" mat-stroked-button type="button" (click)="onClick(a.key)" [disabled]="disabled">
     <mat-icon *ngIf="a.icon">{{ a.icon }}</mat-icon>
     <span *ngIf="a.icon">&nbsp;</span>
-    {{ a.label }}
+    {{ a.label | translate }}
   </button>
 </div>

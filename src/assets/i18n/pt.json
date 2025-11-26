@@ -1,6 +1,8 @@
 {
   "app": {
-    "brand": { "subtitle": "Controlo de Visitas" },
+    "brand": {
+      "subtitle": "Controlo de Visitas"
+    },
     "nav": {
       "dashboard": "Dashboard",
       "visits": "Visitas",
@@ -50,7 +52,11 @@
       "privacy": "Política de Privacidade"
     }
   },
-  "lang": { "label": "Idioma", "pt": "Português", "en": "Inglês" },
+  "lang": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "Inglês"
+  },
   "dashboard": {
     "kpi": {
       "active_visits": "Visitas ativas",
@@ -81,9 +87,182 @@
     },
     "host": "Anfitrião"
   },
-   "topbar": {
+  "topbar": {
     "title": "Visão geral do sistema de controlo de presença",
     "login": "Entrar",
     "logout": "Sair"
+  },
+  "common": {
+    "clear": "Limpar",
+    "close": "Fechar",
+    "next": "Próximo",
+    "back": "Voltar"
+  },
+  "table": {
+    "empty": {
+      "title": "Sem dados",
+      "desc": "Não foram encontrados registos."
+    }
+  },
+  "visits": {
+    "list": {
+      "title": "Lista de Visitas",
+      "subtitle": "Total de {{total}} visitas encontradas"
+    },
+    "actions": {
+      "new_visit": "Nova visita",
+      "view_details": "Ver detalhes",
+      "register_exit": "Registar Saída"
+    },
+    "filters": {
+      "search_label": "Pesquisar",
+      "search_placeholder": "Pesquisar...",
+      "department": "Departamento",
+      "department_all": "Todos",
+      "department_finance": "Finanças",
+      "department_hr": "Recursos Humanos",
+      "department_admin": "Administração",
+      "department_budget": "Orçamento",
+      "date_start": "Data inicial",
+      "date_end": "Data final"
+    },
+    "export": {
+      "export": "Exportar"
+    },
+    "table": {
+      "date": "Data",
+      "visitor": "Visitante",
+      "department": "Departamento",
+      "reason": "Motivo",
+      "duration": "Duração",
+      "actions": "Ações"
+    },
+    "detail": {
+      "title": "Detalhes da Visita",
+      "subtitle": "Informações completas sobre a visita seleccionada",
+      "fields": {
+        "visitor": "Visitante",
+        "host": "Anfitrião",
+        "department": "Departamento",
+        "reason": "Motivo",
+        "date": "Data",
+        "start": "Hora de entrada",
+        "end": "Hora de saída",
+        "duration": "Duração"
+      }
+    },
+    "active": {
+      "title": "Visitas Ativas",
+      "subtitle": "Visitantes atualmente no edifício",
+      "pill_single": "visitante no edifício",
+      "pill_plural": "visitantes no edifício",
+      "list_title": "Lista de Visitantes",
+      "list_subtitle": "Visitantes que ainda não registaram saída",
+      "confirm_message": "Confirma que deseja registar a saída deste visitante?",
+      "toast_success_title": "Saída registada com sucesso!",
+      "toast_success_sub": "{{name}} - Duração: {{duration}}"
+    },
+    "create": {
+      "title": "Cadastrar Nova Visita",
+      "subtitle": "Registe a entrada de um visitante no edifício do MINFIN",
+      "toast_success_title": "Visita registada com sucesso!",
+      "toast_success_sub": "Visitante: {{name}}",
+      "wizard": {
+        "step1": {
+          "title": "Identificar Visitante",
+          "sub": "Selecione ou registe o visitante"
+        },
+        "step2": {
+          "title": "Dados do Visitante",
+          "sub": "Confirme os dados pessoais"
+        },
+        "step3": {
+          "title": "Detalhes da Visita",
+          "sub": "Informe os dados da visita"
+        }
+      },
+      "step1": {
+        "select_title": "Selecionar Visitante",
+        "select_sub": "Procure um visitante existente no sistema ou registe um novo",
+        "search_placeholder": "Pesquisar por nome, documento ou empresa…",
+        "doc_label": "Doc",
+        "not_found": "Visitante não encontrado?",
+        "register_new": "Registar Novo Visitante"
+      },
+      "step2": {
+        "confirm_title": "Confirmar Dados do Visitante",
+        "confirm_sub": "Verifique se os dados estão corretos antes de prosseguir",
+        "selected_tag": "Visitante Selecionado",
+        "new_title": "Dados do Novo Visitante",
+        "new_sub": "Preencha os dados do visitante para registar no sistema"
+      },
+      "step3": {
+        "title": "Detalhes da Visita",
+        "sub": "Informe os dados sobre o destino e o motivo da visita"
+      },
+      "labels": {
+        "name": "Nome Completo",
+        "document": "Documento de Identificação",
+        "phone": "Telefone",
+        "company": "Empresa/Origem",
+        "host": "Funcionário Anfitrião",
+        "department": "Departamento de Destino",
+        "area": "Área/Sala",
+        "reason": "Motivo da Visita",
+        "observations": "Observações Adicionais"
+      },
+      "register_entry": "Registar Entrada"
+    }
+  },
+  "visitors": {
+    "page": {
+      "title": "Gestão de Visitantes",
+      "subtitle": "Registe e faça a gestão de todos os visitantes do edifício"
+    },
+    "list": {
+      "title": "Lista de Visitantes",
+      "subtitle": "Total de {{total}} visitantes registados"
+    },
+    "actions": {
+      "new_visitor": "Novo Visitante",
+      "edit": "Editar",
+      "delete": "Excluir"
+    },
+    "filters": {
+      "search_label": "Pesquisar",
+      "search_placeholder": "Pesquisar visitante..."
+    },
+    "table": {
+      "name": "Nome",
+      "company": "Empresa / Origem",
+      "phone": "Telefone",
+      "total_visits": "Total de visitas",
+      "last_visit": "Última visita",
+      "actions": "Ações"
+    },
+    "modal": {
+      "create_title": "Novo Visitante",
+      "edit_title": "Editar Visitante",
+      "subtitle": "Preencha os dados para registar um visitante",
+      "labels": {
+        "name": "Nome Completo *",
+        "document": "Documento de Identificação *",
+        "phone": "Telefone",
+        "company": "Empresa/Origem"
+      },
+      "actions": {
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "create": "Registar"
+      }
+    },
+    "toast": {
+      "created_title": "Visitante registado!",
+      "updated_title": "Visitante atualizado!",
+      "sub": "{{name}}"
+    },
+    "export": {
+      "export": "Exportar"
+    }
   }
 }

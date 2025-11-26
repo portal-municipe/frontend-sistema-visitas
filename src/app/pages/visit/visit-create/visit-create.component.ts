@@ -1,15 +1,8 @@
-// src/app/features/visits/visit-create/visit-create.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Visitor } from '@app/core/models/index';
+import { Visitor, VisitDetailsPayload } from '@app/core/models/index';
+import { TranslateService } from '@ngx-translate/core';
 
-export interface VisitDetailsPayload {
-  anfitriao: number | string;
-  departamento: string;
-  area?: string;
-  motivo: string;
-  observacoes?: string;
-}
 
 @Component({
   selector: 'app-visit-create',
@@ -27,10 +20,8 @@ export class VisitCreateComponent {
   ];
 
   selectedVisitor: Visitor | null = null;
-  // se o utilizador clicou "registar novo" no step 1
   isNewVisitorFlow = false;
 
-  // listas para o step 3
   hosts = [
     { id: 1, nome: 'João Pedro Silva - Finanças' },
     { id: 2, nome: 'Carlos Manuel Neto - Administração' },
@@ -48,7 +39,7 @@ export class VisitCreateComponent {
   ];
   areas = ['Gabinete do Director', 'Sala de Reuniões 1', 'Sala de Reuniões 2'];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private translate: TranslateService) { }
 
   /* ========== handlers do STEP 1 ========== */
   onVisitorSelected(v: Visitor): void {
@@ -80,8 +71,7 @@ export class VisitCreateComponent {
 
   /* ========== handlers do STEP 2 (novo visitante) ========== */
   onNewVisitorSaved(v: Visitor): void {
-    // veio do componente filho passo 2 (novo)
-    this.selectedVisitor = { ...v, id: 999 }; // podes trocar quando integrar api
+    this.selectedVisitor = { ...v, id: 999 };
     this.isNewVisitorFlow = false;
     this.step = 3;
   }
@@ -92,12 +82,10 @@ export class VisitCreateComponent {
   }
 
   onVisitSubmit(payload: VisitDetailsPayload): void {
-    // aqui tu montas o objeto completo para enviar ao service
     const full = {
       visitante: this.selectedVisitor,
       ...payload,
     };
-    // console.log('enviar para API:', full);
 
     this.showSuccess = true;
     setTimeout(() => (this.showSuccess = false), 5000);

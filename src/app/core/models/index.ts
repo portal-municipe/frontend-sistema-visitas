@@ -6,4 +6,5 @@ export * from './active-visit.model';
 export * from './table-column.model';
 export * from './nav-item.model';
 export * from './dashboard-kip.model';
+export * from './visit-detail.model';
 

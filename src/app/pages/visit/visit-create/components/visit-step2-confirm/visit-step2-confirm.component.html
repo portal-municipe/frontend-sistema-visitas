@@ -2,28 +2,28 @@
   <div class="block-head">
     <div class="icon-box green"><mat-icon>person</mat-icon></div>
     <div>
-      <h2>Confirmar Dados do Visitante</h2>
-      <p>Verifique se os dados estão corretos antes de prosseguir</p>
+      <h2>{{ 'visits.create.step2.confirm_title' | translate }}</h2>
+      <p>{{ 'visits.create.step2.confirm_sub' | translate }}</p>
     </div>
   </div>
 
   <div class="highlight-box">
-    <div class="tag">Visitante Selecionado</div>
+    <div class="tag">{{ 'visits.create.step2.selected_tag' | translate }}</div>
     <div class="info-grid">
       <div>
-        <label>Nome Completo</label>
+        <label>{{ 'visits.create.labels.name' | translate }}</label>
         <p>{{ visitor?.nome }}</p>
       </div>
       <div>
-        <label>Documento</label>
+        <label>{{ 'visits.create.labels.document' | translate }}</label>
         <p>{{ visitor?.documento }}</p>
       </div>
       <div>
-        <label>Telefone</label>
+        <label>{{ 'visits.create.labels.phone' | translate }}</label>
         <p>{{ visitor?.telefone || '—' }}</p>
       </div>
       <div>
-        <label>Empresa</label>
+        <label>{{ 'visits.create.labels.company' | translate }}</label>
         <p>{{ visitor?.empresa || '—' }}</p>
       </div>
     </div>
@@ -32,10 +32,10 @@
   <footer class="footer-actions">
     <button mat-stroked-button (click)="back.emit()">
       <mat-icon>arrow_back</mat-icon>
-      Voltar
+      {{ 'common.back' | translate }}
     </button>
     <button mat-raised-button color="primary" (click)="next.emit()">
-      Próximo
+      {{ 'common.next' | translate }}
       <mat-icon>arrow_forward</mat-icon>
     </button>
   </footer>

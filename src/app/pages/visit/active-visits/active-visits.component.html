@@ -1,13 +1,14 @@
 <div class="visits-shell" [class.dimmed]="showingConfirm">
   <div class="header-row">
     <div>
-      <h1>Visitas Ativas</h1>
-      <p>Visitantes atualmente no edifício</p>
+      <h1>{{ 'visits.active.title' | translate }}</h1>
+      <p>{{ 'visits.active.subtitle' | translate }}</p>
     </div>
 
     <div class="counter-pill">
       <span class="dot"></span>
-      {{ totalAtivos }} visitante{{ totalAtivos !== 1 ? 's' : '' }} no edifício
+      {{ totalAtivos }}
+      {{ totalAtivos !== 1 ? ('visits.active.pill_plural' | translate) : ('visits.active.pill_single' | translate) }}
     </div>
   </div>
 
@@ -18,8 +19,8 @@
           <mat-icon>list</mat-icon>
         </div>
         <div>
-          <h2>Lista de Visitantes</h2>
-          <p>Visitantes que ainda não registaram saída</p>
+          <h2>{{ 'visits.active.list_title' | translate }}</h2>
+          <p>{{ 'visits.active.list_subtitle' | translate }}</p>
         </div>
       </div>
       <app-export [actions]="exportActions" [disabled]="!rows.length" (action)="onExport($event)">
@@ -75,7 +76,7 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="table.onCellAction(col.key, row, $event)">
             <mat-icon>exit_to_app</mat-icon>
-            Registar Saída
+            <span>{{ 'visits.actions.register_exit' | translate }}</span>
           </button>
         </mat-menu>
       </ng-template>
@@ -87,8 +88,11 @@
 </div>
 
 <!-- overlay / confirm reutilizável -->
-<app-confirm-overlay *ngIf="showingConfirm" title="Registar Saída"
-  [message]="'Confirma que deseja registar a saída deste visitante?'" (cancel)="onCancelExit()" [show]="showingConfirm"
+<app-confirm-overlay *ngIf="showingConfirm"
+  [title]="'visits.actions.register_exit' | translate"
+  [message]="'visits.active.confirm_message' | translate"
+  (cancel)="onCancelExit()"
+  [show]="showingConfirm"
   (confirm)="onConfirmExit()">
 </app-confirm-overlay>
 
@@ -96,7 +100,7 @@
 <div class="toast" *ngIf="showToast">
   <mat-icon>check_circle</mat-icon>
   <div>
-    <div class="t-title">Saída registada com sucesso!</div>
+    <div class="t-title">{{ 'visits.active.toast_success_title' | translate }}</div>
     <div class="t-sub">{{ lastToastMsg }}</div>
   </div>
 </div>

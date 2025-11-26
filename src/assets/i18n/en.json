@@ -1,6 +1,8 @@
 {
   "app": {
-    "brand": { "subtitle": "Visits Control" },
+    "brand": {
+      "subtitle": "Visits Control"
+    },
     "nav": {
       "dashboard": "Dashboard",
       "visits": "Visits",
@@ -50,7 +52,11 @@
       "privacy": "Privacy Policy"
     }
   },
-  "lang": { "label": "Language", "pt": "Portuguese", "en": "English" },
+  "lang": {
+    "label": "Language",
+    "pt": "Portuguese",
+    "en": "English"
+  },
   "dashboard": {
     "kpi": {
       "active_visits": "Active visits",
@@ -85,5 +91,178 @@
     "title": "Overview of the attendance control system",
     "login": "Sign in",
     "logout": "Sign out"
+  },
+  "common": {
+    "clear": "Clear",
+    "close": "Close",
+    "next": "Next",
+    "back": "Back"
+  },
+  "table": {
+    "empty": {
+      "title": "No data",
+      "desc": "No records were found."
+    }
+  },
+  "visits": {
+    "list": {
+      "title": "Visits list",
+      "subtitle": "Total of {{total}} visits found"
+    },
+    "actions": {
+      "new_visit": "New visit",
+      "view_details": "View details",
+      "register_exit": "Register exit"
+    },
+    "filters": {
+      "search_label": "Search",
+      "search_placeholder": "Search...",
+      "department": "Department",
+      "department_all": "All",
+      "department_finance": "Finance",
+      "department_hr": "Human Resources",
+      "department_admin": "Administration",
+      "department_budget": "Budget",
+      "date_start": "Start date",
+      "date_end": "End date"
+    },
+    "export": {
+      "export": "Export"
+    },
+    "table": {
+      "date": "Date",
+      "visitor": "Visitor",
+      "department": "Department",
+      "reason": "Reason",
+      "duration": "Duration",
+      "actions": "Actions"
+    },
+    "detail": {
+      "title": "Visit details",
+      "subtitle": "Full information about the selected visit",
+      "fields": {
+        "visitor": "Visitor",
+        "host": "Host",
+        "department": "Department",
+        "reason": "Reason",
+        "date": "Date",
+        "start": "Check-in time",
+        "end": "Check-out time",
+        "duration": "Duration"
+      }
+    },
+    "active": {
+      "title": "Active Visits",
+      "subtitle": "Visitors currently in the building",
+      "pill_single": "visitor in the building",
+      "pill_plural": "visitors in the building",
+      "list_title": "Visitors list",
+      "list_subtitle": "Visitors that haven't checked out yet",
+      "confirm_message": "Do you confirm you want to register this visitor's exit?",
+      "toast_success_title": "Exit registered successfully!",
+      "toast_success_sub": "{{name}} - Duration: {{duration}}"
+    },
+    "create": {
+      "title": "Register New Visit",
+      "subtitle": "Record a visitor's entry to the MINFIN building",
+      "toast_success_title": "Visit registered successfully!",
+      "toast_success_sub": "Visitor: {{name}}",
+      "wizard": {
+        "step1": {
+          "title": "Identify Visitor",
+          "sub": "Select or register the visitor"
+        },
+        "step2": {
+          "title": "Visitor Data",
+          "sub": "Confirm personal data"
+        },
+        "step3": {
+          "title": "Visit Details",
+          "sub": "Provide visit information"
+        }
+      },
+      "step1": {
+        "select_title": "Select Visitor",
+        "select_sub": "Search an existing visitor or register a new one",
+        "search_placeholder": "Search by name, document or company…",
+        "doc_label": "Doc",
+        "not_found": "Visitor not found?",
+        "register_new": "Register New Visitor"
+      },
+      "step2": {
+        "confirm_title": "Confirm Visitor Data",
+        "confirm_sub": "Verify the data before proceeding",
+        "selected_tag": "Selected visitor",
+        "new_title": "New Visitor Data",
+        "new_sub": "Fill visitor data to register in the system"
+      },
+      "step3": {
+        "title": "Visit Details",
+        "sub": "Inform destination and reason"
+      },
+      "labels": {
+        "name": "Full name",
+        "document": "Identification document",
+        "phone": "Phone",
+        "company": "Company / Origin",
+        "host": "Host employee",
+        "department": "Destination department",
+        "area": "Area / Room",
+        "reason": "Visit reason",
+        "observations": "Additional notes"
+      },
+      "register_entry": "Register entry"
+    }
+  },
+  "visitors": {
+    "page": {
+      "title": "Visitors management",
+      "subtitle": "Register and manage all visitors of the building"
+    },
+    "list": {
+      "title": "Visitors list",
+      "subtitle": "Total of {{total}} registered visitors"
+    },
+    "actions": {
+      "new_visitor": "New visitor",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "search_label": "Search",
+      "search_placeholder": "Search visitor..."
+    },
+    "table": {
+      "name": "Name",
+      "company": "Company / Origin",
+      "phone": "Phone",
+      "total_visits": "Total visits",
+      "last_visit": "Last visit",
+      "actions": "Actions"
+    },
+    "modal": {
+      "create_title": "New visitor",
+      "edit_title": "Edit visitor",
+      "subtitle": "Fill in the data to register a visitor",
+      "labels": {
+        "name": "Full name *",
+        "document": "Identification document *",
+        "phone": "Phone",
+        "company": "Company / Origin"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "create": "Register"
+      }
+    },
+    "toast": {
+      "created_title": "Visitor registered!",
+      "updated_title": "Visitor updated!",
+      "sub": "{{name}}"
+    },
+    "export": {
+      "export": "Export"
+    }
   }
 }

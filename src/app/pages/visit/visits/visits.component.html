@@ -1,11 +1,14 @@
-<!-- src/app/features/visits/visits.component.html -->
 <mat-card class="visits-card">
   <div class="header">
     <div class="title-wrap">
       <mat-icon class="mr-8">list</mat-icon>
       <div>
-        <h2 class="title">Lista de Visitas</h2>
-        <div class="subtitle">Total de {{ total }} visitas encontradas</div>
+        <h2 class="title">
+          {{ 'visits.list.title' | translate }}
+        </h2>
+        <div class="subtitle">
+          {{ 'visits.list.subtitle' | translate:{ total: total } }}
+        </div>
       </div>
     </div>
 
@@ -25,7 +28,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="verDetalhes(row)">
           <mat-icon>visibility</mat-icon>
-          Ver Detalhes
+          <span>{{ 'visits.actions.view_details' | translate }}</span>
         </button>
       </mat-menu>
     </ng-template>
@@ -34,9 +37,6 @@
   <app-pagination [length]="total" [pageSize]="10" [pageSizeOptions]="[5,10,20]" (page)="onPage($event)">
   </app-pagination>
 </mat-card>
-
-<!-- overlay -->
-<div class="overlay" *ngIf="showDetailModal"></div>
 
 <!-- modal de detalhes -->
 <app-visit-detail-modal *ngIf="showDetailModal" [visit]="selectedVisit" (close)="closeDetail()">
