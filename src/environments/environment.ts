@@ -3,7 +3,7 @@ export const environment = {
   apiBase: 'http://localhost:3333',
   fastForex: {
     baseUrl: 'https://api.fastforex.io',
-    apiKey: '3b1dce3fa2-295d9127b1-t5puje'
+    apiKey: 'db2074da79-bdd526bc78-t6c0vb'
   },
   openWeather: {
     baseUrl: 'https://api.openweathermap.org',
